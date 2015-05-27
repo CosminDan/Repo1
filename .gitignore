@@ -30,7 +30,6 @@ public/assets/cache/*
 application/config/development/*
 application/config/testing/*
 application/config/production/*
-application/config/installed.txt
 
 # but leave the config folders there
 !application/config/development/index.html
@@ -44,17 +43,9 @@ application/modules/**/.git/*
 application/modules/**/.hg/*
 !application/modules/index.html
 
-
-# Ignore all custom modules.
-application/modules/*
-# Except the following modules:
-
 # Remove PHPStorm Project folders
 bonfire/.ideas
 .idea/*
-
-# Ignore the installed.txt file
-public/install/installed.txt
 
 # Ignore any composer downloaded packages
 vendor/*
