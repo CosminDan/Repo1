@@ -13,6 +13,7 @@
  * @filesource
  */
 
+
 // ------------------------------------------------------------------------
 
 /**
@@ -31,25 +32,25 @@ class Home extends Admin_Controller
 {
 
 
-	/**
-	 * Controller constructor sets the login restriction
-	 *
-	 */
-	public function __construct()
-	{
-		parent::__construct();
+    /**
+     * Controller constructor sets the login restriction
+     *
+     */
+    public function __construct()
+    {
+        parent::__construct();
 
-		$this->auth->restrict();
-	}//end __construct()
+        $this->auth->restrict();
+    }//end __construct()
 
-	//--------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
 
-	/**
-	 * Redirects the user to the Content context
-	 *
-	 * @return void
-	 */
+    /**
+     * Redirects the user to the Content context
+     *
+     * @return void
+     */
     public function index()
     {
         $this->load->model('roles/role_model');
@@ -59,7 +60,7 @@ class Home extends Admin_Controller
         redirect(SITE_AREA .'/'.(isset($default_context) && !empty($default_context) ? $default_context : 'content'));
     }//end index()
 
-	//--------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
 
 }//end class
