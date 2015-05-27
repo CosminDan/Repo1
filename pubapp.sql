@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2015 at 04:31 PM
--- Server version: 5.5.43-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.9
+-- Generation Time: May 28, 2015 at 12:35 AM
+-- Server version: 5.5.41-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,7 +35,73 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `bf_activities`
+--
+
+INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `created_on`, `deleted`) VALUES
+(1, 1, 'logged in from: 127.0.0.1', 'users', '2015-05-28 00:13:50', 0),
+(2, 1, 'Created Module: Articles : 127.0.0.1', 'modulebuilder', '2015-05-28 00:18:03', 0),
+(3, 1, 'Created record with ID: 1 : 127.0.0.1', 'articles', '2015-05-28 00:23:56', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_articles`
+--
+
+DROP TABLE IF EXISTS `bf_articles`;
+CREATE TABLE IF NOT EXISTS `bf_articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `magazines_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `authors_id` int(11) NOT NULL,
+  `affiliation` varchar(100) NOT NULL,
+  `references` varchar(100) NOT NULL,
+  `summary` varchar(1000) NOT NULL,
+  `tags` varchar(100) NOT NULL,
+  `pdf_url` varchar(50) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0',
+  `created_on` date DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_on` date DEFAULT NULL,
+  `modifed_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bf_articles`
+--
+
+INSERT INTO `bf_articles` (`id`, `magazines_id`, `title`, `authors_id`, `affiliation`, `references`, `summary`, `tags`, `pdf_url`, `deleted`, `created_on`, `created_by`, `modified_on`, `modifed_by`) VALUES
+(1, 123, 'Test', 234, 'Me', 'Him', 'Test Article', '#swag', '', 0, '2015-05-28', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_authors`
+--
+
+DROP TABLE IF EXISTS `bf_authors`;
+CREATE TABLE IF NOT EXISTS `bf_authors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_authorsofarticles`
+--
+
+DROP TABLE IF EXISTS `bf_authorsofarticles`;
+CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
+  `article_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -354,6 +420,22 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bf_magazines`
+--
+
+DROP TABLE IF EXISTS `bf_magazines`;
+CREATE TABLE IF NOT EXISTS `bf_magazines` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `volume` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bf_permissions`
 --
 
@@ -364,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `bf_permissions` (
   `description` varchar(100) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -415,7 +497,23 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 (45, 'Bonfire.Translate.View', 'To view the Language Translate menu.', 'active'),
 (46, 'Bonfire.UI.View', 'To view the UI/Keyboard Shortcut menu.', 'active'),
 (49, 'Bonfire.Profiler.View', 'To view the Console Profiler Bar.', 'active'),
-(50, 'Bonfire.Roles.Add', 'To add New Roles', 'active');
+(50, 'Bonfire.Roles.Add', 'To add New Roles', 'active'),
+(51, 'Articles.Content.View', 'View Articles Content', 'active'),
+(52, 'Articles.Content.Create', 'Create Articles Content', 'active'),
+(53, 'Articles.Content.Edit', 'Edit Articles Content', 'active'),
+(54, 'Articles.Content.Delete', 'Delete Articles Content', 'active'),
+(55, 'Articles.Reports.View', 'View Articles Reports', 'active'),
+(56, 'Articles.Reports.Create', 'Create Articles Reports', 'active'),
+(57, 'Articles.Reports.Edit', 'Edit Articles Reports', 'active'),
+(58, 'Articles.Reports.Delete', 'Delete Articles Reports', 'active'),
+(59, 'Articles.Settings.View', 'View Articles Settings', 'active'),
+(60, 'Articles.Settings.Create', 'Create Articles Settings', 'active'),
+(61, 'Articles.Settings.Edit', 'Edit Articles Settings', 'active'),
+(62, 'Articles.Settings.Delete', 'Delete Articles Settings', 'active'),
+(63, 'Articles.Developer.View', 'View Articles Developer', 'active'),
+(64, 'Articles.Developer.Create', 'Create Articles Developer', 'active'),
+(65, 'Articles.Developer.Edit', 'Edit Articles Developer', 'active'),
+(66, 'Articles.Developer.Delete', 'Delete Articles Developer', 'active');
 
 -- --------------------------------------------------------
 
@@ -509,6 +607,22 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 (1, 46),
 (1, 49),
 (1, 50),
+(1, 51),
+(1, 52),
+(1, 53),
+(1, 54),
+(1, 55),
+(1, 56),
+(1, 57),
+(1, 58),
+(1, 59),
+(1, 60),
+(1, 61),
+(1, 62),
+(1, 63),
+(1, 64),
+(1, 65),
+(1, 66),
 (2, 2),
 (2, 3),
 (6, 2),
@@ -543,6 +657,7 @@ CREATE TABLE IF NOT EXISTS `bf_schema_version` (
 --
 
 INSERT INTO `bf_schema_version` (`type`, `version`) VALUES
+('articles_', 1),
 ('core', 43);
 
 -- --------------------------------------------------------
@@ -738,7 +853,7 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@mybonfire.com', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '0000-00-00 00:00:00', '', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UM6', 'english', 1, '', 0);
+(1, 1, 'admin@mybonfire.com', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-05-28 00:13:50', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UM6', 'english', 1, '', 0);
 
 -- --------------------------------------------------------
 

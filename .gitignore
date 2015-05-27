@@ -27,7 +27,7 @@ public/assets/cache/*
 !public/assets/cache/index.html
 
 # Ignore Custom config files
-application/config/development/*
+#application/config/development/*
 application/config/testing/*
 application/config/production/*
 
