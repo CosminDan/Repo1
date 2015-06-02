@@ -22,8 +22,6 @@ class Articles extends Front_Controller
 		$this->load->model('articles/articles_model');
         $this->lang->load('articles');
 		
-        
-
 		Assets::add_module_js('articles', 'articles.js');
 	}
 
@@ -55,7 +53,7 @@ class Articles extends Front_Controller
 		$records = $this->articles_model->find_all();
 
 		Template::set('records', $records);
-        
+        //Template::set_message('sdasdas', 'error');
 
 		Template::render();
 	}

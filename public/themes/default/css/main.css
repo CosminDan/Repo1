@@ -1,0 +1,24 @@
+.masthead.main {
+	background-image: url('../images/mainbg.jpg');
+	background-position: 50% 50%;
+	background-size: cover;
+	min-height: 200px;
+	color: #FFFFFF;
+}
+
+.masthead.main a {
+	color: #FFFFFF;
+}
+
+.masthead.main a:hover {
+	color: #000000;
+}
+
+.masthead .heading {
+	margin: 50px 0px;
+}
+
+.masthead .heading p {
+	text-indent: 20px;
+	text-align: left;
+}

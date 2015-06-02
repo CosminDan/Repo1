@@ -1,7 +1,5 @@
-<?php
 
-$hiddenFields = array('id', 'deleted', 'deleted_by', 'created_by', 'modified_by',);
-?>
+
 <h1 class='page-header'>
     <?php echo lang('articles_area_title'); ?>
 </h1>
@@ -9,7 +7,6 @@ $hiddenFields = array('id', 'deleted', 'deleted_by', 'created_by', 'modified_by'
 <table class='table table-striped table-bordered'>
     <thead>
         <tr>
-            
             <th>Magazines Id</th>
             <th>Title</th>
             <th>Authors Id</th>
@@ -29,7 +26,7 @@ $hiddenFields = array('id', 'deleted', 'deleted_by', 'created_by', 'modified_by'
         <tr>
             <?php
             foreach($record as $field => $value) :
-                if ( ! in_array($field, $hiddenFields)) :
+                
             ?>
             <td>
                 <?php
@@ -41,7 +38,6 @@ $hiddenFields = array('id', 'deleted', 'deleted_by', 'created_by', 'modified_by'
                 ?>
             </td>
             <?php
-                endif;
             endforeach;
             ?>
         </tr>

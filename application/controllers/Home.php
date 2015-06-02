@@ -65,6 +65,8 @@ class Home extends MX_Controller
         $this->load->library('users/auth');
         $this->set_current_user();
 
+        Template::set('firstPage', true);
+
         Template::render();
     }//end index()
 

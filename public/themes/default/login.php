@@ -4,5 +4,5 @@
     <?php
     echo isset($content) ? $content : Template::content();
 
-    echo theme_view('footer', array('show' => false));
+    echo theme_view('footer');
 ?>
