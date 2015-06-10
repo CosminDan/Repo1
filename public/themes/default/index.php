@@ -1,6 +1,6 @@
-<?php echo theme_view('header'); ?>
+<?php echo theme_view('parts/header'); ?>
 
-<?php echo theme_view('_top_menu'); ?>
+<?php echo theme_view('parts/top_menu'); ?>
 
 <div class="container">
 
@@ -10,4 +10,4 @@
 
 </div>
 
-<?php echo theme_view('footer'); ?>
+<?php echo theme_view('parts/footer'); ?>

@@ -22,3 +22,59 @@
 	text-indent: 20px;
 	text-align: left;
 }
+
+/*.categs li a:hover {
+	
+	border-radius: 0px;
+}*/
+
+.categs a .fa {
+	color: #919295;
+}
+
+.categs a {
+	color: #000000;
+}
+
+
+.nav-pills.categs .arts a:hover,
+.nav-pills.categs .arts a:hover .fa,
+.nav-pills.categs .arts.active > a,
+.nav-pills.categs .arts.active > a .fa,
+.nav-pills.categs .arts.active > a:focus {
+	color: #C9302C;
+/*	border-bottom: 1px solid #C9302C;
+*/	background: transparent;
+}
+
+
+.nav-pills.categs .science a:hover,
+.nav-pills.categs .science a:hover .fa,
+.nav-pills.categs .science.active > a,
+.nav-pills.categs .science.active > a .fa, 
+.nav-pills.categs .science.active > a:focus {
+	color: #286090;
+/*	border-bottom: 1px solid #286090;
+*/	background: transparent;
+}
+
+
+.nav-pills.categs .social a:hover,
+.nav-pills.categs .social a:hover .fa,
+.nav-pills.categs .social.active > a,
+.nav-pills.categs .social.active > a .fa,
+.nav-pills.categs .social.active > a:focus {
+	color: #449D44;
+/*	border-bottom: 1px solid #449D44;
+*/	background: transparent;
+}
+
+.categs a .fa {
+	font-size: 3em;
+}
+
+.categs a:hover .fa {
+	transform:scale(1.2,1.2);
+	 transition: all 0.4s;
+}
+

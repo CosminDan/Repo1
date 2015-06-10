@@ -2,7 +2,7 @@
 
 Assets::add_css(array('bootstrap.min.css', 'bootstrap-responsive.min.css'));
 Assets::add_css('main.css');
-
+Assets::add_css('font-awesome.min.css');
 Assets::add_js('bootstrap.min.js');
 
 $inline  = '$(".dropdown-toggle").dropdown();';
@@ -25,6 +25,8 @@ Assets::add_js($inline, 'inline');
     //echo Assets::js('modernizr-2.5.3.js');
     ?>
     <?php echo Assets::css(); ?>
+    <script src="<?php echo js_path(); ?>jquery-1.11.3.min.js"></script>
+    <?php echo Assets::js(); ?>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
 </head>
 <body>
