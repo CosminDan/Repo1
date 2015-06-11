@@ -26,7 +26,6 @@ Arts & Humanities
     Poetry
     Religion
     Theater
-
 Science
     Acoustics
     Agricultural Economics & Policy
@@ -200,7 +199,6 @@ Science
     Virology
     Water Resources
     Zoology
-
 Social Science
     Anthropology
     Area Studies

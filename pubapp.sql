@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 28, 2015 at 12:51 AM
--- Server version: 5.6.24
--- PHP Version: 5.5.24
+-- Host: localhost
+-- Generation Time: Jun 11, 2015 at 11:26 PM
+-- Server version: 5.5.41-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `bf_activities`;
 CREATE TABLE IF NOT EXISTS `bf_activities` (
-  `activity_id` bigint(20) NOT NULL,
+  `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `activity` varchar(255) NOT NULL,
   `module` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
-  `deleted` tinyint(12) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `deleted` tinyint(12) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`activity_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -55,28 +56,30 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 
 DROP TABLE IF EXISTS `bf_articles`;
 CREATE TABLE IF NOT EXISTS `bf_articles` (
-  `id` int(11) NOT NULL,
-  `magazines_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `magazine_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(100) NOT NULL,
-  `authors_id` int(11) NOT NULL,
-  `affiliation` varchar(100) NOT NULL,
-  `references` varchar(100) NOT NULL,
-  `summary` varchar(1000) NOT NULL,
-  `tags` varchar(100) NOT NULL,
-  `pdf_url` varchar(50) NOT NULL,
+  `affiliation` varchar(100) DEFAULT NULL,
+  `raw_text` text,
+  `references` text NOT NULL,
+  `summary` text NOT NULL,
+  `tags` text NOT NULL,
+  `pdf_url` varchar(50) DEFAULT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
-  `modifed_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `modifed_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `bf_articles`
 --
 
-INSERT INTO `bf_articles` (`id`, `magazines_id`, `title`, `authors_id`, `affiliation`, `references`, `summary`, `tags`, `pdf_url`, `deleted`, `created_on`, `created_by`, `modified_on`, `modifed_by`) VALUES
-(1, 123, 'Test', 234, 'Me', 'Him', 'Test Article', '#swag', '', 0, '2015-05-28', 1, NULL, NULL);
+INSERT INTO `bf_articles` (`id`, `magazine_id`, `title`, `affiliation`, `raw_text`, `references`, `summary`, `tags`, `pdf_url`, `deleted`, `created_on`, `created_by`, `modified_on`, `modifed_by`) VALUES
+(1, 123, 'Test', 'Me', NULL, 'Him', 'Test Article', '#swag', '', 0, '2015-05-28', 1, NULL, NULL),
+(2, 0, 'adsasdasd', NULL, '', '', '', '', NULL, 0, '2015-06-11', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,7 +90,8 @@ INSERT INTO `bf_articles` (`id`, `magazines_id`, `title`, `authors_id`, `affilia
 DROP TABLE IF EXISTS `bf_authors`;
 CREATE TABLE IF NOT EXISTS `bf_authors` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -102,6 +106,29 @@ CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
   `author_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `bf_authorsofarticles`
+--
+
+INSERT INTO `bf_authorsofarticles` (`article_id`, `author_id`) VALUES
+(1, 6),
+(1, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_categories`
+--
+
+DROP TABLE IF EXISTS `bf_categories`;
+CREATE TABLE IF NOT EXISTS `bf_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `selectable` smallint(6) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +140,8 @@ CREATE TABLE IF NOT EXISTS `bf_ci3_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `data` blob NOT NULL
+  `data` blob NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -128,7 +156,8 @@ CREATE TABLE IF NOT EXISTS `bf_countries` (
   `name` varchar(80) NOT NULL,
   `printable_name` varchar(80) NOT NULL,
   `iso3` char(3) DEFAULT NULL,
-  `numcode` smallint(6) DEFAULT NULL
+  `numcode` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`iso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -384,7 +413,7 @@ INSERT INTO `bf_countries` (`iso`, `name`, `printable_name`, `iso3`, `numcode`) 
 
 DROP TABLE IF EXISTS `bf_email_queue`;
 CREATE TABLE IF NOT EXISTS `bf_email_queue` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `to_email` varchar(254) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
@@ -395,8 +424,9 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
   `date_published` datetime DEFAULT NULL,
   `last_attempt` datetime DEFAULT NULL,
   `date_sent` datetime DEFAULT NULL,
-  `csv_attachment` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `csv_attachment` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -406,11 +436,12 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
 
 DROP TABLE IF EXISTS `bf_login_attempts`;
 CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -424,7 +455,8 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
   `title` varchar(100) NOT NULL,
   `volume` int(11) NOT NULL,
   `number` int(11) NOT NULL,
-  `year` int(11) NOT NULL
+  `year` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -435,11 +467,12 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
 
 DROP TABLE IF EXISTS `bf_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_permissions` (
-  `permission_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(100) NOT NULL,
-  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
+  PRIMARY KEY (`permission_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -516,15 +549,16 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 
 DROP TABLE IF EXISTS `bf_roles`;
 CREATE TABLE IF NOT EXISTS `bf_roles` (
-  `role_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(60) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `default` tinyint(1) NOT NULL DEFAULT '0',
   `can_delete` tinyint(1) NOT NULL DEFAULT '1',
   `login_destination` varchar(255) NOT NULL DEFAULT '/',
   `deleted` int(1) NOT NULL DEFAULT '0',
-  `default_context` varchar(255) NOT NULL DEFAULT 'content'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `default_context` varchar(255) NOT NULL DEFAULT 'content',
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `bf_roles`
@@ -545,7 +579,8 @@ INSERT INTO `bf_roles` (`role_id`, `role_name`, `description`, `default`, `can_d
 DROP TABLE IF EXISTS `bf_role_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_role_permissions` (
   `role_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`role_id`,`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -639,7 +674,8 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 DROP TABLE IF EXISTS `bf_schema_version`;
 CREATE TABLE IF NOT EXISTS `bf_schema_version` (
   `type` varchar(40) NOT NULL,
-  `version` int(4) NOT NULL DEFAULT '0'
+  `version` int(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -662,7 +698,8 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -675,7 +712,8 @@ DROP TABLE IF EXISTS `bf_settings`;
 CREATE TABLE IF NOT EXISTS `bf_settings` (
   `name` varchar(30) NOT NULL,
   `module` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -729,10 +767,11 @@ INSERT INTO `bf_settings` (`name`, `module`, `value`) VALUES
 
 DROP TABLE IF EXISTS `bf_states`;
 CREATE TABLE IF NOT EXISTS `bf_states` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(40) NOT NULL,
-  `abbrev` char(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+  `abbrev` char(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `bf_states`
@@ -811,7 +850,7 @@ INSERT INTO `bf_states` (`id`, `name`, `abbrev`) VALUES
 
 DROP TABLE IF EXISTS `bf_users`;
 CREATE TABLE IF NOT EXISTS `bf_users` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(11) NOT NULL DEFAULT '4',
   `email` varchar(254) NOT NULL,
   `username` varchar(30) NOT NULL DEFAULT '',
@@ -830,8 +869,10 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `activate_hash` varchar(40) NOT NULL DEFAULT '',
-  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `bf_users`
@@ -850,7 +891,8 @@ DROP TABLE IF EXISTS `bf_user_cookies`;
 CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
   `user_id` bigint(20) unsigned NOT NULL,
   `token` varchar(128) NOT NULL,
-  `created_on` datetime NOT NULL
+  `created_on` datetime NOT NULL,
+  KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -868,173 +910,13 @@ INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
 
 DROP TABLE IF EXISTS `bf_user_meta`;
 CREATE TABLE IF NOT EXISTS `bf_user_meta` (
-  `meta_id` int(20) unsigned NOT NULL,
+  `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) NOT NULL DEFAULT '',
-  `meta_value` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `meta_value` text,
+  PRIMARY KEY (`meta_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `bf_activities`
---
-ALTER TABLE `bf_activities`
-  ADD PRIMARY KEY (`activity_id`);
-
---
--- Indexes for table `bf_articles`
---
-ALTER TABLE `bf_articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_authors`
---
-ALTER TABLE `bf_authors`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_ci3_sessions`
---
-ALTER TABLE `bf_ci3_sessions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_countries`
---
-ALTER TABLE `bf_countries`
-  ADD PRIMARY KEY (`iso`);
-
---
--- Indexes for table `bf_email_queue`
---
-ALTER TABLE `bf_email_queue`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_login_attempts`
---
-ALTER TABLE `bf_login_attempts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazines`
---
-ALTER TABLE `bf_magazines`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_permissions`
---
-ALTER TABLE `bf_permissions`
-  ADD PRIMARY KEY (`permission_id`);
-
---
--- Indexes for table `bf_roles`
---
-ALTER TABLE `bf_roles`
-  ADD PRIMARY KEY (`role_id`);
-
---
--- Indexes for table `bf_role_permissions`
---
-ALTER TABLE `bf_role_permissions`
-  ADD PRIMARY KEY (`role_id`,`permission_id`);
-
---
--- Indexes for table `bf_schema_version`
---
-ALTER TABLE `bf_schema_version`
-  ADD PRIMARY KEY (`type`);
-
---
--- Indexes for table `bf_sessions`
---
-ALTER TABLE `bf_sessions`
-  ADD PRIMARY KEY (`session_id`);
-
---
--- Indexes for table `bf_settings`
---
-ALTER TABLE `bf_settings`
-  ADD PRIMARY KEY (`name`);
-
---
--- Indexes for table `bf_states`
---
-ALTER TABLE `bf_states`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_users`
---
-ALTER TABLE `bf_users`
-  ADD PRIMARY KEY (`id`), ADD KEY `email` (`email`);
-
---
--- Indexes for table `bf_user_cookies`
---
-ALTER TABLE `bf_user_cookies`
-  ADD KEY `token` (`token`);
-
---
--- Indexes for table `bf_user_meta`
---
-ALTER TABLE `bf_user_meta`
-  ADD PRIMARY KEY (`meta_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bf_activities`
---
-ALTER TABLE `bf_activities`
-  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `bf_articles`
---
-ALTER TABLE `bf_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `bf_email_queue`
---
-ALTER TABLE `bf_email_queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_login_attempts`
---
-ALTER TABLE `bf_login_attempts`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_permissions`
---
-ALTER TABLE `bf_permissions`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
---
--- AUTO_INCREMENT for table `bf_roles`
---
-ALTER TABLE `bf_roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `bf_states`
---
-ALTER TABLE `bf_states`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
---
--- AUTO_INCREMENT for table `bf_users`
---
-ALTER TABLE `bf_users`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `bf_user_meta`
---
-ALTER TABLE `bf_user_meta`
-  MODIFY `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

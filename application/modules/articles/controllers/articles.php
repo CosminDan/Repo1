@@ -3,6 +3,8 @@
 /**
  * Articles controller
  */
+
+
 class Articles extends Front_Controller
 {
     protected $permissionCreate = 'Articles.Articles.Create';
@@ -11,31 +13,31 @@ class Articles extends Front_Controller
     protected $permissionView   = 'Articles.Articles.View';
 
     /**
-	 * Constructor
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		
-		$this->load->model('articles/articles_model');
-        $this->lang->load('articles');
-		
-		Assets::add_module_js('articles', 'articles.js');
-	}
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
 
-	/**
-	 * Display a list of Articles data.
-	 *
-	 * @return void
-	 */
-	public function index($offset = 0)
-	{
-        
+        $this->load->model('articles/articles_model');
+        $this->lang->load('articles');
+
+        Assets::add_module_js('articles', 'articles.js');
+    }
+
+    /**
+     * Display a list of Articles data.
+     *
+     * @return void
+     */
+    public function index($offset = 0)
+    {
+
         $pagerUriSegment = 3;
         $pagerBaseUrl = site_url('articles/index') . '/';
-        
+
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
 
         $this->load->library('pagination');
@@ -46,16 +48,16 @@ class Articles extends Front_Controller
 
         $this->pagination->initialize($pager);
         $this->articles_model->limit($limit, $offset);
-        
+
 
         // Don't display soft-deleted records
         $this->articles_model->where($this->articles_model->get_deleted_field(), 0);
-		$records = $this->articles_model->find_all();
+        $records = $this->articles_model->find_all();
 
-		Template::set('records', $records);
+        Template::set('records', $records);
         //Template::set_message('sdasdas', 'error');
 
-		Template::render();
-	}
-    
+        Template::render();
+    }
+
 }
