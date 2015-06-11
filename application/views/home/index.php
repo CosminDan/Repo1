@@ -18,22 +18,42 @@
 
 	    <div role="tabpanel" class="tab-pane fade" id="arts">
 	    	<div class="row">
+
 		    		<div class="col-md-4">
-		    			<div class="panel panel-default">
-							<!-- Default panel contents -->
-							<div class="panel-heading ">Top 5 Articles</div>
-							<!-- List group -->
-							<ul class="list-group ">
-								<li class="list-group-item">Cras justo odio</li>
-								<li class="list-group-item">Dapibus ac facilisis in</li>
-								<li class="list-group-item">Morbi leo risus</li>
-								<li class="list-group-item">Porta ac consectetur ac</li>
-								<li class="list-group-item">Vestibulum at eros</li>
-							</ul>
+		    			<div class="list-group">
+  							<a href="#" class="list-group-item disabled">
+    							<h4>Top 5 Articles</h4>
+  							</a>
+  							<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+  							<a href="#" class="list-group-item">Morbi leo risus</a>
+  							<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+  							<a href="#" class="list-group-item">Vestibulum at eros</a>
 						</div>
 		    		</div>
-		    		<div class="col-md-4">Last Added</div>
-		    		<div class="col-md-4">Popular Subcategories</div>
+
+		    		<div class="col-md-4">
+		    			<div class="list-group">
+  							<a href="#" class="list-group-item disabled">
+    							<h4>Last Added</h4>
+  							</a>
+  							<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+  							<a href="#" class="list-group-item">Morbi leo risus</a>
+  							<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+  							<a href="#" class="list-group-item">Vestibulum at eros</a>
+						</div>
+		    		</div>
+
+		    		<div class="col-md-4">
+		    			<div class="list-group">
+  							<a href="#" class="list-group-item disabled">
+    							<h4>Popular Subcategories</h4>
+  							</a>
+  							<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+  							<a href="#" class="list-group-item">Morbi leo risus</a>
+  							<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+  							<a href="#" class="list-group-item">Vestibulum at eros</a>
+						</div>
+		    		</div>
 	    	</div>
 	    </div>
 
