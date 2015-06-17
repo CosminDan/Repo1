@@ -48,7 +48,7 @@ bonfire/.ideas
 .idea/*
 
 # Ignore any composer downloaded packages
-vendor/*
+#vendor/*
 
 # Ignore any sparks that have been loaded
 sparks/*

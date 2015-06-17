@@ -17,18 +17,8 @@ $id = isset($articles->id) ? $articles->id : '';
 ?>
 <div class='admin-box'>
     <h3>Articles</h3>
-    <?php echo form_open($this->uri->uri_string(), 'class="form-horizontal"'); ?>
+    <?php echo form_open_multipart($this->uri->uri_string(), 'class="form-horizontal"'); ?>
         <fieldset>
-
-
-            <div class="control-group<?php echo form_error('magazines_id') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_magazines_id') , 'magazines_id', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input id='magazines_id' type='text' name='magazines_id' maxlength='11' value="<?php echo set_value('magazines_id', isset($articles->magazines_id) ? $articles->magazines_id : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('magazines_id'); ?></span>
-                </div>
-            </div>
-
             <div class="control-group<?php echo form_error('title') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_title') , 'title', array('class' => 'control-label')); ?>
                 <div class='controls'>
@@ -40,7 +30,9 @@ $id = isset($articles->id) ? $articles->id : '';
             <div class="control-group<?php echo form_error('authors_id') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_authors_id') , 'authors_id', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <input id='authors_id' type='text' name='authors_id' maxlength='11' value="<?php echo set_value('authors_id', isset($articles->authors_id) ? $articles->authors_id : ''); ?>" />
+                    <select multiple="multiple" id='authors_id' class="select2-tags" type='text' name='authors[]' maxlength='11' value="<?php echo set_value('authors_id', isset($articles->authors_id) ? $articles->authors_id : ''); ?>">
+                        <option value="cozmin">Cozmin</option>
+                    </select>
                     <span class='help-inline'><?php echo form_error('authors_id'); ?></span>
                 </div>
             </div>
@@ -77,11 +69,15 @@ $id = isset($articles->id) ? $articles->id : '';
                 </div>
             </div>
 
-            <div class="control-group<?php echo form_error('pdf_url') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_pdf_url') , 'pdf_url', array('class' => 'control-label')); ?>
+            <div class="control-group">
                 <div class='controls'>
-                    <input id='pdf_url' type='text' name='pdf_url' maxlength='50' value="<?php echo set_value('pdf_url', isset($articles->pdf_url) ? $articles->pdf_url : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('pdf_url'); ?></span>
+                    <textarea name="raw_text"><?php echo isset($articles->raw_text) ? $articles->raw_text : ''; ?></textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class='controls'>
+                    <input type="file" name="pdf_file"/>
                 </div>
             </div>
         </fieldset>

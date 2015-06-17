@@ -96,10 +96,10 @@ class Content extends Admin_Controller
         $this->auth->restrict($this->permissionCreate);
 
         if (isset($_POST['save'])) {
+
             if ($insert_id = $this->save_articles()) {
                 //log_activity($this->auth->user_id(), lang('articles_act_create_record') . ': ' . $insert_id . ' : ' . $this->input->ip_address(), 'articles');
                 Template::set_message(lang('articles_create_success'), 'success');
-
                 redirect(SITE_AREA . '/content/articles');
             }
 
@@ -113,6 +113,26 @@ class Content extends Admin_Controller
         Template::render();
     }
 
+    public function parsePDF($filepath)
+    {
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf    = $parser->parseFile($filepath);
+
+        // Retrieve all pages from the pdf file.
+        $pages = $pdf->getPages();
+        $details  = $pdf->getDetails();
+
+        return $pdf->getText();
+
+        // Loop over each page to extract text.
+        foreach ($pages as $page) {
+            echo $page->getText();
+        }
+        echo time();
+
+        die;
+    }
+
     /**
      * Allows editing of Articles data.
      *
@@ -120,23 +140,6 @@ class Content extends Admin_Controller
      */
     public function edit()
     {
-        // $parser = new \Smalot\PdfParser\Parser();
-        // $pdf    = $parser->parseFile('test.pdf');
-
-        // // Retrieve all pages from the pdf file.
-        // $pages = $pdf->getPages();
-        // $details  = $pdf->getDetails();
-        // echo "<pre>";
-        //print_r($details);
-
-        // Loop over each page to extract text.
-        // foreach ($pages as $page) {
-        //     echo $page->getText();
-        // }
-        // echo time();
-
-        // die;
-
         $id = $this->uri->segment(5);
         if (empty($id)) {
             Template::set_message(lang('articles_invalid_id'), 'error');
@@ -144,11 +147,11 @@ class Content extends Admin_Controller
             redirect(SITE_AREA . '/content/articles');
         }
 
-        if (isset($_POST['save'])) {
+        if ($this->input->post('save')) {
             $this->auth->restrict($this->permissionEdit);
 
             if ($this->save_articles('update', $id)) {
-                log_activity($this->auth->user_id(), lang('articles_act_edit_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
+                //log_activity($this->auth->user_id(), lang('articles_act_edit_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
                 Template::set_message(lang('articles_edit_success'), 'success');
                 redirect(SITE_AREA . '/content/articles');
             }
@@ -202,9 +205,31 @@ class Content extends Admin_Controller
             return false;
         }
 
+        $data = $this->input->post();
+
+        $config = array();
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'pdf';
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        $dataPDF = null;
+        $raw_text = null;
+        if ($this->upload->do_upload('pdf_file')) {
+            $dataPDF = $this->upload->data('pdf_file');
+
+            $filepath = $config['upload_path'].$dataPDF['file_name'];
+
+            $raw_text = $this->parsePDF($filepath);
+        }
+
+        if (!is_null($raw_text)) {
+            $data['raw_text'] = $raw_text;
+        }
+
         // Make sure we only pass in the fields we want
 
-        $data = $this->articles_model->prep_data($this->input->post());
+        $data = $this->articles_model->prep_data($data);
 
         // Additional handling for default values should be added below,
         // or in the model's prep_data() method
