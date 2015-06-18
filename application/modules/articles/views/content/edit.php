@@ -53,18 +53,36 @@ $id = isset($articles->id) ? $articles->id : '';
                 </div>
             </div>
 
-            <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
+            <!-- <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_summary') , 'summary', array('class' => 'control-label')); ?>
                 <div class='controls'>
                     <input id='summary' type='text' name='summary' maxlength='1000' value="<?php echo set_value('summary', isset($articles->summary) ? $articles->summary : ''); ?>" />
                     <span class='help-inline'><?php echo form_error('summary'); ?></span>
                 </div>
+            </div> -->
+
+            <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
+                <?php echo form_label(lang('articles_field_summary') , 'summary', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <textarea name="summary"><?php echo isset($articles->summary) ? $articles->summary : ''; ?></textarea>                    
+                    <span class='help-inline'><?php echo form_error('summary'); ?></span>
+                </div>
             </div>
+
+            <!-- <div class="control-group<?php echo form_error('tags') ? ' error' : ''; ?>">
+                <?php echo form_label(lang('articles_field_tags') , 'tags', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input id='tags' type='text' name='tags' maxlength='100' value="<?php echo set_value('tags', isset($articles->tags) ? $articles->tags : ''); ?>" />
+                    <span class='help-inline'><?php echo form_error('tags'); ?></span>
+                </div>
+            </div> -->
 
             <div class="control-group<?php echo form_error('tags') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_tags') , 'tags', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <input id='tags' type='text' name='tags' maxlength='100' value="<?php echo set_value('tags', isset($articles->tags) ? $articles->tags : ''); ?>" />
+                    <select multiple="multiple" id='tags' class="select2-tags" type='text' name='tags[]' maxlength='11' value="<?php echo set_value('tags', isset($articles->tags) ? $articles->tags : ''); ?>">
+                        <option value="tag1">Tag1</option>
+                    </select>
                     <span class='help-inline'><?php echo form_error('tags'); ?></span>
                 </div>
             </div>
