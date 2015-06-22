@@ -99,5 +99,23 @@ class Articles_model extends BF_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('articles/authorsofarticles_model');
+        $this->load->model('articles/authors_model');
+    }
+
+    public function find($id = 0)
+    {
+        $item = parent::find($id);
+
+        $item->authors = array();
+        $aoas = $this->authorsofarticles_model->find_all_by('article_id', $item->id);
+
+        foreach ($aoas as $aoa) {
+            if ($author = $this->authors_model->find($aoa->author_id)) {
+                $item->authors[$author->id] = $author->name;
+            }
+        }
+
+        return $item;
     }
 }

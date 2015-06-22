@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2015 at 11:26 PM
+-- Generation Time: Jun 23, 2015 at 12:09 AM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -46,7 +46,9 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (2, 1, 'Created Module: Articles : 127.0.0.1', 'modulebuilder', '2015-05-28 00:18:03', 0),
 (3, 1, 'Created record with ID: 1 : 127.0.0.1', 'articles', '2015-05-28 00:23:56', 0),
 (4, 1, 'logged in from: ::1', 'users', '2015-05-28 00:41:54', 0),
-(5, 1, 'App settings saved from: ::1', 'core', '2015-05-28 00:46:28', 0);
+(5, 1, 'App settings saved from: ::1', 'core', '2015-05-28 00:46:28', 0),
+(6, 1, 'logged in from: 127.0.0.1', 'users', '2015-06-17 22:26:39', 0),
+(7, 1, 'logged in from: 127.0.0.1', 'users', '2015-06-22 21:35:07', 0);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
-  `modifed_by` int(11) DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -77,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
 -- Dumping data for table `bf_articles`
 --
 
-INSERT INTO `bf_articles` (`id`, `magazine_id`, `title`, `affiliation`, `raw_text`, `references`, `summary`, `tags`, `pdf_url`, `deleted`, `created_on`, `created_by`, `modified_on`, `modifed_by`) VALUES
-(1, 123, 'Test', 'Me', NULL, 'Him', 'Test Article', '#swag', '', 0, '2015-05-28', 1, NULL, NULL),
+INSERT INTO `bf_articles` (`id`, `magazine_id`, `title`, `affiliation`, `raw_text`, `references`, `summary`, `tags`, `pdf_url`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
+(1, 123, 'Test 2', 'Me', 'A.            Date de intrare\n-                    articole: revista (titlu revista, volum, numar, an), titlu articol, nume prenume autori, \nafiliere,    camp de tip text pentru referintele fiecarui articol (liber sau un format specificat. \nEste important ce articole sunt citate la referinte pentru fiecare articol in parte), camp text \nliber cu rezumatul, camp text liber pentru cuvinte cheie, posibilitate atasare articol in format \nPDF\n-                    utilizatori ai bazei de date pe niveluri de accesibilitate (administrator cu drepturi \ncomplete, inclusiv posibilitate de modificare drepturi pentru alti utilizatori, validare/invalidare\na acestora, de adaugare noi campuri in baza de date, campurile putand fi marcate ca vizibile\nsau nu catre public; utilizatori cu drepturi limitate de administrare a informatiilor in baza de \ndate, putand realiza conturi pentru reviste noi, putand introduce articole noi, cu toate \ncampurile mai sus mentionate)\nB.            Date de iesire\n-                    rezultate ale cautarilor parametrizate in baza de date, cautari dupa oricare din \ncampurile vizibile publicului, inclusiv dupa cuvinte tip text liber (cautarea se va face in \ncampurile pentru numele revistei, titlu articol, rezumate si/sau cuvinte cheie. Ar fi de interes \nsa poata fi facute cautari si in fisierele pdf in corpul articolelor). De asemenea, pentru fiecare\narticol se va mentiona numarul de citari (se va numara la cate articole apare fiecare rezultat \ncitat). Rezultatele ar fi afisate pe ecran intr-un format anume \n-                    rezultatele cautarilor sa poata fi exportate intr-un format anume, am aici in vedere \nformat de tip referinta, cu extensii anume. De exemplu, unul sau mai multe articole selectate\nsa poata fi copiate in clipboard pentru a fi introduse intr-un articol, sau selectia sa \nC.            Specificatii generale, fara a fi exclusive\n-                    Sa existe posibilitatea ca revistele sa poata introduce printr-un reprezentant al lor, \ninformatiile specifice lor (cont pentru fiecare revista in parte din care sa fie introduse toate \ninformatiile specifice fiecarui articol, ca mai sus)\n-                    Odata introduse informatii in baza de date, orice modificare va putea fi facuta DOAR \nde catre nivelul administrator. De exemplu, daca un angajat al universitatii ce se ocupa cu \nintroducerea si validarea informatiilor in baza de date, astazi termina ceva lucrat si maine \ngaseste o greseala efectuata azi. Stergerea sau modificarea sa poata fi operata, dar sa \nramana in stand-by (intr-un fel de memorie tampon) pana cand administratorul ce are \ndrepturi full, valideaza modificarile. Ce asigura asta? Inainte de orice, se elimina posibilitatea\nca persoana ce introduce articolele si revistele in baza de date sa faca rau la un moment dar \nincercand sa stearga informatiile. De asemenea, contul revista sa poata opera modificari, \ninclusiv stergere de informatii din baza de date, DOAR pentru revista numar curent. Cu alte \ncuvinte, sa nu poata face modificari in arhiva. Orice alte modificari vor fi communicate \nadministratorului bazei de date care va opera modificarile daca sunt necesare.\n-                    Baza de date sa aiba implementate optiuni de backup saptamanal (sau zilnic, noaptea\nde ex.). Back-up-ul se va realiza eventual intr-o alta locatie hardware (asigurand prin \nredundanta securitatea bazei de date in cazul in care o persoana rau intentionata, din \ninterior (nu presupun ca toti angajatii unei institutii sunt intotdeauna bine intentionati mai\n\nales daca contractele de colaborare se apropie de final cu atat mai mult daca incetarea \ncolaborarii vine unilateral din partea institutiei … sau, cum a gresi este omeneste, e posibil \nca un operator standard sa faca modificari gresite, si lipsa validarii de catre un nivel superior \nva perpetua greseli in baza de date. Cu alte cuvinte modificarile se fac cu dubla cheie)\n-                    ar fi de interes exista unui server de email ce sa poata fi gestionat cu Outlook, si ar fi \nde real ajutor sa existe un server Microsoft Exchange la care sa se poata utilizatorii (cei \ninterni) conecta cu outlook si gestiona emailurile, fara a fi neaparat dependenti de o statie de\nlucru, si mai ales sa se sincronizeze automat folderele de pe statia de lucru cu cele de pe \nserver (stim ca gestionarea cu outlook permite download-ul emailurile dar orice trimit \nramane in sent-ul local unui .pst). \n-                    unele reviste ofera access la articole contra cost. Articolele in baza de date a noastra \nvor avea un flag ce sa mentioneze ca sunt accesibile contra cost sau sunt la liber. Daca sunt \ncontra cost, va rugam sa va ganditi la posibilitatea de distributie a informatiei contra cost, \npresupunand ca universitatea, sau autoritatea ce are baza de date are un contract incheiat \nin acest sens cu editurile ce publica revistele (cost per bucata articol sau per numar revista).\n \n-                    Datele de intrare vor trebui sa poata fi introduse fie manual de catre operator uman, \nfie automat, scanand articolele sau revista intreaga ce ne sunt livrate in format electronic. \nFormatul electronic este in majoritatea cazurilor pdf, deci ar trebui luat in considerare \nscanarea acestor formate atunci cand articolele sunt introduse in mod automat. Eventual, ca \npropunere, ar putea ca inainte de completarea oricaror campuri, sa fie importat articolul pdf, \nsi campurile sa fie completate automat cu informatii din articol, operatorul uman urmand a \nvalida importul, daca este correct, sau a corecta daca sunt greseli dupa care valideaza \nvarianta finala a importului.   \nIndiferent cine introduce datele, sunt necesare informatii despre fiecare revista si articolele \nce le contin, dupa cum urmeaza. Se creaza o inregistrare pentru un numar nou al revistei, \navand campuri disponibile ca:\n-                    volum\n-                    nr., anul numarului (nu este anul aparitiei, de ex. 2015, ci reprezinta anul de cand a \ninceput a fi publicata revista, de ex. anul VIII), \n-                    este sau nu un numar special (adesea revistele scot cate un numar in afara celor \nstandard, fara o anume periodicitate, eventual adresate unui eveniment, de genul \nconferinta). Acest camp nu este binar YES/NO ci include o mentiune scurta despre numarul \ncurent, de ex. SPECIAL ISSUE sau ceva similar\n-                    anul publicarii (anul cand a fost revista printata/publicata) \nImportante sunt cautarile si mai ales posibilitatea de export a informatiei intr-un format ales \nde cel ce interogheaza baza de date. De ex. eu utilizez adesea formatul Vancouver, pentru \nreferinte in medicina, si acesta foloseste o grila standard de prezentare a informatiei (astfel \nmotoare automate de cautare in articole identificare referintele la finalul articolelor si \nindexeaza numarul de citari ale acestora atunci cand utilizatorul doreste o raportare despre\n\nnumar de citari). Important este sa poata fi exportata informatia in diverse tipuri de fisiere. \nDe ex. Endnote, Word, .txt etc. in principiu cam astea 3 ar fi.\nPentru ca nu reinventam roata, un exemplu de baza de date ar fi  http://www.scipio.ro . Interfata este simpla \n(nu este nevoie de mai mult de atat), si permite cautari parametrice, are formular de contact, cautare \navansata etc. Si  http://www.ebscohost.com  este o alta baza de date foarte buna ca exemplu. \nDe asemenea, orice detaliu doriti lamurit, va rog sa ma contactati, si daca aveti propuneri si sugestii, \nsuntem deschisi la orice ne-ar ajuta in demersul de realizare a acestei baze de date sau ar facilita \nadministrarea acesteia. Interfata trebuie sa fie relativ simpla, intuitiva.', 'Him', 'Test Article', 'dfdfsdfsdf,SEXY,SHIT,test,#nofilter', '', 0, '2015-05-28', 1, '2015-06-23', 1),
 (2, 0, 'adsasdasd', NULL, '', '', '', '', NULL, 0, '2015-06-11', 1, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -89,10 +91,24 @@ INSERT INTO `bf_articles` (`id`, `magazine_id`, `title`, `affiliation`, `raw_tex
 
 DROP TABLE IF EXISTS `bf_authors`;
 CREATE TABLE IF NOT EXISTS `bf_authors` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `bf_authors`
+--
+
+INSERT INTO `bf_authors` (`id`, `name`) VALUES
+(1, 'Sandelian'),
+(2, 'Sandelush'),
+(3, 'asdasdasd'),
+(4, 'aasdasdasd'),
+(5, 'aasdasdasd'),
+(6, 'Eugen G8'),
+(7, 'Test'),
+(8, 'Coshmin');
 
 -- --------------------------------------------------------
 
@@ -102,17 +118,20 @@ CREATE TABLE IF NOT EXISTS `bf_authors` (
 
 DROP TABLE IF EXISTS `bf_authorsofarticles`;
 CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `author_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
 --
 
-INSERT INTO `bf_authorsofarticles` (`article_id`, `author_id`) VALUES
-(1, 6),
-(1, 9);
+INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
+(4, 1, 6),
+(5, 1, 7),
+(6, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -879,7 +898,7 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@mybonfire.com', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-05-28 00:41:54', '::1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UM6', 'english', 1, '', 0);
+(1, 1, 'admin@mybonfire.com', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-06-22 21:35:07', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UM6', 'english', 1, '', 0);
 
 -- --------------------------------------------------------
 
