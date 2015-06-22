@@ -3,7 +3,11 @@
 Assets::add_css(array(
         'bootstrap.css',
         'bootstrap-responsive.css',
+        'select2.min.css'
     ));
+
+Assets::add_js('select2.full.min.js');
+
 
 if (isset($shortcut_data) && is_array($shortcut_data['shortcut_keys'])) {
     Assets::add_js($this->load->view('ui/shortcut_keys', $shortcut_data, true), 'inline');
