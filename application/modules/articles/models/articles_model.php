@@ -110,10 +110,24 @@ class Articles_model extends BF_Model
         $item->authors = array();
         $aoas = $this->authorsofarticles_model->find_all_by('article_id', $item->id);
 
+        if (!is_array($aoas)) {
+            $aoas = array();
+        }
+
         foreach ($aoas as $aoa) {
             if ($author = $this->authors_model->find($aoa->author_id)) {
                 $item->authors[$author->id] = $author->name;
             }
+        }
+
+        $tags = array();
+        if (strlen($item->tags)) {
+            $tags = explode(',', $item->tags);
+        }
+
+        $item->tags = array();
+        foreach ($tags as $tag) {
+            $item->tags[$tag] = $tag;
         }
 
         return $item;

@@ -25,6 +25,7 @@ class Content extends Admin_Controller
         $this->load->model('articles/articles_model');
         $this->load->model('articles/authors_model');
         $this->load->model('articles/authorsofarticles_model');
+        $this->load->model('articles/institutions_model');
         $this->lang->load('articles');
 
         $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
@@ -157,13 +158,16 @@ class Content extends Admin_Controller
         // }
 
         $articles = $this->articles_model->find($id);
-        $tags = isset($articles->tags) ? explode(',', $articles->tags) : array();
-        $articles->tags = array();
-        foreach ($tags as $tag) {
-            $articles->tags[$tag] = $tag;
+        $this->institutions_model->select(array('id', 'name'));
+        $institutions = $this->institutions_model->find_all();
+        $affiliations = array();
+
+        foreach ($institutions as $inst) {
+            $affiliations[$inst->id] = $inst->name;
         }
 
         Template::set('articles', $articles);
+        Template::set('affiliations', $affiliations);
 
         Template::set('toolbar_title', lang('articles_edit_heading'));
         Template::render();
@@ -191,21 +195,27 @@ class Content extends Admin_Controller
         // Validate the data
         $this->form_validation->set_rules($this->articles_model->get_validation_rules());
         if ($this->form_validation->run() === false) {
-            die('dasdasd');
             return false;
         }
 
         $data = $this->input->post();
 
+        if (isset($data['affiliation'])) {
+            if (!is_numeric($data['affiliation'])) {
+                $instID = $this->institutions_model->insert(
+                    array('name' => $data['affiliation'])
+                );
 
-
+                if (is_numeric($instID)) {
+                    $data['affiliation'] = $instID;
+                }
+            }
+        }
 
         // Process Tags
-        $tags = null;
+        $tags = array();
         if (isset($data['tags'])) $tags = $data['tags'];
-        if (is_array($tags)) {
-            $data['tags'] = implode(',', $tags);
-        }
+        $data['tags'] = implode(',', $tags);
 
         $config = array();
         $config['upload_path'] = './uploads/';

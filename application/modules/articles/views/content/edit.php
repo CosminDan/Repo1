@@ -22,50 +22,37 @@ $id = isset($articles->id) ? $articles->id : '';
             <div class="control-group<?php echo form_error('title') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_title') , 'title', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <input id='title' type='text' name='title' maxlength='100' value="<?php echo set_value('title', isset($articles->title) ? $articles->title : ''); ?>" />
+                    <input class="input-xxlarge" id='title' type='text' name='title' maxlength='100' value="<?php echo set_value('title', isset($articles->title) ? $articles->title : ''); ?>" />
                     <span class='help-inline'><?php echo form_error('title'); ?></span>
                 </div>
             </div>
 
-            <?php echo form_multiselect('authors[]', $articles->authors, array_keys($articles->authors), lang('articles_field_authors'), 'class="select2-tags"'); ?>
+            <?php echo form_multiselect('authors[]', $articles->authors, array_keys($articles->authors), lang('articles_field_authors'), 'class="select2-tags input-xxlarge"'); ?>
 
-            <div class="control-group<?php echo form_error('affiliation') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_affiliation') , 'affiliation', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input id='affiliation' type='text' name='affiliation' maxlength='100' value="<?php echo set_value('affiliation', isset($articles->affiliation) ? $articles->affiliation : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('affiliation'); ?></span>
-                </div>
-            </div>
+            <?php echo form_dropdown('affiliation', $affiliations, $articles->affiliation, lang('articles_field_affiliation'), 'class="select2-tags input-xxlarge"'); ?>
 
             <div class="control-group<?php echo form_error('references') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_references') , 'references', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <input id='references' type='text' name='references' maxlength='100' value="<?php echo set_value('references', isset($articles->references) ? $articles->references : ''); ?>" />
+                    <input class="input-xxlarge" id='references' type='text' name='references' maxlength='100' value="<?php echo set_value('references', isset($articles->references) ? $articles->references : ''); ?>" />
                     <span class='help-inline'><?php echo form_error('references'); ?></span>
                 </div>
             </div>
 
-            <!-- <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_summary') , 'summary', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input id='summary' type='text' name='summary' maxlength='1000' value="<?php echo set_value('summary', isset($articles->summary) ? $articles->summary : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('summary'); ?></span>
-                </div>
-            </div> -->
-
             <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_summary') , 'summary', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <textarea name="summary"><?php echo isset($articles->summary) ? $articles->summary : ''; ?></textarea>
+                    <textarea class="input-xxlarge" name="summary"><?php echo isset($articles->summary) ? $articles->summary : ''; ?></textarea>
                     <span class='help-inline'><?php echo form_error('summary'); ?></span>
                 </div>
             </div>
 
-            <?php echo form_multiselect('tags[]', $articles->tags, $articles->tags, lang('articles_field_tags'), 'class="select2-tags"'); ?>
+            <?php echo form_multiselect('tags[]', $articles->tags, $articles->tags, lang('articles_field_tags'), 'class="select2-tags input-xxlarge"'); ?>
 
             <div class="control-group">
+                <?php echo form_label(lang('articles_field_rawtext') , 'raw_text', array('class' => 'control-label')); ?>
                 <div class='controls'>
-                    <textarea name="raw_text"><?php echo isset($articles->raw_text) ? $articles->raw_text : ''; ?></textarea>
+                    <textarea class="input-xxlarge" name="raw_text"><?php echo isset($articles->raw_text) ? $articles->raw_text : ''; ?></textarea>
                 </div>
             </div>
 

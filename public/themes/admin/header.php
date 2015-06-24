@@ -1,10 +1,13 @@
 <?php
 
-Assets::add_css(array(
-        'bootstrap.css',
-        'bootstrap-responsive.css',
-        'select2.min.css'
-    ));
+Assets::add_css(
+    array(
+        'bootstrap2.min.css',
+        'bootstrap2-responsive.min.css',
+        'select2.min.css',
+        'main.css'
+    )
+);
 
 Assets::add_js('select2.full.min.js');
 

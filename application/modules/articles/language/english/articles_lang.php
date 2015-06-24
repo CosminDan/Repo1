@@ -61,3 +61,4 @@ $lang['articles_field_references']   = 'References';
 $lang['articles_field_summary']      = 'Summary';
 $lang['articles_field_tags']         = 'Tags';
 $lang['articles_field_pdf_url']      = 'Pdf Url';
+$lang['articles_field_rawtext']      = 'Raw Text';
