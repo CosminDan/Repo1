@@ -9,17 +9,22 @@ Arts & Humanities
     Folklore
     History
     History & Philosophy Of Science
-    Humanities, Multidisciplinary
+    Humanities
+        Multidisciplinary
     Language & Linguistics
     Literary Reviews
     Literary Theory & Criticism
     Literature
-    Literature, African, Australian, Canadian
-    Literature, American
-    Literature, British Isles
-    Literature, German, Dutch, Scandinavian
-    Literature, Romance
-    Literature, Slavic
+        African
+        Australian
+        Canadian
+        American
+        British Isles
+        German
+        Dutch
+        Scandinavian
+        Romance
+        Slavic
     Medieval & Renaissance Studies
     Music
     Philosophy
@@ -30,8 +35,9 @@ Science
     Acoustics
     Agricultural Economics & Policy
     Agricultural Engineering
-    Agriculture, Dairy & Animal Science
-    Agriculture, Multidisciplinary
+    Agriculture
+        Dairy & Animal Science
+        Multidisciplinary
     Agronomy
     Allergy
     Anatomy & Morphology
@@ -48,47 +54,52 @@ Science
     Biotechnology & Applied Microbiology
     Cardiac & Cardiovascular Systems
     Cell Biology
-    Chemistry, Analytical
-    Chemistry, Applied
-    Chemistry, Inorganic & Nuclear
-    Chemistry, Medicinal
-    Chemistry, Multidisciplinary
-    Chemistry, Organic
-    Chemistry, Physical
+    Chemistry
+        Analytical
+        Applied
+        Inorganic & Nuclear
+        Medicinal
+        Multidisciplinary
+        Organic
+        Physical
     Clinical Neurology
-    Computer Science, Artificial Intelligence
-    Computer Science, Cybernetics
-    Computer Science, Hardware & Architecture
-    Computer Science, Information Systems
-    Computer Science, Interdisciplinary Applications
-    Computer Science, Software Engineering
-    Computer Science, Theory & Methods
+    Computer Science
+        Artificial Intelligence
+        Cybernetics
+        Hardware & Architecture
+        Information Systems
+        Interdisciplinary Applications
+        Software Engineering
+        Theory & Methods
     Construction & Building Technology
     Critical Care Medicine
     Crystallography
-    Dentistry, Oral Surgery & Medicine
+    Dentistry
+        Oral Surgery & Medicine
     Dermatology
     Developmental Biology
     Ecology
-    Education, Scientific Disciplines
+    Education
+        Scientific Disciplines
     Electrochemistry
     Emergency Medicine
     Endocrinology & Metabolism
     Energy & Fuels
-    Engineering, Aerospace
-    Engineering, Biomedical
-    Engineering, Chemical
-    Engineering, Civil
-    Engineering, Electrical & Electronic
-    Engineering, Environmental
-    Engineering, Geological
-    Engineering, Industrial
-    Engineering, Manufacturing
-    Engineering, Marine
-    Engineering, Mechanical
-    Engineering, Multidisciplinary
-    Engineering, Ocean
-    Engineering, Petroleum
+    Engineering
+        Aerospace
+        Biomedical
+        Chemical
+        Civil
+        Electrical & Electronic
+        Environmental
+        Geological
+        Industrial
+        Manufacturing
+        Marine
+        Mechanical
+        Multidisciplinary
+        Ocean
+        Petroleum
     Entomology
     Environmental Sciences
     Evolutionary Biology
@@ -98,9 +109,11 @@ Science
     Gastroenterology & Hepatology
     Genetics & Heredity
     Geochemistry & Geophysics
-    Geography, Physical
+    Geography
+        Physical
     Geology
-    Geosciences, Multidisciplinary
+    Geosciences
+        Multidisciplinary
     Geriatrics & Gerontology
     Health Care Sciences & Services
     Hematology
@@ -113,25 +126,27 @@ Science
     Integrative & Complementary Medicine
     Limnology
     Marine & Freshwater Biology
-    Materials Science, Biomaterials
-    Materials Science, Ceramics
-    Materials Science, Characterization & Testing
-    Materials Science, Coatings & Films
-    Materials Science, Composites
-    Materials Science, Multidisciplinary
-    Materials Science, Paper & Wood
-    Materials Science, Textiles
+    Materials Science
+        Biomaterials
+        Ceramics
+        Characterization & Testing
+        Coatings & Films
+        Composites
+        Multidisciplinary
+        Paper & Wood
+        Textiles
     Mathematical & Computational Biology
     Mathematics
-    Mathematics, Applied
-    Mathematics, Interdisciplinary Applications
+        Applied
+        Interdisciplinary Applications
     Mechanics
     Medical Ethics
     Medical Informatics
     Medical Laboratory Technology
-    Medicine, General & Internal
-    Medicine, Legal
-    Medicine, Research & Experimental
+    Medicine
+        General & Internal
+        Legal
+        Research & Experimental
     Metallurgy & Metallurgical Engineering
     Meteorology & Atmospheric Sciences
     Microbiology
@@ -161,21 +176,23 @@ Science
     Pediatrics
     Peripheral Vascular Disease
     Pharmacology & Pharmacy
-    Physics, Applied
-    Physics, Atomic, Molecular & Chemical
-    Physics, Condensed Matter
-    Physics, Fluids & Plasmas
-    Physics, Mathematical
-    Physics, Multidisciplinary
-    Physics, Nuclear
-    Physics, Particles & Fields
+    Physics
+        Applied
+        Atomic, Molecular & Chemical
+        Condensed Matter
+        Fluids & Plasmas
+        Mathematical
+        Multidisciplinary
+        Nuclear
+        Particles & Fields
     Physiology
     Plant Sciences
     Polymer Science
     Psychiatry
     Psychology
     Public, Environmental & Occupational Health
-    Radiology, Nuclear Medicine & Medical Imaging
+    Radiology
+        Nuclear Medicine & Medical Imaging
     Rehabilitation
     Remote Sensing
     Reproductive Biology
@@ -203,7 +220,7 @@ Social Science
     Anthropology
     Area Studies
     Business
-    Business, Finance
+        Finance
     Communication
     Criminology & Penology
     Demography
@@ -232,23 +249,25 @@ Social Science
     Planning & Development
     Political Science
     Psychiatry
-    Psychology, Applied
-    Psychology, Biological
-    Psychology, Clinical
-    Psychology, Developmental
-    Psychology, Educational
-    Psychology, Experimental
-    Psychology, Mathematical
-    Psychology, Multidisciplinary
-    Psychology, Psychoanalysis
-    Psychology, Social
+    Psychology
+        Applied
+        Biological
+        Clinical
+        Developmental
+        Educational
+        Experimental
+        Mathematical
+        Multidisciplinary
+        Psychoanalysis
+        Social
     Public Administration
     Public, Environmental & Occupational Health
     Rehabilitation
     Social Issues
-    Social Sciences, Biomedical
-    Social Sciences, Interdisciplinary
-    Social Sciences, Mathematical Methods
+    Social Sciences
+        Biomedical
+        Interdisciplinary
+        Mathematical Methods
     Social Work
     Sociology
     Substance Abuse
