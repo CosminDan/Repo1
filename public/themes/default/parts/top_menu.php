@@ -3,20 +3,22 @@
     <nav class="navbar">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-        PubApp
-        </a>
+        <a class="navbar-brand" href="<?php echo site_url(); ?>"><?php e(settings_item('site.title')); ?></a>
     </div>
     <div class="collapse navbar-collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+                <?php if (empty($current_user)) : ?>
+                <li><a href="<?php echo site_url(LOGIN_URL); ?>">Sign In</a></li>
+                <?php else : ?>
+                <li <?php echo check_method('profile'); ?>><a href="<?php echo site_url('users/profile'); ?>"><?php e(lang('bf_user_settings')); ?></a></li>
+                <li><a href="<?php echo site_url('admin'); ?>">Admin</a></li>
+                <li><a href="<?php echo site_url('logout'); ?>"><?php e(lang('bf_action_logout')); ?></a></li>
+                <?php endif; ?>
           </ul>
         </div>
   </div>
 </nav>
-    
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
       <div class="text-center">
@@ -49,6 +51,6 @@
     </div>
   </div>
 </div>
-    
+
 </div>
 </div>

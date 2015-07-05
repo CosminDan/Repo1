@@ -6,8 +6,8 @@ $areaUrl = SITE_AREA . '/content/articles';
 ?>
 <ul class='nav nav-pills'>
     <?php if ($this->auth->has_permission('Articles.Content.Create')) : ?>
-    <li<?php echo $checkSegment == 'create' ? ' class="active"' : ''; ?>>
-        <a href="<?php echo site_url($areaUrl.'/create/'.$issue->id); ?>" id='create_new'>
+    <li<?php echo $checkSegment == 'add' ? ' class="active"' : ''; ?>>
+        <a href="<?php echo site_url(SITE_AREA . '/content/issues/add/'.$issue->id); ?>" id='create_new'>
             <?php echo lang('articles_new'); ?>
         </a>
     </li>

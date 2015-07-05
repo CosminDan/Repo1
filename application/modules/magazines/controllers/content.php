@@ -7,10 +7,10 @@
 
 class Content extends Admin_Controller
 {
-    protected $permissionCreate = 'Articles.Content.Create';
-    protected $permissionDelete = 'Articles.Content.Delete';
-    protected $permissionEdit   = 'Articles.Content.Edit';
-    protected $permissionView   = 'Articles.Content.View';
+    protected $permissionCreate = 'Magazines.Content.Create';
+    protected $permissionDelete = 'Magazines.Content.Delete';
+    protected $permissionEdit   = 'Magazines.Content.Edit';
+    protected $permissionView   = 'Magazines.Content.View';
 
     /**
      * Constructor
@@ -22,24 +22,21 @@ class Content extends Admin_Controller
         parent::__construct();
 
         $this->auth->restrict($this->permissionView);
-        $this->load->model('articles_model');
-        $this->load->model('authors_model');
-        $this->load->model('articles_categories_model');
+
+        $this->load->model('magazines_model');
         $this->load->model('issues_model');
+        $this->load->model('authors_model');
+        $this->load->model('articles_model');
         $this->load->model('authorsofarticles_model');
         $this->load->model('institutions_model');
-        $this->load->model('categories_model');
-        $this->load->model('magazines_model');
+        $this->load->helper('misc');
+        $this->lang->load('magazines');
 
-        $this->lang->load('issues/issues');
-        $this->lang->load('articles/articles');
-        $this->lang->load('magazines/magazines');
+        // $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
 
-        $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
+        //Template::set_block('sub_nav', 'content/_sub_nav');
 
-
-
-        Assets::add_module_js('articles', 'articles.js');
+        //Assets::add_module_js('articles', 'articles.js');
         //Assets::add_module_css('articles', 'articles.css');
     }
 
@@ -48,20 +45,10 @@ class Content extends Admin_Controller
      *
      * @return void
      */
-    public function index($id = 0, $offset = 0)
+    public function index($offset = 0)
     {
-        if (!$id) {
-            if (!$um = $this->auth->user_magazine()) {
-                redirect(SITE_AREA);
-            }
-            $issues = $this->issues_model->where('magazine_id', $um)->order_by('id', 'DESC')->limit(1)->find_all();
-            if (!isset($issues[0])) {
-                redirect(SITE_AREA);
-            }
-            $issue = $issues[0];
-
-        } else {
-            $issue = $this->issues_model->find_by('id', $id);
+        if (!has_permission('Magazines.Manage.All')) {
+            // get my magazine id & redirect.
         }
 
         // Deleting anything?
@@ -76,7 +63,7 @@ class Content extends Admin_Controller
 
                 $result = true;
                 foreach ($checked as $pid) {
-                    $deleted = $this->articles_model->delete($pid);
+                    $deleted = $this->magazines_model->delete($pid);
                     if ($deleted == false) {
                         $result = false;
                     }
@@ -84,58 +71,60 @@ class Content extends Admin_Controller
                 if ($result) {
                     Template::set_message(count($checked) . ' ' . lang('articles_delete_success'), 'success');
                 } else {
-                    Template::set_message(lang('articles_delete_failure') . $this->articles_model->error, 'error');
+                    Template::set_message(lang('articles_delete_failure') . $this->magazines_model->error, 'error');
                 }
             }
         }
         $pagerUriSegment = 5;
-        $pagerBaseUrl = site_url(SITE_AREA . '/content/articles/index/'.$id) . '/';
+        $pagerBaseUrl = site_url(SITE_AREA . '/content/magazines/index') . '/';
 
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
 
         $this->load->library('pagination');
         $pager['base_url']    = $pagerBaseUrl;
-        $pager['total_rows']  = $this->articles_model->count_all();
+        $pager['total_rows']  = $this->magazines_model->count_all();
         $pager['per_page']    = $limit;
         $pager['uri_segment'] = $pagerUriSegment;
 
         $this->pagination->initialize($pager);
-        $this->articles_model->limit($limit, $offset);
-        $this->articles_model->where('issue_id', $issue->id);
+        $this->magazines_model->limit($limit, $offset);
 
+        $records = $this->magazines_model->find_all();
 
-        $records = $this->articles_model->find_all();
-
-        Template::set('issue', $issue);
         Template::set('records', $records);
-        Template::set('toolbar_title', lang('articles_manage'));
-
-        Template::set_block('sub_nav', 'content/_sub_nav');
+        Template::set('toolbar_title', lang('magazines_manage'));
 
         Template::render();
     }
 
-    public function create($issue_id = 0)
+    /**
+     * Create a Articles object.
+     *
+     * @return void
+     */
+    public function create()
     {
-        if (!$issue = $this->issues_model->find_by('id', (int) $issue_id)) {
-            redirect(SITE_AREA . '/content/magazines');
+        $this->auth->restrict($this->permissionCreate);
+
+        if (isset($_POST['save'])) {
+
+            if ($insert_id = $this->save_articles()) {
+                //log_activity($this->auth->user_id(), lang('articles_act_create_record') . ': ' . $insert_id . ' : ' . $this->input->ip_address(), 'articles');
+                Template::set_message(lang('articles_create_success'), 'success');
+                redirect(SITE_AREA . '/content/articles');
+            }
+
+            // Not validation error
+            if ( ! empty($this->articles_model->error)) {
+                Template::set_message(lang('articles_create_failure') . $this->articles_model->error, 'error');
+            }
         }
 
-        if (!$magazine = $this->magazines_model->find_by('id', $issue->magazine_id)) {
-            redirect(SITE_AREA . '/content/magazines');
-        }
-
-        // TODO: Check if my own
-
-        $id = $this->articles_model->insert(
-            array(
-                'issue_id' => $issue->id,
-                'title' => 'Untitled'
-            )
-        );
-
-        redirect(SITE_AREA . '/content/articles/edit/' . $id);
+        Template::set('toolbar_title', lang('articles_action_create'));
+        Template::render();
     }
+
+
 
     /**
      * Allows editing of Articles data.
@@ -147,6 +136,7 @@ class Content extends Admin_Controller
         $id = $this->uri->segment(5);
         if (empty($id)) {
             Template::set_message(lang('articles_invalid_id'), 'error');
+
             redirect(SITE_AREA . '/content/articles');
         }
 
@@ -154,9 +144,9 @@ class Content extends Admin_Controller
             $this->auth->restrict($this->permissionEdit);
 
             if ($this->save_articles('update', $id)) {
+                //log_activity($this->auth->user_id(), lang('articles_act_edit_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
                 Template::set_message(lang('articles_edit_success'), 'success');
-                $article = $this->articles_model->find_by('id', $id);
-                redirect(SITE_AREA . '/content/articles/index/'.$article->issue_id);
+                redirect(SITE_AREA . '/content/articles');
             }
 
             // Not validation error
@@ -164,10 +154,17 @@ class Content extends Admin_Controller
                 Template::set_message(lang('articles_edit_failure') . $this->articles_model->error, 'error');
             }
         }
+        // elseif (isset($_POST['delete'])) {
+        //     $this->auth->restrict($this->permissionDelete);
+        //     if ($this->articles_model->delete($id)) {
+        //         log_activity($this->auth->user_id(), lang('articles_act_delete_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
+        //         Template::set_message(lang('articles_delete_success'), 'success');
+        //         redirect(SITE_AREA . '/content/articles');
+        //     }
+        //     Template::set_message(lang('articles_delete_failure') . $this->articles_model->error, 'error');
+        // }
 
         $articles = $this->articles_model->find($id);
-        $categories = $this->categories_model->select(array('id', 'name'))->where('pid !=', 0)->find_all();
-
         $this->institutions_model->select(array('id', 'name'));
         $institutions = $this->institutions_model->find_all();
         $affiliations = array();
@@ -176,14 +173,8 @@ class Content extends Admin_Controller
             $affiliations[$inst->id] = $inst->name;
         }
 
-        $categs = array();
-        foreach ($categories as $cat) {
-            $categs[$cat->id] = $cat->name;
-        }
-
         Template::set('articles', $articles);
         Template::set('affiliations', $affiliations);
-        Template::set('categories', $categs);
 
         Template::set('toolbar_title', lang('articles_edit_heading'));
         Template::render();
@@ -216,17 +207,6 @@ class Content extends Admin_Controller
 
         $data = $this->input->post();
 
-        if (isset($data['issue_id'])) {
-            unset($data['issue_id']);
-        }
-
-        if (isset($data['page'])) {
-            $data['page'] = (int) $data['page'];
-            if ($data['page'] < 1) {
-                $data['page'] = 1;
-            }
-        }
-
         if (isset($data['affiliation'])) {
             if (!is_numeric($data['affiliation'])) {
                 $instID = $this->institutions_model->insert(
@@ -238,8 +218,6 @@ class Content extends Admin_Controller
                 }
             }
         }
-
-
 
         // Process Tags
         $tags = array();
@@ -317,22 +295,10 @@ class Content extends Admin_Controller
             }
         }
 
-        if (isset($data['categories'])) {
-            $this->articles_categories_model->delete_where('article_id = '.$id);
-            $batch = array();
-            foreach ($data['categories'] as $categ) {
-                $batch[] = array(
-                    'article_id' => $id,
-                    'category_id' => $categ
-                );
-            }
-            $this->articles_categories_model->insert_batch($batch);
-        }
-
         return $return;
     }
 
-    private function parsePDF($filepath)
+    public function parsePDF($filepath)
     {
         $parser = new \Smalot\PdfParser\Parser();
         $pdf    = $parser->parseFile($filepath);
@@ -349,37 +315,6 @@ class Content extends Admin_Controller
         }
         echo time();
 
-        die;
-    }
-
-    public function test()
-    {
-        die();
-        $categs = file_get_contents('../categs.txt');
-        $categs = explode("\n", $categs);
-
-        $parent = array(0, 0, 0);
-
-        foreach ($categs as $line) {
-            $categ = ltrim($line);
-            $diff = strlen($line) - strlen($categ);
-            $level = $diff/4;
-
-            $pid = $parent[$level];
-
-            $data = array(
-                'pid'        => $pid,
-                'name'       => $categ,
-                'selectable' => 1
-            );
-
-            $id = $this->categories_model->insert($data);
-
-            $next_level = $level+1;
-            $parent[$next_level] = $id;
-
-            echo "{$line} - {$level}\n";
-        }
         die;
     }
 }

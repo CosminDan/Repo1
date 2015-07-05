@@ -27,19 +27,9 @@ $id = isset($articles->id) ? $articles->id : '';
                 </div>
             </div>
 
-            <?php echo form_multiselect('categories[]', $categories, $articles->categories, lang('articles_field_categories'), 'class="select2-tags input-xxlarge"'); ?>
-
             <?php echo form_multiselect('authors[]', $articles->authors, array_keys($articles->authors), lang('articles_field_authors'), 'class="select2-tags input-xxlarge"'); ?>
 
             <?php echo form_dropdown('affiliation', $affiliations, $articles->affiliation, lang('articles_field_affiliation'), 'class="select2-tags input-xxlarge"'); ?>
-
-            <div class="control-group<?php echo form_error('page') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_page') , 'page', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input class="input-xxlarge" id='page' type='text' name='page' maxlength='100' value="<?php echo set_value('page', isset($articles->page) ? $articles->page : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('page'); ?></span>
-                </div>
-            </div>
 
             <div class="control-group<?php echo form_error('references') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('articles_field_references') , 'references', array('class' => 'control-label')); ?>
@@ -58,10 +48,31 @@ $id = isset($articles->id) ? $articles->id : '';
             </div>
 
             <?php echo form_multiselect('tags[]', $articles->tags, $articles->tags, lang('articles_field_tags'), 'class="select2-tags input-xxlarge"'); ?>
+
+            <div class="control-group">
+                <?php echo form_label(lang('articles_field_rawtext') , 'raw_text', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <textarea class="input-xxlarge" name="raw_text"><?php echo isset($articles->raw_text) ? $articles->raw_text : ''; ?></textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class='controls'>
+                    <input type="file" name="pdf_file"/>
+                </div>
+            </div>
         </fieldset>
         <fieldset class='form-actions'>
             <input type='submit' name='save' class='btn btn-primary' value="<?php echo lang('articles_action_edit'); ?>" />
-            <?php echo anchor(SITE_AREA . '/content/articles/index/'.$articles->issue_id, lang('articles_cancel'), 'class="btn btn-warning"'); ?>
+            <?php echo lang('bf_or'); ?>
+            <?php echo anchor(SITE_AREA . '/content/articles', lang('articles_cancel'), 'class="btn btn-warning"'); ?>
+
+            <?php if ($this->auth->has_permission('Articles.Content.Delete')) : ?>
+                <?php echo lang('bf_or'); ?>
+                <button type='submit' name='delete' formnovalidate class='btn btn-danger' id='delete-me' onclick="return confirm('<?php e(js_escape(lang('articles_delete_confirm'))); ?>');">
+                    <span class='icon-trash icon-white'></span>&nbsp;<?php echo lang('articles_delete_record'); ?>
+                </button>
+            <?php endif; ?>
         </fieldset>
     <?php echo form_close(); ?>
 </div>

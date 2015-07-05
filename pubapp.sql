@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2015 at 11:45 PM
+-- Generation Time: Jul 06, 2015 at 12:00 AM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -58,7 +58,12 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (14, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-01 23:17:33', 0),
 (15, 2, 'logged in from: 127.0.0.1', 'users', '2015-07-01 23:26:12', 0),
 (16, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-01 23:27:02', 0),
-(17, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-01 23:27:56', 0);
+(17, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-01 23:27:56', 0),
+(18, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-05 12:20:35', 0),
+(19, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-05 20:12:19', 0),
+(20, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-05 21:57:49', 0),
+(21, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-05 23:47:41', 0),
+(22, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-05 23:53:16', 0);
 
 -- --------------------------------------------------------
 
@@ -69,29 +74,69 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 DROP TABLE IF EXISTS `bf_articles`;
 CREATE TABLE IF NOT EXISTS `bf_articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `magazine_id` int(11) NOT NULL DEFAULT '0',
+  `issue_id` int(11) NOT NULL DEFAULT '0',
   `page` int(11) DEFAULT NULL,
   `title` varchar(100) NOT NULL,
   `affiliation` varchar(100) DEFAULT NULL,
-  `raw_text` text,
-  `references` text NOT NULL,
-  `summary` text NOT NULL,
-  `tags` text NOT NULL,
+  `references` text,
+  `summary` text,
+  `tags` text,
+  `views` int(11) NOT NULL DEFAULT '0',
   `deleted` int(11) NOT NULL DEFAULT '0',
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `bf_articles`
 --
 
-INSERT INTO `bf_articles` (`id`, `magazine_id`, `page`, `title`, `affiliation`, `raw_text`, `references`, `summary`, `tags`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
-(1, 123, NULL, 'Test 2', 'Me', 'A.            Date de intrare\n-                    articole: revista (titlu revista, volum, numar, an), titlu articol, nume prenume autori, \nafiliere,    camp de tip text pentru referintele fiecarui articol (liber sau un format specificat. \nEste important ce articole sunt citate la referinte pentru fiecare articol in parte), camp text \nliber cu rezumatul, camp text liber pentru cuvinte cheie, posibilitate atasare articol in format \nPDF\n-                    utilizatori ai bazei de date pe niveluri de accesibilitate (administrator cu drepturi \ncomplete, inclusiv posibilitate de modificare drepturi pentru alti utilizatori, validare/invalidare\na acestora, de adaugare noi campuri in baza de date, campurile putand fi marcate ca vizibile\nsau nu catre public; utilizatori cu drepturi limitate de administrare a informatiilor in baza de \ndate, putand realiza conturi pentru reviste noi, putand introduce articole noi, cu toate \ncampurile mai sus mentionate)\nB.            Date de iesire\n-                    rezultate ale cautarilor parametrizate in baza de date, cautari dupa oricare din \ncampurile vizibile publicului, inclusiv dupa cuvinte tip text liber (cautarea se va face in \ncampurile pentru numele revistei, titlu articol, rezumate si/sau cuvinte cheie. Ar fi de interes \nsa poata fi facute cautari si in fisierele pdf in corpul articolelor). De asemenea, pentru fiecare\narticol se va mentiona numarul de citari (se va numara la cate articole apare fiecare rezultat \ncitat). Rezultatele ar fi afisate pe ecran intr-un format anume \n-                    rezultatele cautarilor sa poata fi exportate intr-un format anume, am aici in vedere \nformat de tip referinta, cu extensii anume. De exemplu, unul sau mai multe articole selectate\nsa poata fi copiate in clipboard pentru a fi introduse intr-un articol, sau selectia sa \nC.            Specificatii generale, fara a fi exclusive\n-                    Sa existe posibilitatea ca revistele sa poata introduce printr-un reprezentant al lor, \ninformatiile specifice lor (cont pentru fiecare revista in parte din care sa fie introduse toate \ninformatiile specifice fiecarui articol, ca mai sus)\n-                    Odata introduse informatii in baza de date, orice modificare va putea fi facuta DOAR \nde catre nivelul administrator. De exemplu, daca un angajat al universitatii ce se ocupa cu \nintroducerea si validarea informatiilor in baza de date, astazi termina ceva lucrat si maine \ngaseste o greseala efectuata azi. Stergerea sau modificarea sa poata fi operata, dar sa \nramana in stand-by (intr-un fel de memorie tampon) pana cand administratorul ce are \ndrepturi full, valideaza modificarile. Ce asigura asta? Inainte de orice, se elimina posibilitatea\nca persoana ce introduce articolele si revistele in baza de date sa faca rau la un moment dar \nincercand sa stearga informatiile. De asemenea, contul revista sa poata opera modificari, \ninclusiv stergere de informatii din baza de date, DOAR pentru revista numar curent. Cu alte \ncuvinte, sa nu poata face modificari in arhiva. Orice alte modificari vor fi communicate \nadministratorului bazei de date care va opera modificarile daca sunt necesare.\n-                    Baza de date sa aiba implementate optiuni de backup saptamanal (sau zilnic, noaptea\nde ex.). Back-up-ul se va realiza eventual intr-o alta locatie hardware (asigurand prin \nredundanta securitatea bazei de date in cazul in care o persoana rau intentionata, din \ninterior (nu presupun ca toti angajatii unei institutii sunt intotdeauna bine intentionati mai\n\nales daca contractele de colaborare se apropie de final cu atat mai mult daca incetarea \ncolaborarii vine unilateral din partea institutiei … sau, cum a gresi este omeneste, e posibil \nca un operator standard sa faca modificari gresite, si lipsa validarii de catre un nivel superior \nva perpetua greseli in baza de date. Cu alte cuvinte modificarile se fac cu dubla cheie)\n-                    ar fi de interes exista unui server de email ce sa poata fi gestionat cu Outlook, si ar fi \nde real ajutor sa existe un server Microsoft Exchange la care sa se poata utilizatorii (cei \ninterni) conecta cu outlook si gestiona emailurile, fara a fi neaparat dependenti de o statie de\nlucru, si mai ales sa se sincronizeze automat folderele de pe statia de lucru cu cele de pe \nserver (stim ca gestionarea cu outlook permite download-ul emailurile dar orice trimit \nramane in sent-ul local unui .pst). \n-                    unele reviste ofera access la articole contra cost. Articolele in baza de date a noastra \nvor avea un flag ce sa mentioneze ca sunt accesibile contra cost sau sunt la liber. Daca sunt \ncontra cost, va rugam sa va ganditi la posibilitatea de distributie a informatiei contra cost, \npresupunand ca universitatea, sau autoritatea ce are baza de date are un contract incheiat \nin acest sens cu editurile ce publica revistele (cost per bucata articol sau per numar revista).\n \n-                    Datele de intrare vor trebui sa poata fi introduse fie manual de catre operator uman, \nfie automat, scanand articolele sau revista intreaga ce ne sunt livrate in format electronic. \nFormatul electronic este in majoritatea cazurilor pdf, deci ar trebui luat in considerare \nscanarea acestor formate atunci cand articolele sunt introduse in mod automat. Eventual, ca \npropunere, ar putea ca inainte de completarea oricaror campuri, sa fie importat articolul pdf, \nsi campurile sa fie completate automat cu informatii din articol, operatorul uman urmand a \nvalida importul, daca este correct, sau a corecta daca sunt greseli dupa care valideaza \nvarianta finala a importului.   \nIndiferent cine introduce datele, sunt necesare informatii despre fiecare revista si articolele \nce le contin, dupa cum urmeaza. Se creaza o inregistrare pentru un numar nou al revistei, \navand campuri disponibile ca:\n-                    volum\n-                    nr., anul numarului (nu este anul aparitiei, de ex. 2015, ci reprezinta anul de cand a \ninceput a fi publicata revista, de ex. anul VIII), \n-                    este sau nu un numar special (adesea revistele scot cate un numar in afara celor \nstandard, fara o anume periodicitate, eventual adresate unui eveniment, de genul \nconferinta). Acest camp nu este binar YES/NO ci include o mentiune scurta despre numarul \ncurent, de ex. SPECIAL ISSUE sau ceva similar\n-                    anul publicarii (anul cand a fost revista printata/publicata) \nImportante sunt cautarile si mai ales posibilitatea de export a informatiei intr-un format ales \nde cel ce interogheaza baza de date. De ex. eu utilizez adesea formatul Vancouver, pentru \nreferinte in medicina, si acesta foloseste o grila standard de prezentare a informatiei (astfel \nmotoare automate de cautare in articole identificare referintele la finalul articolelor si \nindexeaza numarul de citari ale acestora atunci cand utilizatorul doreste o raportare despre\n\nnumar de citari). Important este sa poata fi exportata informatia in diverse tipuri de fisiere. \nDe ex. Endnote, Word, .txt etc. in principiu cam astea 3 ar fi.\nPentru ca nu reinventam roata, un exemplu de baza de date ar fi  http://www.scipio.ro . Interfata este simpla \n(nu este nevoie de mai mult de atat), si permite cautari parametrice, are formular de contact, cautare \navansata etc. Si  http://www.ebscohost.com  este o alta baza de date foarte buna ca exemplu. \nDe asemenea, orice detaliu doriti lamurit, va rog sa ma contactati, si daca aveti propuneri si sugestii, \nsuntem deschisi la orice ne-ar ajuta in demersul de realizare a acestei baze de date sau ar facilita \nadministrarea acesteia. Interfata trebuie sa fie relativ simpla, intuitiva.', 'Him', 'Test Article', 'dfdfsdfsdf,SEXY,SHIT,test,#nofilter', 0, '2015-05-28', 1, '2015-06-23', 1),
-(2, 0, NULL, 'adsasdasd', '4', '', '', '', '', 0, '2015-06-11', 1, '2015-06-24', 1);
+INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `references`, `summary`, `tags`, `views`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
+(4, 1, 1, 'Untitled12313223', '1', '', '', '', 3432, 0, '2015-07-05', 1, '2015-07-05', 1),
+(5, 1, 1, 'Testtt', '4', 'sdfsdfsd', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
+(6, 1, 1, '23redwd', '1', '', '', '', 3555, 0, '2015-07-05', 1, '2015-07-05', 1),
+(7, 3, 1, 'Untitled', '1', '', '', '', 555, 0, '2015-07-05', 1, '2015-07-05', 1),
+(8, 3, 1, 'adfwewdsd', '1', '', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
+(9, 2, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-05', 1, NULL, NULL),
+(10, 3, 1, 'The Bla Bla Theory', '1', '', '', '', 0, 0, '2015-07-05', 1, '2015-07-05', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_articles_categories`
+--
+
+DROP TABLE IF EXISTS `bf_articles_categories`;
+CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+
+--
+-- Dumping data for table `bf_articles_categories`
+--
+
+INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
+(4, 7, 2),
+(5, 7, 3),
+(6, 7, 5),
+(7, 8, 4),
+(8, 8, 6),
+(9, 8, 2),
+(10, 10, 3),
+(11, 10, 5),
+(12, 10, 7),
+(13, 10, 11),
+(14, 10, 143),
+(15, 10, 262),
+(16, 5, 2),
+(17, 5, 7),
+(18, 5, 41);
 
 -- --------------------------------------------------------
 
@@ -157,10 +202,292 @@ DROP TABLE IF EXISTS `bf_categories`;
 CREATE TABLE IF NOT EXISTS `bf_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `selectable` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=277 ;
+
+--
+-- Dumping data for table `bf_categories`
+--
+
+INSERT INTO `bf_categories` (`id`, `pid`, `name`, `selectable`) VALUES
+(1, 0, 'Arts & Humanities', 1),
+(2, 1, 'Archaeology', 1),
+(3, 1, 'Architecture', 1),
+(4, 1, 'Art', 1),
+(5, 1, 'Asian Studies', 1),
+(6, 1, 'Classics', 1),
+(7, 1, 'Dance', 1),
+(8, 1, 'Film, Radio, Television', 1),
+(9, 1, 'Folklore', 1),
+(10, 1, 'History', 1),
+(11, 1, 'History & Philosophy Of Science', 1),
+(12, 1, 'Humanities', 1),
+(13, 12, 'Multidisciplinary', 1),
+(14, 1, 'Language & Linguistics', 1),
+(15, 1, 'Literary Reviews', 1),
+(16, 1, 'Literary Theory & Criticism', 1),
+(17, 1, 'Literature', 1),
+(18, 17, 'African', 1),
+(19, 17, 'Australian', 1),
+(20, 17, 'Canadian', 1),
+(21, 17, 'American', 1),
+(22, 17, 'British Isles', 1),
+(23, 17, 'German', 1),
+(24, 17, 'Dutch', 1),
+(25, 17, 'Scandinavian', 1),
+(26, 17, 'Romance', 1),
+(27, 17, 'Slavic', 1),
+(28, 1, 'Medieval & Renaissance Studies', 1),
+(29, 1, 'Music', 1),
+(30, 1, 'Philosophy', 1),
+(31, 1, 'Poetry', 1),
+(32, 1, 'Religion', 1),
+(33, 1, 'Theater', 1),
+(34, 0, 'Science', 1),
+(35, 34, 'Acoustics', 1),
+(36, 34, 'Agricultural Economics & Policy', 1),
+(37, 34, 'Agricultural Engineering', 1),
+(38, 34, 'Agriculture', 1),
+(39, 38, 'Dairy & Animal Science', 1),
+(40, 38, 'Multidisciplinary', 1),
+(41, 34, 'Agronomy', 1),
+(42, 34, 'Allergy', 1),
+(43, 34, 'Anatomy & Morphology', 1),
+(44, 34, 'Andrology', 1),
+(45, 34, 'Anesthesiology', 1),
+(46, 34, 'Astronomy & Astrophysics', 1),
+(47, 34, 'Automation & Control Systems', 1),
+(48, 34, 'Behavioral Sciences', 1),
+(49, 34, 'Biochemical Research Methods', 1),
+(50, 34, 'Biochemistry & Molecular Biology', 1),
+(51, 34, 'Biodiversity Conservation', 1),
+(52, 34, 'Biology', 1),
+(53, 34, 'Biophysics', 1),
+(54, 34, 'Biotechnology & Applied Microbiology', 1),
+(55, 34, 'Cardiac & Cardiovascular Systems', 1),
+(56, 34, 'Cell Biology', 1),
+(57, 34, 'Chemistry', 1),
+(58, 57, 'Analytical', 1),
+(59, 57, 'Applied', 1),
+(60, 57, 'Inorganic & Nuclear', 1),
+(61, 57, 'Medicinal', 1),
+(62, 57, 'Multidisciplinary', 1),
+(63, 57, 'Organic', 1),
+(64, 57, 'Physical', 1),
+(65, 34, 'Clinical Neurology', 1),
+(66, 34, 'Computer Science', 1),
+(67, 66, 'Artificial Intelligence', 1),
+(68, 66, 'Cybernetics', 1),
+(69, 66, 'Hardware & Architecture', 1),
+(70, 66, 'Information Systems', 1),
+(71, 66, 'Interdisciplinary Applications', 1),
+(72, 66, 'Software Engineering', 1),
+(73, 66, 'Theory & Methods', 1),
+(74, 34, 'Construction & Building Technology', 1),
+(75, 34, 'Critical Care Medicine', 1),
+(76, 34, 'Crystallography', 1),
+(77, 34, 'Dentistry', 1),
+(78, 77, 'Oral Surgery & Medicine', 1),
+(79, 34, 'Dermatology', 1),
+(80, 34, 'Developmental Biology', 1),
+(81, 34, 'Ecology', 1),
+(82, 34, 'Education', 1),
+(83, 82, 'Scientific Disciplines', 1),
+(84, 34, 'Electrochemistry', 1),
+(85, 34, 'Emergency Medicine', 1),
+(86, 34, 'Endocrinology & Metabolism', 1),
+(87, 34, 'Energy & Fuels', 1),
+(88, 34, 'Engineering', 1),
+(89, 88, 'Aerospace', 1),
+(90, 88, 'Biomedical', 1),
+(91, 88, 'Chemical', 1),
+(92, 88, 'Civil', 1),
+(93, 88, 'Electrical & Electronic', 1),
+(94, 88, 'Environmental', 1),
+(95, 88, 'Geological', 1),
+(96, 88, 'Industrial', 1),
+(97, 88, 'Manufacturing', 1),
+(98, 88, 'Marine', 1),
+(99, 88, 'Mechanical', 1),
+(100, 88, 'Multidisciplinary', 1),
+(101, 88, 'Ocean', 1),
+(102, 88, 'Petroleum', 1),
+(103, 34, 'Entomology', 1),
+(104, 34, 'Environmental Sciences', 1),
+(105, 34, 'Evolutionary Biology', 1),
+(106, 34, 'Fisheries', 1),
+(107, 34, 'Food Science & Technology', 1),
+(108, 34, 'Forestry', 1),
+(109, 34, 'Gastroenterology & Hepatology', 1),
+(110, 34, 'Genetics & Heredity', 1),
+(111, 34, 'Geochemistry & Geophysics', 1),
+(112, 34, 'Geography', 1),
+(113, 112, 'Physical', 1),
+(114, 34, 'Geology', 1),
+(115, 34, 'Geosciences', 1),
+(116, 115, 'Multidisciplinary', 1),
+(117, 34, 'Geriatrics & Gerontology', 1),
+(118, 34, 'Health Care Sciences & Services', 1),
+(119, 34, 'Hematology', 1),
+(120, 34, 'History & Philosophy of Science', 1),
+(121, 34, 'Horticulture', 1),
+(122, 34, 'Imaging Science & Photographic Technology', 1),
+(123, 34, 'Immunology', 1),
+(124, 34, 'Infectious Diseases', 1),
+(125, 34, 'Instruments & Instrumentation', 1),
+(126, 34, 'Integrative & Complementary Medicine', 1),
+(127, 34, 'Limnology', 1),
+(128, 34, 'Marine & Freshwater Biology', 1),
+(129, 34, 'Materials Science', 1),
+(130, 129, 'Biomaterials', 1),
+(131, 129, 'Ceramics', 1),
+(132, 129, 'Characterization & Testing', 1),
+(133, 129, 'Coatings & Films', 1),
+(134, 129, 'Composites', 1),
+(135, 129, 'Multidisciplinary', 1),
+(136, 129, 'Paper & Wood', 1),
+(137, 129, 'Textiles', 1),
+(138, 34, 'Mathematical & Computational Biology', 1),
+(139, 34, 'Mathematics', 1),
+(140, 139, 'Applied', 1),
+(141, 139, 'Interdisciplinary Applications', 1),
+(142, 34, 'Mechanics', 1),
+(143, 34, 'Medical Ethics', 1),
+(144, 34, 'Medical Informatics', 1),
+(145, 34, 'Medical Laboratory Technology', 1),
+(146, 34, 'Medicine', 1),
+(147, 146, 'General & Internal', 1),
+(148, 146, 'Legal', 1),
+(149, 146, 'Research & Experimental', 1),
+(150, 34, 'Metallurgy & Metallurgical Engineering', 1),
+(151, 34, 'Meteorology & Atmospheric Sciences', 1),
+(152, 34, 'Microbiology', 1),
+(153, 34, 'Microscopy', 1),
+(154, 34, 'Mineralogy', 1),
+(155, 34, 'Mining & Mineral Processing', 1),
+(156, 34, 'Multidisciplinary Sciences', 1),
+(157, 34, 'Mycology', 1),
+(158, 34, 'Nanoscience & Nanotechnology', 1),
+(159, 34, 'Neuroimaging', 1),
+(160, 34, 'Neurosciences', 1),
+(161, 34, 'Nuclear Science & Technology', 1),
+(162, 34, 'Nursing', 1),
+(163, 34, 'Nutrition & Dietetics', 1),
+(164, 34, 'Obstetrics & Gynecology', 1),
+(165, 34, 'Oceanography', 1),
+(166, 34, 'Oncology', 1),
+(167, 34, 'Operations Research & Management Science', 1),
+(168, 34, 'Ophthalmology', 1),
+(169, 34, 'Optics', 1),
+(170, 34, 'Ornithology', 1),
+(171, 34, 'Orthopedics', 1),
+(172, 34, 'Otorhinolaryngology', 1),
+(173, 34, 'Paleontology', 1),
+(174, 34, 'Parasitology', 1),
+(175, 34, 'Pathology', 1),
+(176, 34, 'Pediatrics', 1),
+(177, 34, 'Peripheral Vascular Disease', 1),
+(178, 34, 'Pharmacology & Pharmacy', 1),
+(179, 34, 'Physics', 1),
+(180, 179, 'Applied', 1),
+(181, 179, 'Atomic, Molecular & Chemical', 1),
+(182, 179, 'Condensed Matter', 1),
+(183, 179, 'Fluids & Plasmas', 1),
+(184, 179, 'Mathematical', 1),
+(185, 179, 'Multidisciplinary', 1),
+(186, 179, 'Nuclear', 1),
+(187, 179, 'Particles & Fields', 1),
+(188, 34, 'Physiology', 1),
+(189, 34, 'Plant Sciences', 1),
+(190, 34, 'Polymer Science', 1),
+(191, 34, 'Psychiatry', 1),
+(192, 34, 'Psychology', 1),
+(193, 34, 'Public, Environmental & Occupational Health', 1),
+(194, 34, 'Radiology', 1),
+(195, 194, 'Nuclear Medicine & Medical Imaging', 1),
+(196, 34, 'Rehabilitation', 1),
+(197, 34, 'Remote Sensing', 1),
+(198, 34, 'Reproductive Biology', 1),
+(199, 34, 'Respiratory System', 1),
+(200, 34, 'Rheumatology', 1),
+(201, 34, 'Robotics', 1),
+(202, 34, 'Soil Science', 1),
+(203, 34, 'Spectroscopy', 1),
+(204, 34, 'Sport Sciences', 1),
+(205, 34, 'Statistics & Probability', 1),
+(206, 34, 'Substance Abuse', 1),
+(207, 34, 'Surgery', 1),
+(208, 34, 'Telecommunications', 1),
+(209, 34, 'Thermodynamics', 1),
+(210, 34, 'Toxicology', 1),
+(211, 34, 'Transplantation', 1),
+(212, 34, 'Transportation Science & Technology', 1),
+(213, 34, 'Tropical Medicine', 1),
+(214, 34, 'Urology & Nephrology', 1),
+(215, 34, 'Veterinary Sciences', 1),
+(216, 34, 'Virology', 1),
+(217, 34, 'Water Resources', 1),
+(218, 34, 'Zoology', 1),
+(219, 0, 'Social Science', 1),
+(220, 219, 'Anthropology', 1),
+(221, 219, 'Area Studies', 1),
+(222, 219, 'Business', 1),
+(223, 222, 'Finance', 1),
+(224, 219, 'Communication', 1),
+(225, 219, 'Criminology & Penology', 1),
+(226, 219, 'Demography', 1),
+(227, 219, 'Economics', 1),
+(228, 219, 'Education & Educational Research', 1),
+(229, 219, 'Education, Special', 1),
+(230, 219, 'Environmental Studies', 1),
+(231, 219, 'Ergonomics', 1),
+(232, 219, 'Ethics', 1),
+(233, 219, 'Ethnic Studies', 1),
+(234, 219, 'Family Studies', 1),
+(235, 219, 'Geography', 1),
+(236, 219, 'Gerontology', 1),
+(237, 219, 'Health Policy & Services', 1),
+(238, 219, 'History', 1),
+(239, 219, 'History & Philosophy Of Science', 1),
+(240, 219, 'History of Social Sciences', 1),
+(241, 219, 'Hospitality, Leisure, Sport & Tourism', 1),
+(242, 219, 'Industrial Relations & Labor', 1),
+(243, 219, 'Information Science & Library Science', 1),
+(244, 219, 'International Relations', 1),
+(245, 219, 'Law', 1),
+(246, 219, 'Linguistics', 1),
+(247, 219, 'Management', 1),
+(248, 219, 'Nursing', 1),
+(249, 219, 'Planning & Development', 1),
+(250, 219, 'Political Science', 1),
+(251, 219, 'Psychiatry', 1),
+(252, 219, 'Psychology', 1),
+(253, 252, 'Applied', 1),
+(254, 252, 'Biological', 1),
+(255, 252, 'Clinical', 1),
+(256, 252, 'Developmental', 1),
+(257, 252, 'Educational', 1),
+(258, 252, 'Experimental', 1),
+(259, 252, 'Mathematical', 1),
+(260, 252, 'Multidisciplinary', 1),
+(261, 252, 'Psychoanalysis', 1),
+(262, 252, 'Social', 1),
+(263, 219, 'Public Administration', 1),
+(264, 219, 'Public, Environmental & Occupational Health', 1),
+(265, 219, 'Rehabilitation', 1),
+(266, 219, 'Social Issues', 1),
+(267, 219, 'Social Sciences', 1),
+(268, 267, 'Biomedical', 1),
+(269, 267, 'Interdisciplinary', 1),
+(270, 267, 'Mathematical Methods', 1),
+(271, 219, 'Social Work', 1),
+(272, 219, 'Sociology', 1),
+(273, 219, 'Substance Abuse', 1),
+(274, 219, 'Transportation', 1),
+(275, 219, 'Urban Studies', 1),
+(276, 219, 'Women''s Studies', 1);
 
 -- --------------------------------------------------------
 
@@ -474,7 +801,7 @@ CREATE TABLE IF NOT EXISTS `bf_institutions` (
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `bf_institutions`
@@ -484,7 +811,8 @@ INSERT INTO `bf_institutions` (`id`, `name`, `created_on`, `created_by`) VALUES
 (1, 'asdfsfsdafsdfasdf', '2015-06-24', NULL),
 (2, 'asdfsfsdafsdfasdf', '2015-06-24', 1),
 (3, 'Test', '2015-06-24', 1),
-(4, 'Facultatea Alexandru Ioan Cuza, IESI', '2015-06-24', 1);
+(4, 'Facultatea Alexandru Ioan Cuza, IESI', '2015-06-24', 1),
+(5, 'dasdasdasd', '2015-07-05', 1);
 
 -- --------------------------------------------------------
 
@@ -499,7 +827,7 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
   `login` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -509,7 +837,7 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
 
 DROP TABLE IF EXISTS `bf_magazines`;
 CREATE TABLE IF NOT EXISTS `bf_magazines` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `issn` varchar(50) DEFAULT NULL,
   `publisher` varchar(200) DEFAULT NULL,
@@ -521,7 +849,28 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
   `description` text,
   `approved` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bf_magazines`
+--
+
+INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `publisher`, `editorial_address`, `email`, `website`, `phoneno`, `founded_year`, `description`, `approved`) VALUES
+(1, 'Erasous', '34-54413435', 'dsffsadfsaf', 'sdfsadfasdf', 'test@test.ro', 'www.test.ro', '72346295748935', 2014, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_magazines_categories`
+--
+
+DROP TABLE IF EXISTS `bf_magazines_categories`;
+CREATE TABLE IF NOT EXISTS `bf_magazines_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `magazine_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -540,7 +889,17 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
   `special` varchar(100) DEFAULT NULL,
   `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `bf_magazine_issues`
+--
+
+INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `status`) VALUES
+(1, 1, 1, 1, 30, 2014, 'Hot Nurses', 'published'),
+(2, 1, 4, NULL, NULL, NULL, 'NOPE', 'draft'),
+(3, 1, 6546, NULL, NULL, NULL, 'YES', 'draft'),
+(4, 2, 123, 123, 22, 1233, NULL, 'draft');
 
 -- --------------------------------------------------------
 
@@ -555,7 +914,7 @@ CREATE TABLE IF NOT EXISTS `bf_permissions` (
   `description` varchar(100) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -611,24 +970,17 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 (52, 'Articles.Content.Create', 'Create Articles Content', 'active'),
 (53, 'Articles.Content.Edit', 'Edit Articles Content', 'active'),
 (54, 'Articles.Content.Delete', 'Delete Articles Content', 'active'),
-(55, 'Articles.Reports.View', 'View Articles Reports', 'active'),
-(56, 'Articles.Reports.Create', 'Create Articles Reports', 'active'),
-(57, 'Articles.Reports.Edit', 'Edit Articles Reports', 'active'),
-(58, 'Articles.Reports.Delete', 'Delete Articles Reports', 'active'),
-(59, 'Articles.Settings.View', 'View Articles Settings', 'active'),
-(60, 'Articles.Settings.Create', 'Create Articles Settings', 'active'),
-(61, 'Articles.Settings.Edit', 'Edit Articles Settings', 'active'),
-(62, 'Articles.Settings.Delete', 'Delete Articles Settings', 'active'),
-(63, 'Articles.Developer.View', 'View Articles Developer', 'active'),
-(64, 'Articles.Developer.Create', 'Create Articles Developer', 'active'),
-(65, 'Articles.Developer.Edit', 'Edit Articles Developer', 'active'),
-(66, 'Articles.Developer.Delete', 'Delete Articles Developer', 'active'),
-(67, 'Magazine.Content.Create', '', 'active'),
-(68, 'Magazine.Content.View', '', 'active'),
-(69, 'Magazine.Content.Edit', '', 'active'),
-(70, 'Magazine.Content.Delete', '', 'active'),
+(67, 'Magazines.Content.Create', '', 'active'),
+(68, 'Magazines.Content.View', '', 'active'),
+(69, 'Magazines.Content.Edit', '', 'active'),
+(70, 'Magazines.Content.Delete', '', 'active'),
 (71, 'Permissions.Manager.Manage', 'To manage the access control permissions for the Manager role.', 'active'),
-(72, 'Permissions.Editor-in-Chief.Manage', 'To manage the access control permissions for the Editor-in-Chief role.', 'active');
+(72, 'Permissions.Editor-in-Chief.Manage', 'To manage the access control permissions for the Editor-in-Chief role.', 'active'),
+(73, 'Magazines.Manage.All', '', 'active'),
+(74, 'Issues.Content.Create', '', 'active'),
+(75, 'Issues.Content.Edit', '', 'active'),
+(76, 'Issues.Content.Delete', '', 'active'),
+(77, 'Issues.Content.View', '', 'active');
 
 -- --------------------------------------------------------
 
@@ -745,6 +1097,11 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 (1, 70),
 (1, 71),
 (1, 72),
+(1, 73),
+(1, 74),
+(1, 75),
+(1, 76),
+(1, 77),
 (2, 2),
 (2, 51),
 (2, 52),
@@ -791,7 +1148,6 @@ CREATE TABLE IF NOT EXISTS `bf_schema_version` (
 --
 
 INSERT INTO `bf_schema_version` (`type`, `version`) VALUES
-('articles_', 1),
 ('core', 43);
 
 -- --------------------------------------------------------
@@ -987,7 +1343,7 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-07-01 23:27:56', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-07-05 23:53:16', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
 (2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0);
 
 -- --------------------------------------------------------
@@ -1024,17 +1380,18 @@ CREATE TABLE IF NOT EXISTS `bf_user_meta` (
   `meta_key` varchar(255) NOT NULL DEFAULT '',
   `meta_value` text,
   PRIMARY KEY (`meta_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `bf_user_meta`
 --
 
 INSERT INTO `bf_user_meta` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VALUES
-(1, 1, 'state', ''),
+(1, 1, 'state', 'NY'),
 (2, 1, 'country', 'RO'),
 (3, 2, 'state', 'HI'),
-(4, 2, 'country', 'US');
+(4, 2, 'country', 'US'),
+(5, 1, 'magazine', '1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

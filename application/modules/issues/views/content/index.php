@@ -11,7 +11,7 @@ if ($can_delete) {
 ?>
 <div class='admin-box'>
     <h3>
-        <?php echo lang('articles_area_title'); ?>
+        <?php echo lang('magazine_issues_area_title'); ?>
     </h3>
     <?php echo form_open($this->uri->uri_string()); ?>
         <table class='table table-striped'>
@@ -21,12 +21,14 @@ if ($can_delete) {
                     <th class='column-check'><input class='check-all' type='checkbox' /></th>
                     <?php endif;?>
 
-                    <th><?php echo lang('articles_field_title'); ?></th>
-                    <th><?php echo lang('articles_field_page'); ?></th>
-                    <th><?php echo lang('articles_field_affiliation'); ?></th>
-                    <th><?php echo lang('articles_field_references'); ?></th>
-                    <th><?php echo lang('articles_field_summary'); ?></th>
-                    <th><?php echo lang('articles_field_tags'); ?></th>
+                    <th><?php echo lang('magazines_field_title'); ?></th>
+                    <th><?php echo lang('magazines_field_number'); ?></th>
+                    <th><?php echo lang('magazines_field_volume'); ?></th>
+                    <th><?php echo lang('magazines_field_special'); ?></th>
+                    <th><?php echo lang('magazines_field_year_issue'); ?></th>
+                    <th><?php echo lang('magazines_field_year_published'); ?></th>
+                    <th><?php echo lang('magazines_field_status'); ?></th>
+                    <th></th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -51,12 +53,14 @@ if ($has_records) :
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/articles/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->title); ?></td>
-                    <td><?php e($record->page); ?></td>
-                    <td><?php e($record->affiliation); ?></td>
-                    <td><?php e($record->references); ?></td>
-                    <td><?php e($record->summary); ?></td>
-                    <td><?php e($record->tags); ?></td>
+                    <td><?php e($magazine->title); ?></td>
+                    <td><?php e($record->number); ?></td>
+                    <td><?php e($record->volume); ?></td>
+                    <td><?php e($record->special); ?></td>
+                    <td><?php echo integerToRoman($record->year_issue); ?></td>
+                    <td><?php e($record->year_published); ?></td>
+                    <td><?php e($record->status); ?></td>
+                    <td><?php echo anchor(SITE_AREA . '/content/articles/index/' . $record->id, "{$record->count} articles"); ?></td>
                 </tr>
                 <?php
 endforeach;

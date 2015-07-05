@@ -11,7 +11,7 @@ if ($can_delete) {
 ?>
 <div class='admin-box'>
     <h3>
-        <?php echo lang('articles_area_title'); ?>
+        <?php echo lang('magazines_area_title'); ?>
     </h3>
     <?php echo form_open($this->uri->uri_string()); ?>
         <table class='table table-striped'>
@@ -21,12 +21,11 @@ if ($can_delete) {
                     <th class='column-check'><input class='check-all' type='checkbox' /></th>
                     <?php endif;?>
 
-                    <th><?php echo lang('articles_field_title'); ?></th>
-                    <th><?php echo lang('articles_field_page'); ?></th>
-                    <th><?php echo lang('articles_field_affiliation'); ?></th>
-                    <th><?php echo lang('articles_field_references'); ?></th>
-                    <th><?php echo lang('articles_field_summary'); ?></th>
-                    <th><?php echo lang('articles_field_tags'); ?></th>
+                    <th><?php echo lang('magazines_field_title'); ?></th>
+                    <th><?php echo lang('magazines_field_issn'); ?></th>
+                    <th><?php echo lang('magazines_field_founded_year'); ?></th>
+                    <th><?php echo lang('magazines_field_publisher'); ?></th>
+
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -51,12 +50,10 @@ if ($has_records) :
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/articles/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->title); ?></td>
-                    <td><?php e($record->page); ?></td>
-                    <td><?php e($record->affiliation); ?></td>
-                    <td><?php e($record->references); ?></td>
-                    <td><?php e($record->summary); ?></td>
-                    <td><?php e($record->tags); ?></td>
+                    <td><?php echo anchor(SITE_AREA . '/content/issues/index/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->title); ?></td>
+                    <td><?php e($record->issn); ?></td>
+                    <td><?php e($record->founded_year); ?></td>
+                    <td><?php e($record->publisher); ?></td>
                 </tr>
                 <?php
 endforeach;

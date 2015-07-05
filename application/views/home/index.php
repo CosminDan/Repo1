@@ -1,7 +1,7 @@
 <div role="tabpanel">
 
     <ul class="nav nav-pills nav-justified categs">
-        <li class="arts" role="presentation" text-align="center">
+        <li class="arts active" role="presentation" text-align="center">
             <a href="#arts" aria-controls="arts" role="tab" data-toggle="pill"><i class="fa fa-institution"></i><br/><br/>Arts &amp; Humanities</a>
         </li>
 
@@ -15,19 +15,18 @@
     </ul>
 
     <div class="tab-content">
-
-        <div role="tabpanel" class="tab-pane fade" id="arts">
+        <?php foreach ($mainCats as $i => $mainCat) { ?>
+        <div role="tabpanel" class="tab-pane fade <?php if (!$i) echo 'active in'; ?>" id="<?php echo $mainCat->tab_id; ?>">
             <div class="row">
 
                     <div class="col-md-4">
                         <div class="list-group">
                             <a href="#" class="list-group-item disabled">
-                                <h4>Top 5 Articles</h4>
+                                <h4>Top Articles</h4>
                             </a>
-                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item">Morbi leo risus</a>
-                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item">Vestibulum at eros</a>
+                            <?php foreach ($mainCat->articles_popular as $art) { ?>
+                                <a href="#" class="list-group-item"><?php echo $art->title; ?></a>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -36,10 +35,9 @@
                             <a href="#" class="list-group-item disabled">
                                 <h4>Last Added</h4>
                             </a>
-                            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item">Morbi leo risus</a>
-                            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item">Vestibulum at eros</a>
+                            <?php foreach ($mainCat->articles_recent as $art) { ?>
+                                <a href="#" class="list-group-item"><?php echo $art->title; ?></a>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -56,22 +54,7 @@
                     </div>
             </div>
         </div>
-
-        <div role="tabpanel" class="tab-pane fade" id="science">
-            <div class="row">
-                    <div class="col-md-4">Top 5 Articles</div>
-                    <div class="col-md-4">Last Added</div>
-                    <div class="col-md-4">Popular Subcategories</div>
-            </div>
-        </div>
-
-        <div role="tabpanel" class="tab-pane fade" id="social">
-            <div class="row">
-                    <div class="col-md-4">Top 5 Articles</div>
-                    <div class="col-md-4">Last Added</div>
-                    <div class="col-md-4">Popular Subcategories</div>
-            </div>
-        </div>
+        <?php } ?>
     </div>
 
 </div>

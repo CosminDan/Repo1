@@ -1,13 +1,15 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 
 
-$lang['articles_manage']             = 'Manage Articles';
+$lang['issues_manage']             = 'Manage Issues';
+
+
 $lang['articles_edit']               = 'Edit';
 $lang['articles_true']               = 'True';
 $lang['articles_false']              = 'False';
 $lang['articles_create']             = 'Create';
 $lang['articles_list']               = 'List';
-$lang['articles_new']                = 'New Article';
+$lang['articles_new']                = 'New';
 $lang['articles_edit_text']          = 'Edit this to suit your needs';
 $lang['articles_no_records']         = 'There are no articles in the system.';
 $lang['articles_create_new']         = 'Create a new Articles.';
@@ -50,15 +52,17 @@ $lang['articles_column_modified_by'] = 'Modified By';
 // Module Details
 $lang['articles_module_name']        = 'Articles';
 $lang['articles_module_description'] = 'Your module description';
-$lang['articles_area_title']         = 'Articles';
+$lang['magazines_area_title']         = 'Magazines';
+$lang['magazine_issues_area_title']         = 'Magazine Issues';
 
 // Fields
-$lang['articles_field_magazines_id'] = 'Magazines Id';
-$lang['articles_field_title']        = 'Title';
-$lang['articles_field_categories']      = 'Categories';
-$lang['articles_field_authors']      = 'Author(s)';
-$lang['articles_field_affiliation']  = 'Affiliation';
-$lang['articles_field_references']   = 'References';
-$lang['articles_field_summary']      = 'Summary';
-$lang['articles_field_tags']         = 'Tags';
-$lang['articles_field_page']         = 'Page';
+$lang['magazines_field_title']          = 'Title';
+$lang['magazines_field_issn']           = 'ISSN';
+$lang['magazines_field_founded_year']   = 'Year Founded';
+$lang['magazines_field_publisher']      = 'Publisher';
+$lang['magazines_field_number']         = 'Number';
+$lang['magazines_field_volume']         = 'Volume';
+$lang['magazines_field_year_issue']     = 'Issue Year';
+$lang['magazines_field_year_published'] = 'Published Year';
+$lang['magazines_field_special']        = 'Special Edition';
+$lang['magazines_field_status']         = 'Status';
