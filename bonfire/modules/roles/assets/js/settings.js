@@ -1,3 +1,6 @@
+$(document).ready(function() {
+
+
 // Toggle hover class on permission matrix
 $('#permission_table').tableHover({colClass: 'hover', ignoreCols: [1]});
 
@@ -122,4 +125,6 @@ $('.matrix th a').click(function(){
 	}
 
 	return false;
+});
+
 });
