@@ -12,67 +12,38 @@ if (validation_errors()) :
 <?php
 endif;
 
-$id = isset($articles->id) ? $articles->id : '';
-
+$id = isset($item->id) ? $item->id : '';
 ?>
 <div class='admin-box'>
-    <h3>Articles</h3>
+    <h3>Edit Magazine</h3>
     <?php echo form_open_multipart($this->uri->uri_string(), 'class="form-horizontal"'); ?>
         <fieldset>
-            <div class="control-group<?php echo form_error('title') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_title') , 'title', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input class="input-xxlarge" id='title' type='text' name='title' maxlength='100' value="<?php echo set_value('title', isset($articles->title) ? $articles->title : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('title'); ?></span>
-                </div>
-            </div>
 
-            <?php echo form_multiselect('authors[]', $articles->authors, array_keys($articles->authors), lang('articles_field_authors'), 'class="select2-tags input-xxlarge"'); ?>
+            <?php echo form_input('title', $item->title, 'Title'); ?>
 
-            <?php echo form_dropdown('affiliation', $affiliations, $articles->affiliation, lang('articles_field_affiliation'), 'class="select2-tags input-xxlarge"'); ?>
+            <?php echo form_input('issn', $item->issn, 'ISSN'); ?>
 
-            <div class="control-group<?php echo form_error('references') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_references') , 'references', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <input class="input-xxlarge" id='references' type='text' name='references' maxlength='100' value="<?php echo set_value('references', isset($articles->references) ? $articles->references : ''); ?>" />
-                    <span class='help-inline'><?php echo form_error('references'); ?></span>
-                </div>
-            </div>
+            <?php echo form_dropdown('language', $languages, $item->language, lang('pa_language')); ?>
 
-            <div class="control-group<?php echo form_error('summary') ? ' error' : ''; ?>">
-                <?php echo form_label(lang('articles_field_summary') , 'summary', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <textarea class="input-xxlarge" name="summary"><?php echo isset($articles->summary) ? $articles->summary : ''; ?></textarea>
-                    <span class='help-inline'><?php echo form_error('summary'); ?></span>
-                </div>
-            </div>
+            <?php echo form_input('publisher', $item->publisher, 'Publisher'); ?>
 
-            <?php echo form_multiselect('tags[]', $articles->tags, $articles->tags, lang('articles_field_tags'), 'class="select2-tags input-xxlarge"'); ?>
+            <?php echo form_input('editorial_address', $item->editorial_address, 'Editorial Address'); ?>
 
-            <div class="control-group">
-                <?php echo form_label(lang('articles_field_rawtext') , 'raw_text', array('class' => 'control-label')); ?>
-                <div class='controls'>
-                    <textarea class="input-xxlarge" name="raw_text"><?php echo isset($articles->raw_text) ? $articles->raw_text : ''; ?></textarea>
-                </div>
-            </div>
+            <?php echo form_input('email', $item->email, 'E-Mail'); ?>
 
-            <div class="control-group">
-                <div class='controls'>
-                    <input type="file" name="pdf_file"/>
-                </div>
-            </div>
+            <?php echo form_input('website', $item->website, 'Website'); ?>
+
+            <?php echo form_input('phoneno', $item->phoneno, 'Phone Number'); ?>
+
+            <?php echo form_input('founded_year', $item->founded_year, 'Year Founded'); ?>
+
+            <?php echo form_input('description', $item->description, 'Description'); ?>
+
+
         </fieldset>
-        <fieldset class='form-actions'>
-            <input type='submit' name='save' class='btn btn-primary' value="<?php echo lang('articles_action_edit'); ?>" />
-            <?php echo lang('bf_or'); ?>
-            <?php echo anchor(SITE_AREA . '/content/articles', lang('articles_cancel'), 'class="btn btn-warning"'); ?>
-
-            <?php if ($this->auth->has_permission('Articles.Content.Delete')) : ?>
-                <?php echo lang('bf_or'); ?>
-                <button type='submit' name='delete' formnovalidate class='btn btn-danger' id='delete-me' onclick="return confirm('<?php e(js_escape(lang('articles_delete_confirm'))); ?>');">
-                    <span class='icon-trash icon-white'></span>&nbsp;<?php echo lang('articles_delete_record'); ?>
-                </button>
-            <?php endif; ?>
+        <fieldset class="form-actions">
+            <input type="submit" name="save" class='btn btn-primary' value="<?php echo lang('bf_action_save'); ?>" />
+            <?php echo anchor(SITE_AREA . '/content/magazines', lang('bf_action_cancel'), 'class="btn btn-warning"'); ?>
         </fieldset>
     <?php echo form_close(); ?>
 </div>

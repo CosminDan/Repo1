@@ -25,7 +25,7 @@ if ($can_delete) {
                     <th><?php echo lang('magazines_field_issn'); ?></th>
                     <th><?php echo lang('magazines_field_founded_year'); ?></th>
                     <th><?php echo lang('magazines_field_publisher'); ?></th>
-
+                    <th>Actions</th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -44,16 +44,23 @@ if ($can_delete) {
                 <?php
 if ($has_records) :
     foreach ($records as $record) :
+        $vis_icon = $record->approved ? 'icon-eye-open' : 'icon-eye-close';
 ?>
                 <tr>
                     <?php if ($can_delete) : ?>
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/issues/index/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->title); ?></td>
+                    <td><?php echo anchor(SITE_AREA . '/content/issues/index/' . $record->id, $record->title); ?></td>
                     <td><?php e($record->issn); ?></td>
                     <td><?php e($record->founded_year); ?></td>
                     <td><?php e($record->publisher); ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/edit/' . $record->id); ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i></a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/toggleVisibility/' . $record->id); ?>" class="btn btn-primary"><i class="<?php echo $vis_icon; ?> icon-white"></i></a>
+                        </div>
+                    </td>
                 </tr>
                 <?php
 endforeach;

@@ -56,11 +56,6 @@ class Content extends Admin_Controller
             $this->auth->restrict($this->permissionDelete);
             $checked = $this->input->post('checked');
             if (is_array($checked) && count($checked)) {
-
-                // If any of the deletions fail, set the result to false, so
-                // failure message is set if any of the attempts fail, not just
-                // the last attempt
-
                 $result = true;
                 foreach ($checked as $pid) {
                     $deleted = $this->magazines_model->delete($pid);
@@ -75,16 +70,19 @@ class Content extends Admin_Controller
                 }
             }
         }
-        $pagerUriSegment = 5;
+
         $pagerBaseUrl = site_url(SITE_AREA . '/content/magazines/index') . '/';
 
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
 
         $this->load->library('pagination');
-        $pager['base_url']    = $pagerBaseUrl;
-        $pager['total_rows']  = $this->magazines_model->count_all();
-        $pager['per_page']    = $limit;
-        $pager['uri_segment'] = $pagerUriSegment;
+
+        $pager = array(
+            'base_url'    => $pagerBaseUrl,
+            'total_rows'  => $this->magazines_model->count_all(),
+            'per_page'    => $limit,
+            'uri_segment' => 5,
+        );
 
         $this->pagination->initialize($pager);
         $this->magazines_model->limit($limit, $offset);
@@ -133,51 +131,53 @@ class Content extends Admin_Controller
      */
     public function edit()
     {
+        $this->auth->restrict($this->permissionView);
         $id = $this->uri->segment(5);
-        if (empty($id)) {
-            Template::set_message(lang('articles_invalid_id'), 'error');
 
-            redirect(SITE_AREA . '/content/articles');
+        if (empty($id)) {
+            redirect(SITE_AREA . '/content/magazines');
         }
 
         if ($this->input->post('save')) {
             $this->auth->restrict($this->permissionEdit);
 
-            if ($this->save_articles('update', $id)) {
-                //log_activity($this->auth->user_id(), lang('articles_act_edit_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
-                Template::set_message(lang('articles_edit_success'), 'success');
-                redirect(SITE_AREA . '/content/articles');
+            if ($this->save_item('update', $id)) {
+                Template::set_message(lang('magazines_edit_success'), 'success');
+                redirect(SITE_AREA . '/content/magazines');
             }
 
             // Not validation error
-            if ( ! empty($this->articles_model->error)) {
-                Template::set_message(lang('articles_edit_failure') . $this->articles_model->error, 'error');
+            if ( ! empty($this->magazines_model->error)) {
+                Template::set_message(lang('magazines_edit_failure') . $this->magazines_model->error, 'error');
             }
         }
-        // elseif (isset($_POST['delete'])) {
-        //     $this->auth->restrict($this->permissionDelete);
-        //     if ($this->articles_model->delete($id)) {
-        //         log_activity($this->auth->user_id(), lang('articles_act_delete_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'articles');
-        //         Template::set_message(lang('articles_delete_success'), 'success');
-        //         redirect(SITE_AREA . '/content/articles');
-        //     }
-        //     Template::set_message(lang('articles_delete_failure') . $this->articles_model->error, 'error');
-        // }
 
-        $articles = $this->articles_model->find($id);
-        $this->institutions_model->select(array('id', 'name'));
-        $institutions = $this->institutions_model->find_all();
-        $affiliations = array();
+        $item = $this->magazines_model->find($id);
+        $languages = magazines_languages();
 
-        foreach ($institutions as $inst) {
-            $affiliations[$inst->id] = $inst->name;
+        Template::set('item', $item);
+        Template::set('languages', $languages);
+        Template::set('toolbar_title', lang('magazines_edit_heading'));
+
+        Template::render();
+    }
+
+    public function toggleVisibility()
+    {
+        $this->auth->restrict($this->permissionEdit);
+
+        $id = $this->uri->segment(5);
+
+        if (empty($id)) {
+            redirect(SITE_AREA . '/content/magazines');
         }
 
-        Template::set('articles', $articles);
-        Template::set('affiliations', $affiliations);
+        if ($item = $this->magazines_model->find($id)) {
+            $item->approved = (int) ! (bool) $item->approved;
+            $this->magazines_model->update($item->id, array('approved' => $item->approved));
+        }
 
-        Template::set('toolbar_title', lang('articles_edit_heading'));
-        Template::render();
+        redirect(SITE_AREA . '/content/magazines');
     }
 
     //--------------------------------------------------------------------
@@ -193,128 +193,37 @@ class Content extends Admin_Controller
      * @return bool|int An int ID for successful inserts, true for successful
      * updates, else false.
      */
-    private function save_articles($type = 'insert', $id = 0)
+    private function save_item($type = 'insert', $id = 0)
     {
         if ($type == 'update') {
             $_POST['id'] = $id;
         }
 
         // Validate the data
-        $this->form_validation->set_rules($this->articles_model->get_validation_rules());
+        $this->form_validation->set_rules($this->magazines_model->get_validation_rules());
         if ($this->form_validation->run() === false) {
             return false;
         }
 
         $data = $this->input->post();
 
-        if (isset($data['affiliation'])) {
-            if (!is_numeric($data['affiliation'])) {
-                $instID = $this->institutions_model->insert(
-                    array('name' => $data['affiliation'])
-                );
-
-                if (is_numeric($instID)) {
-                    $data['affiliation'] = $instID;
-                }
-            }
-        }
-
-        // Process Tags
-        $tags = array();
-        if (isset($data['tags'])) $tags = $data['tags'];
-        $data['tags'] = implode(',', $tags);
-
-        $config = array();
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf';
-        $this->load->library('upload');
-        $this->upload->initialize($config);
-
-        $dataPDF = null;
-        $raw_text = null;
-        if ($this->upload->do_upload('pdf_file')) {
-            $dataPDF = $this->upload->data('pdf_file');
-            $filepath = $config['upload_path'].$dataPDF['file_name'];
-            $raw_text = $this->parsePDF($filepath);
-        }
-
-        if (!is_null($raw_text)) {
-            $data['raw_text'] = $raw_text;
-        }
-
         // Make sure we only pass in the fields we want
-
-        $mData = $this->articles_model->prep_data($data);
+        $mData = $this->magazines_model->prep_data($data);
 
         // Additional handling for default values should be added below,
         // or in the model's prep_data() method
 
-
         $return = false;
         if ($type == 'insert') {
-            $id = $this->articles_model->insert($mData);
+            $id = $this->magazines_model->insert($mData);
 
             if (is_numeric($id)) {
                 $return = $id;
             }
         } elseif ($type == 'update') {
-            $return = $this->articles_model->update($id, $mData);
-        }
-
-        // Process Authors
-        $authors = null;
-        if (isset($data['authors'])) {
-            $authors = $data['authors'];
-        }
-        if (is_array($authors)) {
-            $article = $this->articles_model->find($id);
-            $prevAuthorsIDs = array_keys($article->authors);
-            $currAuthorsIDs = array();
-            foreach ($authors as $i => $v) {
-                if (!is_numeric($v)) {
-                    $authorid = $this->authors_model->insert(array('name' => $v));
-                    $this->authorsofarticles_model->insert(
-                        array(
-                            'author_id' => $authorid,
-                            'article_id' => $id
-                        )
-                    );
-                } else {
-                    $currAuthorsIDs[] = $v;
-                }
-            }
-            $daIDs = array_diff($prevAuthorsIDs, $currAuthorsIDs);
-            if (count($daIDs)) {
-                $aoas = $this->authorsofarticles_model->find_all_by('article_id', $id);
-                // Delete authors
-                foreach ($aoas as $aoa) {
-                    if (in_array($aoa->author_id, $daIDs)) {
-                        $this->authorsofarticles_model->delete($aoa->id);
-                    }
-                }
-            }
+            $return = $this->magazines_model->update($id, $mData);
         }
 
         return $return;
-    }
-
-    public function parsePDF($filepath)
-    {
-        $parser = new \Smalot\PdfParser\Parser();
-        $pdf    = $parser->parseFile($filepath);
-
-        // Retrieve all pages from the pdf file.
-        $pages = $pdf->getPages();
-        $details  = $pdf->getDetails();
-
-        return $pdf->getText();
-
-        // Loop over each page to extract text.
-        foreach ($pages as $page) {
-            echo $page->getText();
-        }
-        echo time();
-
-        die;
     }
 }
