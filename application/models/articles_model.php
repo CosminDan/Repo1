@@ -145,8 +145,13 @@ class Articles_model extends BF_Model
 
     public function count_by_issues($issuesIDs = array())
     {
-        //$this->load->model('issues_model');
-        //$issues_table = $this->issues_model->table_name;
+        if (!is_array($issuesIDs)) {
+            return array();
+        }
+
+        if (!count($issuesIDs)) {
+            return array();
+        }
 
         $this->db->select(array("issue_id", 'count(1) as count'))
         ->from($this->table_name)

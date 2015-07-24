@@ -39,7 +39,6 @@ $id = isset($item->id) ? $item->id : '';
 
             <?php echo form_input('description', $item->description, 'Description'); ?>
 
-
         </fieldset>
         <fieldset class="form-actions">
             <input type="submit" name="save" class='btn btn-primary' value="<?php echo lang('bf_action_save'); ?>" />

@@ -31,9 +31,9 @@ class Content extends Admin_Controller
         $this->load->model('categories_model');
         $this->load->model('magazines_model');
 
-        $this->lang->load('issues/issues');
-        $this->lang->load('articles/articles');
-        $this->lang->load('magazines/magazines');
+        // $this->lang->load('issues/issues');
+        // $this->lang->load('articles/articles');
+        // $this->lang->load('magazines/magazines');
 
         $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
 
@@ -41,6 +41,32 @@ class Content extends Admin_Controller
 
         Assets::add_module_js('articles', 'articles.js');
         //Assets::add_module_css('articles', 'articles.css');
+    }
+
+    public function getBreadcrumbs($arID = 0, $isID = 0)
+    {
+        return array();
+
+        $link = '';
+        $name = '';
+        $article = null;
+
+        if ($arID) {
+            if (!$article = $this->articles_model->find($arID)) {
+                return array();
+            }
+            $isID = $article->issue_id;
+        }
+
+        if ($isID && !$crumbs = Modules::run('issues/getBreadcrumbs', $isID)) {
+            return array();
+        }
+
+        if ($article) {
+            $link = site_url(SITE_AREA . '/content/articles/edit/'.$id) . '/';
+        }
+
+        return $crumbs;
     }
 
     /**
@@ -61,56 +87,55 @@ class Content extends Admin_Controller
             $issue = $issues[0];
 
         } else {
-            $issue = $this->issues_model->find_by('id', $id);
+            $issue = $this->issues_model->find($id);
         }
 
-        // Deleting anything?
-        if (isset($_POST['delete'])) {
-            $this->auth->restrict($this->permissionDelete);
-            $checked = $this->input->post('checked');
-            if (is_array($checked) && count($checked)) {
-
-                // If any of the deletions fail, set the result to false, so
-                // failure message is set if any of the attempts fail, not just
-                // the last attempt
-
-                $result = true;
-                foreach ($checked as $pid) {
-                    $deleted = $this->articles_model->delete($pid);
-                    if ($deleted == false) {
-                        $result = false;
-                    }
-                }
-                if ($result) {
-                    Template::set_message(count($checked) . ' ' . lang('articles_delete_success'), 'success');
-                } else {
-                    Template::set_message(lang('articles_delete_failure') . $this->articles_model->error, 'error');
-                }
-            }
-        }
-        $pagerUriSegment = 5;
+        $pagerUriSegment = 6;
         $pagerBaseUrl = site_url(SITE_AREA . '/content/articles/index/'.$id) . '/';
 
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
 
         $this->load->library('pagination');
-        $pager['base_url']    = $pagerBaseUrl;
-        $pager['total_rows']  = $this->articles_model->count_all();
-        $pager['per_page']    = $limit;
-        $pager['uri_segment'] = $pagerUriSegment;
+
+        $pager = array(
+            'base_url'    => $pagerBaseUrl,
+            'total_rows'  => 0,
+            'per_page'    => $limit,
+            'uri_segment' => $pagerUriSegment,
+        );
+
+        // Get total count for issue and articles for page
+        foreach (range(0, 1) as $i) {
+            $this->articles_model->where('articles.issue_id', $issue->id);
+            if ($i) {
+                $this->articles_model->select('articles.*, institutions.name AS affiliation_name');
+                $this->db->join('institutions', "institutions.id = articles.affiliation", 'left');
+                $this->articles_model->limit($limit, $offset);
+                $records = $this->articles_model->find_all();
+            } else {
+                $pager['total_rows'] = $this->articles_model->count_all();
+            }
+        }
+
+        // Set tags as arrays
+        foreach ($records as $k => $v) {
+            $tags = array();
+            if (strlen($v->tags)) {
+                $tags = explode(',', $v->tags);
+            }
+            $records[$k]->tags = $tags;
+            $records[$k]->summary_count = str_word_count($v->summary);
+        }
 
         $this->pagination->initialize($pager);
-        $this->articles_model->limit($limit, $offset);
-        $this->articles_model->where('issue_id', $issue->id);
-
-
-        $records = $this->articles_model->find_all();
 
         Template::set('issue', $issue);
         Template::set('records', $records);
         Template::set('toolbar_title', lang('articles_manage'));
+        Template::set('breadcrumbs', $this->getBreadcrumbs($id));
 
         Template::set_block('sub_nav', 'content/_sub_nav');
+        Template::set_block('breadcrumb', 'admin/breadcrumb');
 
         Template::render();
     }
@@ -150,10 +175,10 @@ class Content extends Admin_Controller
             redirect(SITE_AREA . '/content/articles');
         }
 
-        if ($this->input->post('save')) {
+        if ($this->input->post()) {
             $this->auth->restrict($this->permissionEdit);
 
-            if ($this->save_articles('update', $id)) {
+            if ($this->save_item('update', $id)) {
                 Template::set_message(lang('articles_edit_success'), 'success');
                 $article = $this->articles_model->find_by('id', $id);
                 redirect(SITE_AREA . '/content/articles/index/'.$article->issue_id);
@@ -170,7 +195,7 @@ class Content extends Admin_Controller
 
         $this->institutions_model->select(array('id', 'name'));
         $institutions = $this->institutions_model->find_all();
-        $affiliations = array();
+        $affiliations = array('0' => 'No affiliation');
 
         foreach ($institutions as $inst) {
             $affiliations[$inst->id] = $inst->name;
@@ -202,7 +227,7 @@ class Content extends Admin_Controller
      * @return bool|int An int ID for successful inserts, true for successful
      * updates, else false.
      */
-    private function save_articles($type = 'insert', $id = 0)
+    private function save_item($type = 'insert', $id = 0)
     {
         if ($type == 'update') {
             $_POST['id'] = $id;
@@ -252,17 +277,17 @@ class Content extends Admin_Controller
         $this->load->library('upload');
         $this->upload->initialize($config);
 
-        $dataPDF = null;
-        $raw_text = null;
-        if ($this->upload->do_upload('pdf_file')) {
-            $dataPDF = $this->upload->data('pdf_file');
-            $filepath = $config['upload_path'].$dataPDF['file_name'];
-            $raw_text = $this->parsePDF($filepath);
-        }
+        // $dataPDF = null;
+        // $raw_text = null;
+        // if ($this->upload->do_upload('pdf_file')) {
+        //     $dataPDF = $this->upload->data('pdf_file');
+        //     $filepath = $config['upload_path'].$dataPDF['file_name'];
+        //     $raw_text = $this->parsePDF($filepath);
+        // }
 
-        if (!is_null($raw_text)) {
-            $data['raw_text'] = $raw_text;
-        }
+        // if (!is_null($raw_text)) {
+        //     $data['raw_text'] = $raw_text;
+        // }
 
         // Make sure we only pass in the fields we want
 
@@ -352,34 +377,34 @@ class Content extends Admin_Controller
         die;
     }
 
-    public function test()
-    {
-        die();
-        $categs = file_get_contents('../categs.txt');
-        $categs = explode("\n", $categs);
+    // public function test()
+    // {
+    //     die();
+    //     $categs = file_get_contents('../categs.txt');
+    //     $categs = explode("\n", $categs);
 
-        $parent = array(0, 0, 0);
+    //     $parent = array(0, 0, 0);
 
-        foreach ($categs as $line) {
-            $categ = ltrim($line);
-            $diff = strlen($line) - strlen($categ);
-            $level = $diff/4;
+    //     foreach ($categs as $line) {
+    //         $categ = ltrim($line);
+    //         $diff = strlen($line) - strlen($categ);
+    //         $level = $diff/4;
 
-            $pid = $parent[$level];
+    //         $pid = $parent[$level];
 
-            $data = array(
-                'pid'        => $pid,
-                'name'       => $categ,
-                'selectable' => 1
-            );
+    //         $data = array(
+    //             'pid'        => $pid,
+    //             'name'       => $categ,
+    //             'selectable' => 1
+    //         );
 
-            $id = $this->categories_model->insert($data);
+    //         $id = $this->categories_model->insert($data);
 
-            $next_level = $level+1;
-            $parent[$next_level] = $id;
+    //         $next_level = $level+1;
+    //         $parent[$next_level] = $id;
 
-            echo "{$line} - {$level}\n";
-        }
-        die;
-    }
+    //         echo "{$line} - {$level}\n";
+    //     }
+    //     die;
+    // }
 }

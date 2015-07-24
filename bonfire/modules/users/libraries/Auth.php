@@ -54,6 +54,8 @@ class Auth
 
     private $user;
 
+    private $meta = null;
+
     //--------------------------------------------------------------------------
 
     /**
@@ -669,10 +671,19 @@ class Auth
         return $this->user()->id;
     }
 
+    public function meta()
+    {
+        if (is_null($this->meta)) {
+            $id         = $this->user_id();
+            $this->meta = $this->ci->user_model->find_meta_for($id);
+        }
+
+        return $this->meta;
+    }
+
     public function user_magazine()
     {
-        //$this->user_model->save_meta_for($this->auth->user_id(), array('magazine' => 1));
-        $um = $this->ci->user_model->find_meta_for($this->user_id());
+        $um = $this->meta();
 
         if (!isset($um->magazine)) return 0;
 

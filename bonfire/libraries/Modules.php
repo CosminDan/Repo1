@@ -28,10 +28,12 @@ spl_autoload_register('Modules::autoload');
  * @filesource
  */
 
+
 /**
  * Modules class for Bonfire.
  *
  * Adapted from Wiredesignz Modular Extensions - HMVC.
+ *
  * @link https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc
  *
  * Provides utility functions for working with modules, as well as an autoloader
@@ -51,7 +53,7 @@ class Modules
     /**
      * Run a module controller method. Output from module is buffered and returned.
      *
-     * @param string $module The module/controller/method to run.
+     * @param string  $module The module/controller/method to run.
      *
      * @return mixed The output from the module.
      */
@@ -68,6 +70,7 @@ class Modules
 
         // Load the class indicated by $module and check whether $method exists.
         $class = self::load($module);
+
         if (! $class || ! method_exists($class, $method)) {
             log_message('error', "Module controller failed to run: {$module}/{$method}");
             return;
@@ -90,7 +93,7 @@ class Modules
     /**
      * Load a module controller.
      *
-     * @param string $module The module/controller to load.
+     * @param string  $module The module/controller to load.
      *
      * @return mixed The loaded controller.
      */
@@ -134,7 +137,7 @@ class Modules
     /**
      * Library base class autoload.
      *
-     * @param string $class The class to load.
+     * @param string  $class The class to load.
      *
      * @return void
      */
@@ -165,7 +168,7 @@ class Modules
         if (strstr($class, 'BF_')
             && is_file($location = BFPATH . "core/{$class}.php")
         ) {
-            include_once($location);
+            include_once $location;
             return;
         }
 
@@ -185,10 +188,10 @@ class Modules
     /**
      * Load a module file.
      *
-     * @param string $file The filename.
-     * @param string $path The path to the file.
-     * @param string $type The type of file.
-     * @param mixed  $result
+     * @param string  $file   The filename.
+     * @param string  $path   The path to the file.
+     * @param string  $type   The type of file.
+     * @param mixed   $result
      *
      * @return mixed
      */
@@ -216,7 +219,7 @@ class Modules
             if (file_exists($location)) {
                 include_once $location;
             } elseif (file_exists("{$path}/" . ucfirst($file) . '.php')) {
-                include_once("{$path}/" . ucfirst($file) . '.php');
+                include_once "{$path}/" . ucfirst($file) . '.php';
             } else {
                 log_message('debug', "File not found: {$location}");
                 return $result;
@@ -243,9 +246,9 @@ class Modules
      * directories for models, plugins, and views. Generates fatal error if file
      * not found.
      *
-     * @param string $file   The file.
-     * @param string $module The module.
-     * @param string $base
+     * @param string  $file   The file.
+     * @param string  $module The module.
+     * @param string  $base
      *
      * @return array
      */
@@ -282,8 +285,8 @@ class Modules
     /**
      * Parse module routes.
      *
-     * @param  string $module The module.
-     * @param  string $uri    The URI.
+     * @param string  $module The module.
+     * @param string  $uri    The URI.
      *
      * @return mixed The parsed route or void.
      */
@@ -328,8 +331,8 @@ class Modules
     /**
      * Determine whether a controller exists for a module.
      *
-     * @param $controller string The controller to look for (without the extension).
-     * @param $module     string The module to look in.
+     * @param unknown $controller string The controller to look for (without the extension).
+     * @param unknown $module     string The module to look in.
      *
      * @return boolean True if the controller is found, else false.
      */
@@ -354,10 +357,10 @@ class Modules
     /**
      * Find the path to a module's file.
      *
-     * @param $module string The name of the module to find.
-     * @param $folder string The folder within the module to search for the file
+     * @param unknown $module string The name of the module to find.
+     * @param unknown $folder string The folder within the module to search for the file
      * (ie. controllers).
-     * @param $file   string The name of the file to search for.
+     * @param unknown $file   string The name of the file to search for.
      *
      * @return string The full path to the file.
      */
@@ -379,8 +382,8 @@ class Modules
     /**
      * Return the path to the module and its specified folder.
      *
-     * @param $module string The name of the module (must match the folder name).
-     * @param $folder string The folder name to search for (Optional).
+     * @param unknown $module string The name of the module (must match the folder name).
+     * @param unknown $folder string The folder name to search for (Optional).
      *
      * @return string The path, relative to the front controller.
      */
@@ -405,11 +408,11 @@ class Modules
     /**
      * Return an associative array of files within one or more modules.
      *
-     * @param $module_name   string  If not null, will return only files from that
+     * @param unknown $module_name   string  If not null, will return only files from that
      * module.
-     * @param $module_folder string  If not null, will return only files within
+     * @param unknown $module_folder string  If not null, will return only files within
      * that sub-folder of each module (ie 'views').
-     * @param $exclude_core  boolean If true, excludes all core modules.
+     * @param unknown $exclude_core  boolean If true, excludes all core modules.
      *
      * @return array An associative array, like:
      * <code>
@@ -489,8 +492,8 @@ class Modules
      * );
      * </code>
      *
-     * @param $module_name string  The name of the module.
-     * @param $return_full boolean Ignored if the 'module_config' portion exists.
+     * @param unknown $module_name string  The name of the module.
+     * @param unknown $return_full boolean Ignored if the 'module_config' portion exists.
      * Otherwise, if true, will return the entire config array, else an empty array
      * is returned.
      *
@@ -505,7 +508,7 @@ class Modules
         }
 
         // Include the file and determine whether it contains a config array.
-        include($config_file);
+        include $config_file;
         if (! isset($config)) {
             return array();
         }
@@ -537,7 +540,7 @@ class Modules
     /**
      * Returns a list of all modules in the system.
      *
-     * @param bool $exclude_core Whether to exclude the Bonfire core modules.
+     * @param bool    $exclude_core Whether to exclude the Bonfire core modules.
      *
      * @return array A list of all modules in the system.
      */

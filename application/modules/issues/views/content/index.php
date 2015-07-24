@@ -10,9 +10,7 @@ if ($can_delete) {
 }
 ?>
 <div class='admin-box'>
-    <h3>
-        <?php echo lang('magazine_issues_area_title'); ?>
-    </h3>
+    <h3><?php echo $page_head; ?></h3>
     <?php echo form_open($this->uri->uri_string()); ?>
         <table class='table table-striped'>
             <thead>
@@ -23,12 +21,12 @@ if ($can_delete) {
 
                     <th><?php echo lang('magazines_field_title'); ?></th>
                     <th><?php echo lang('magazines_field_number'); ?></th>
-                    <th><?php echo lang('magazines_field_volume'); ?></th>
                     <th><?php echo lang('magazines_field_special'); ?></th>
+                    <th><?php echo lang('magazines_field_volume'); ?></th>
                     <th><?php echo lang('magazines_field_year_issue'); ?></th>
                     <th><?php echo lang('magazines_field_year_published'); ?></th>
                     <th><?php echo lang('magazines_field_status'); ?></th>
-                    <th></th>
+                    <th>Articles</th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -53,13 +51,14 @@ if ($has_records) :
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php e($magazine->title); ?></td>
-                    <td><?php e($record->number); ?></td>
-                    <td><?php e($record->volume); ?></td>
+                    <td><?php echo anchor(SITE_AREA . '/content/issues/edit/' . $record->id, $magazine->title); ?></td>
+                    <td><?php if ($record->number) e($record->number); ?></td>
                     <td><?php e($record->special); ?></td>
+                    <td><?php echo integerToRoman($record->volume); ?></td>
                     <td><?php echo integerToRoman($record->year_issue); ?></td>
                     <td><?php e($record->year_published); ?></td>
                     <td><?php e($record->status); ?></td>
+
                     <td><?php echo anchor(SITE_AREA . '/content/articles/index/' . $record->id, "{$record->count} articles"); ?></td>
                 </tr>
                 <?php

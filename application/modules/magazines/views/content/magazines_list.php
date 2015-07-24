@@ -51,14 +51,15 @@ if ($has_records) :
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/issues/index/' . $record->id, $record->title); ?></td>
+                    <td><?php e($record->title); ?></td>
                     <td><?php e($record->issn); ?></td>
                     <td><?php e($record->founded_year); ?></td>
                     <td><?php e($record->publisher); ?></td>
                     <td>
                         <div class="btn-group">
-                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/edit/' . $record->id); ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i></a>
-                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/toggleVisibility/' . $record->id); ?>" class="btn btn-primary"><i class="<?php echo $vis_icon; ?> icon-white"></i></a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Issues</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/magazines/toggleVisibility/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="<?php echo $vis_icon; ?> icon-white"></i> Visibility</a>
                         </div>
                     </td>
                 </tr>

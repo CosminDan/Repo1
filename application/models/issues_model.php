@@ -105,7 +105,9 @@ class Issues_model extends BF_Model
 
     public function find($id = 0)
     {
-        $item = parent::find($id);
+        if (!$item = parent::find($id)) {
+            return $item;
+        }
 
         $item->authors = array();
         $aoas = $this->authorsofarticles_model->find_all_by('article_id', $item->id);
@@ -118,16 +120,6 @@ class Issues_model extends BF_Model
             if ($author = $this->authors_model->find($aoa->author_id)) {
                 $item->authors[$author->id] = $author->name;
             }
-        }
-
-        $tags = array();
-        if (strlen($item->tags)) {
-            $tags = explode(',', $item->tags);
-        }
-
-        $item->tags = array();
-        foreach ($tags as $tag) {
-            $item->tags[$tag] = $tag;
         }
 
         return $item;

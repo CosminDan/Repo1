@@ -51,12 +51,14 @@ if ($has_records) :
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/articles/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->title); ?></td>
+                    <td><?php echo anchor(SITE_AREA . '/content/articles/edit/' . $record->id, $record->title); ?></td>
                     <td><?php e($record->page); ?></td>
-                    <td><?php e($record->affiliation); ?></td>
+                    <td><?php e($record->affiliation_name); ?></td>
                     <td><?php e($record->references); ?></td>
-                    <td><?php e($record->summary); ?></td>
-                    <td><?php e($record->tags); ?></td>
+                    <td><?php echo "{$record->summary_count} words"; ?></td>
+                    <td><?php foreach ($record->tags as $tag) { ?>
+                        <span class="label label-info"><?php e($tag); ?></span>
+                       <?php } ?></td>
                 </tr>
                 <?php
 endforeach;
