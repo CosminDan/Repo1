@@ -35,11 +35,10 @@ class Content extends Admin_Controller
         $this->lang->load('articles/articles');
         $this->lang->load('magazines/magazines');
 
+        $this->magazine_id = $this->session->userdata('magazine_id');
+
         // $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
-
-
-
-        //Assets::add_module_js('articles', 'articles.js');
+        //Assets::add_modul1e_js('articles', 'articles.js');
         //Assets::add_module_css('articles', 'articles.css');
     }
 
@@ -52,20 +51,23 @@ class Content extends Admin_Controller
      */
     public function index($id = 0, $offset = 0)
     {
+        if (!$id = $this->uri->segment(5)) {
+            $id = $this->magazine_id;
+        }
+
         if (!$id) {
-            if (!$id = $this->auth->user_magazine()) {
-                redirect(SITE_AREA);
-            }
+            redirect(SITE_AREA.'/content/magazines');
         }
 
         // TODO: check perms
-        $magazine = $this->magazines_model->find_by('id', $id);
-
-        if (!$magazine) {
-            redirect(SITE_AREA);
+        if (!$magazine = $this->magazines_model->find_by('id', $id)) {
+            redirect(SITE_AREA.'/content/magazines');
         }
 
+        $this->session->set_userdata('magazine_id', $magazine->id);
+
         $pagerUriSegment = 6;
+        $offset = $this->uri->segment($pagerUriSegment);
         $pagerBaseUrl = site_url(SITE_AREA . '/content/issues/index/'.$id) . '/';
 
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;

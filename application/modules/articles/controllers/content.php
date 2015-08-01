@@ -31,6 +31,8 @@ class Content extends Admin_Controller
         $this->load->model('categories_model');
         $this->load->model('magazines_model');
 
+        $this->issue_id = $this->session->userdata('issue_id');
+
         // $this->lang->load('issues/issues');
         // $this->lang->load('articles/articles');
         // $this->lang->load('magazines/magazines');
@@ -74,23 +76,21 @@ class Content extends Admin_Controller
      *
      * @return void
      */
-    public function index($id = 0, $offset = 0)
+    public function index()
     {
-        if (!$id) {
-            if (!$um = $this->auth->user_magazine()) {
-                redirect(SITE_AREA);
-            }
-            $issues = $this->issues_model->where('magazine_id', $um)->order_by('id', 'DESC')->limit(1)->find_all();
-            if (!isset($issues[0])) {
-                redirect(SITE_AREA);
-            }
-            $issue = $issues[0];
+        if (!$id = $this->uri->segment(5)) {
+            $id = $this->issue_id;
+        }
 
+        if (!$id) {
+            redirect(SITE_AREA.'/content/issues');
         } else {
             $issue = $this->issues_model->find($id);
+            $this->session->set_userdata('issue_id', $issue->id);
         }
 
         $pagerUriSegment = 6;
+        $offset = $this->uri->segment($pagerUriSegment);
         $pagerBaseUrl = site_url(SITE_AREA . '/content/articles/index/'.$id) . '/';
 
         $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
@@ -135,7 +135,6 @@ class Content extends Admin_Controller
         Template::set('breadcrumbs', $this->getBreadcrumbs($id));
 
         Template::set_block('sub_nav', 'content/_sub_nav');
-        Template::set_block('breadcrumb', 'admin/breadcrumb');
 
         Template::render();
     }

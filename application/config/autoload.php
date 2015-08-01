@@ -41,7 +41,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 */
 
 $autoload['packages'] = array(
-		realpath(APPPATH .'../bonfire'),	// Bonfire Core
+    realpath(APPPATH .'../bonfire'), // Bonfire Core
     APPPATH . 'third_party',          // App -specific 3rd-party libs.
 );
 
@@ -54,12 +54,12 @@ $autoload['packages'] = array(
 |
 | Prototype:
 |
-|	$autoload['libraries'] = array('database', 'email', 'session');
+|   $autoload['libraries'] = array('database', 'email', 'session');
 |
 | You can also supply an alternative library name to be assigned
 | in the controller:
 |
-|	$autoload['libraries'] = array('user_agent' => 'ua');
+|   $autoload['libraries'] = array('user_agent' => 'ua');
 */
 
 $autoload['libraries'] = array('database');
@@ -75,7 +75,7 @@ $autoload['libraries'] = array('database');
 |
 | Prototype:
 |
-|	$autoload['drivers'] = array('cache');
+|   $autoload['drivers'] = array('cache');
 */
 
 $autoload['drivers'] = array();
@@ -86,7 +86,7 @@ $autoload['drivers'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['helper'] = array('url', 'file');
+|   $autoload['helper'] = array('url', 'file');
 */
 
 $autoload['helper'] = array('url', 'language');
@@ -97,7 +97,7 @@ $autoload['helper'] = array('url', 'language');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['config'] = array('config1', 'config2');
+|   $autoload['config'] = array('config1', 'config2');
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
@@ -112,14 +112,14 @@ $autoload['config'] = array('application');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['language'] = array('lang1', 'lang2');
+|   $autoload['language'] = array('lang1', 'lang2');
 |
 | NOTE: Do not include the "_lang" part of your file.  For example
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
 
-$autoload['language'] = array();
+$autoload['language'] = array('pubapp');
 
 /*
 | -------------------------------------------------------------------
@@ -127,12 +127,16 @@ $autoload['language'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('model1', 'model2');
+|   $autoload['model'] = array('model1', 'model2');
 |
 | You can also supply an alternative model name to be assigned
 | in the controller:
 |
-|	$autoload['model'] = array('first_model' => 'first');
+|   $autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array(
+    'magazines_model', 'issues_model', 'authors_model', 'articles_model',
+    'authorsofarticles_model', 'institutions_model', 'magazine_staff_model',
+    'roles/role_model'
+);

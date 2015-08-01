@@ -31,3 +31,9 @@ $lang['issues_field_volume']         = 'Volume';
 $lang['issues_field_year_issue']     = 'Issue Year';
 $lang['issues_field_year_published'] = 'Published Year';
 $lang['issues_field_status']         = 'Status';
+
+
+
+//
+$lang['magazines_staff_manage']         = 'Manage Magazine Staff';
+$lang['magazines_staff_add']         = 'Add User';

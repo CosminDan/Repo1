@@ -2,6 +2,7 @@
 
 Assets::add_css(
     array(
+        //'font-awesome.min.css',
         'bootstrap2.min.css',
         'bootstrap2-responsive.min.css',
         'select2.min.css',

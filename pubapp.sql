@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2015 at 07:02 PM
+-- Generation Time: Aug 01, 2015 at 07:44 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -72,7 +72,14 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (28, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-22 13:17:42', 0),
 (29, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-23 11:01:27', 0),
 (30, 1, 'App settings saved from: 127.0.0.1', 'core', '2015-07-23 17:00:55', 0),
-(31, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-24 12:55:00', 0);
+(31, 1, 'logged in from: 127.0.0.1', 'users', '2015-07-24 12:55:00', 0),
+(32, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 14:58:26', 0),
+(33, 1, 'created a new User: Cosmin', 'users', '2015-08-01 15:45:53', 0),
+(34, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:27:49', 0),
+(35, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:28:37', 0),
+(36, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:57:16', 0),
+(37, 1, 'App settings saved from: 127.0.0.1', 'core', '2015-08-01 18:57:58', 0),
+(38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0);
 
 -- --------------------------------------------------------
 
@@ -97,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
   `modified_on` date DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=241 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=242 ;
 
 --
 -- Dumping data for table `bf_articles`
@@ -340,7 +347,8 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 (237, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
 (238, 5, 3, 'Test', '6', '', ' dd sdadfsfdgwsd vds sdf dsc weqwdsdf', 'yep,nope,ok,nevermind', 0, 0, '2015-07-23', 1, '2015-07-23', 1),
 (239, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
-(240, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL);
+(240, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
+(241, 1, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-01', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1189,7 +1197,19 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_staff` (
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `magazine_id` (`magazine_id`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `bf_magazine_staff`
+--
+
+INSERT INTO `bf_magazine_staff` (`id`, `magazine_id`, `user_id`, `role_id`) VALUES
+(1, 1, 1, 8),
+(5, 1, 6, 8),
+(6, 2, 7, 8),
+(7, 2, 8, 8),
+(10, 1, 8, 8),
+(11, 2, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -1204,7 +1224,7 @@ CREATE TABLE IF NOT EXISTS `bf_permissions` (
   `description` varchar(100) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -1270,7 +1290,9 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 (74, 'Issues.Content.Create', '', 'active'),
 (75, 'Issues.Content.Edit', '', 'active'),
 (76, 'Issues.Content.Delete', '', 'active'),
-(77, 'Issues.Content.View', '', 'active');
+(77, 'Issues.Content.View', '', 'active'),
+(78, 'Permissions.Contributor.Manage', 'To manage the access control permissions for the Contributor role.', 'active'),
+(79, 'Permissions.Staff Manager.Manage', 'To manage the access control permissions for the Staff Manager role.', 'active');
 
 -- --------------------------------------------------------
 
@@ -1288,19 +1310,22 @@ CREATE TABLE IF NOT EXISTS `bf_roles` (
   `login_destination` varchar(255) NOT NULL DEFAULT '/',
   `deleted` int(1) NOT NULL DEFAULT '0',
   `default_context` varchar(255) NOT NULL DEFAULT 'content',
+  `magazine_role` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `bf_roles`
 --
 
-INSERT INTO `bf_roles` (`role_id`, `role_name`, `description`, `default`, `can_delete`, `login_destination`, `deleted`, `default_context`) VALUES
-(1, 'Administrator', 'Has full control over every aspect of the site.', 0, 0, '', 0, 'content'),
-(2, 'Editor', 'Can handle day-to-day management, but does not have full power.', 0, 1, '', 0, 'content'),
-(4, 'User', 'This is the default user with access to login.', 1, 0, '', 0, 'content'),
-(6, 'Developer', 'Developers typically are the only ones that can access the developer tools. Otherwise identical to Administrators, at least until the site is handed off.', 0, 1, '', 0, 'content'),
-(8, 'Editor-in-Chief', '', 0, 1, '', 0, 'content');
+INSERT INTO `bf_roles` (`role_id`, `role_name`, `description`, `default`, `can_delete`, `login_destination`, `deleted`, `default_context`, `magazine_role`) VALUES
+(1, 'Administrator', 'Has full control over every aspect of the site.', 0, 0, '', 0, 'content', 0),
+(2, 'Editor', 'Can handle day-to-day management, but does not have full power.', 0, 1, '', 0, 'content', 0),
+(4, 'User', 'This is the default user with access to login.', 1, 0, '', 0, 'content', 0),
+(6, 'Developer', 'Developers typically are the only ones that can access the developer tools. Otherwise identical to Administrators, at least until the site is handed off.', 0, 1, '', 0, 'content', 0),
+(8, 'Editor-in-Chief', '', 0, 1, '', 0, 'content', 1),
+(9, 'Contributor', '', 0, 1, '', 0, 'content', 1),
+(10, 'Staff Manager', '', 0, 1, '', 0, 'content', 1);
 
 -- --------------------------------------------------------
 
@@ -1392,6 +1417,8 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 (1, 75),
 (1, 76),
 (1, 77),
+(1, 78),
+(1, 79),
 (2, 2),
 (2, 51),
 (2, 52),
@@ -1418,7 +1445,12 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 (8, 54),
 (8, 67),
 (8, 68),
-(8, 69);
+(8, 69),
+(10, 67),
+(10, 68),
+(10, 69),
+(10, 70),
+(10, 73);
 
 -- --------------------------------------------------------
 
@@ -1456,6 +1488,14 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `bf_sessions`
+--
+
+INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('c220a48c34cc5cbad5d5624ecde0f90e', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438442860, 'a:10:{s:9:"user_data";s:0:"";s:14:"requested_page";s:40:"http://localhost/admin/content/magazines";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:40:"http://localhost/admin/content/magazines";}'),
+('e2c484190577bcce1e1c932c163fb5eb', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438446775, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:48:"http://localhost/admin/content/magazines/staff/1";s:13:"previous_page";s:48:"http://localhost/admin/content/magazines/staff/1";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:1:"5";}');
+
 -- --------------------------------------------------------
 
 --
@@ -1488,7 +1528,7 @@ INSERT INTO `bf_settings` (`name`, `module`, `value`) VALUES
 ('auth.password_min_length', 'core', '8'),
 ('auth.password_show_labels', 'core', '0'),
 ('auth.remember_length', 'core', '1209600'),
-('auth.user_activation_method', 'core', '2'),
+('auth.user_activation_method', 'core', '1'),
 ('auth.use_extended_profile', 'core', '0'),
 ('auth.use_usernames', 'core', '1'),
 ('form_save', 'core.ui', 'ctrl+s/⌘+s'),
@@ -1497,7 +1537,7 @@ INSERT INTO `bf_settings` (`name`, `module`, `value`) VALUES
 ('mailtype', 'email', 'text'),
 ('password_iterations', 'users', '8'),
 ('protocol', 'email', 'mail'),
-('sender_email', 'email', ''),
+('sender_email', 'email', 'admin@pubapp.ro'),
 ('site.languages', 'core', 'a:1:{i:0;s:7:"english";}'),
 ('site.list_limit', 'core', '25'),
 ('site.show_front_profiler', 'core', '1'),
@@ -1626,15 +1666,23 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
   `force_password_reset` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `bf_users`
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-07-24 12:55:00', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
-(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0);
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-01 19:02:30', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
+(3, 4, 'cosmin@hitman47.ro', 'cozmin.htn', '$2a$08$I6PYkQIsoipFlf5cUh4vBejb/4oNw.wGb8xiKmlkxdv3Q8mhtceV2', NULL, '0000-00-00 00:00:00', '', '2015-08-01 15:45:52', 0, NULL, 0, NULL, 'Cosmin', NULL, 'UP2', 'english', 0, '', 0),
+(4, 4, 'asdasd@adasdas.adsda', 'asdasd@adasdas.adsda', '$2a$08$kDlzKKZ/UUWk1Kjzqx.g9eAWcHjxh/x4j1C9Lhf2xA2YUxOCXZ2vy', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:25', 0, NULL, 0, NULL, 'asdasd@adasdas.adsda', NULL, 'UM6', 'english', 0, '', 0),
+(5, 4, 'test@slayers.ro', 'test@slayers.ro', '$2a$08$SgMZtJaEBmYEfyJQYQcNu.wj3G7/9fCe3/9dA7XYBUZEVRdOSnZQK', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:36', 0, NULL, 0, NULL, 'test@slayers.ro', NULL, 'UM6', 'english', 0, '', 0),
+(6, 4, 'ucozmin@gmail.com', 'ucozmin@gmail.com', '$2a$08$lp03mrA7pTXnIJOPdkIAZO5X/dI6eiYYwQVfZRAXybGLdp2PO1t0C', 'f45ced249adf8778505bfcf409989c8989c709bb', '0000-00-00 00:00:00', '', '2015-08-01 18:54:21', 0, 1438530890, 0, NULL, 'ucozmin@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
+(7, 4, 'htn.cosmin@gmail.com', 'htn.cosmin@gmail.com', '$2a$08$ee0WUVk/T02CYZLKK3PHUOgSxFKYcIXLLZJYO3.qVO40YC/Asy.ci', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:04:48', 0, NULL, 0, NULL, 'htn.cosmin@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
+(8, 4, 'htn.cosmindan@gmail.com', 'htn.cosmindan@gmail.com', '$2a$08$BVkS7it4QJ4gD1ahZnYqLuOjMwRCXoVKwmOuOuTeARcfptcGLPzWW', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:05:11', 0, NULL, 0, NULL, 'htn.cosmindan@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
+(9, 4, 'saasd@dasdas.asd', 'saasd@dasdas.asd', '$2a$08$SJbbJ5tZF4e9klqMEJ37Iuug/a92nCpwCmUvHacoTNS0xFLsZVoYS', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:11:21', 0, NULL, 0, NULL, 'saasd@dasdas.asd', NULL, 'UM6', 'english', 0, '', 0),
+(10, 4, 'dsda@asdasdas.asdasd', 'dsda@asdasdas.asdasd', '$2a$08$Ia1eYPw4vVWTk/b5vREL0uOx/F0NqcaHgkK.Ehx8QZfl2rRObw8Nu', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:15:18', 0, NULL, 0, NULL, 'dsda@asdasdas.asdasd', NULL, 'UM6', 'english', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1650,13 +1698,6 @@ CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
   KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `bf_user_cookies`
---
-
-INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
-(1, 'zDCRcbXL5gpJE4BkHtUS6SkM4MhVDBTFVNgAH4GdilFWOyPsQk6JSmwfTvxjPiYNEIWATjylvURf44F303pRuTQ5WTeF50r5dVJ5gcfH4cDc8XZbAxkG9vE9HXqzeKtY', '2015-05-28 00:41:54');
-
 -- --------------------------------------------------------
 
 --
@@ -1670,7 +1711,7 @@ CREATE TABLE IF NOT EXISTS `bf_user_meta` (
   `meta_key` varchar(255) NOT NULL DEFAULT '',
   `meta_value` text,
   PRIMARY KEY (`meta_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `bf_user_meta`
@@ -1681,7 +1722,9 @@ INSERT INTO `bf_user_meta` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (2, 1, 'country', 'RO'),
 (3, 2, 'state', 'HI'),
 (4, 2, 'country', 'US'),
-(5, 1, 'magazine', '2');
+(5, 1, 'magazine', '2'),
+(6, 3, 'state', 'HI'),
+(7, 3, 'country', 'US');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

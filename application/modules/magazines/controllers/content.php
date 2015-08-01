@@ -27,12 +27,6 @@ class Content extends Admin_Controller
 
         $this->auth->restrict($this->permView);
 
-        $this->load->model('magazines_model');
-        $this->load->model('issues_model');
-        $this->load->model('authors_model');
-        $this->load->model('articles_model');
-        $this->load->model('authorsofarticles_model');
-        $this->load->model('institutions_model');
         $this->load->helper('misc');
         $this->lang->load('magazines');
 
@@ -44,60 +38,12 @@ class Content extends Admin_Controller
         //Assets::add_module_css('articles', 'articles.css');
     }
 
-    public function main($mag = null, $iss = null, $art = null)
-    {
-        $params = array(
-            'magazine' => $mag,
-            'issue'    => $iss,
-            'article'  => $art
-        );
-
-        $func = 'magazine_list';
-
-        foreach ($params as $cat => $param) {
-            if (ctype_digit($param) && $param) {
-                $model = "{$cat}s_model";
-                if (!$this->{$cat} = $this->{$model}->find($param)) {
-                    return show_404();
-                }
-            } else {
-                if (is_null($param)) {
-
-                }
-            }
-        }
-
-        if ($this->article && $this->issue) {
-            if ($this->article->issue_id != $this->issue->id) {
-                return show_404();
-            }
-        }
-
-        if ($this->issue && $this->magazine) {
-            if ($this->issue->magazine_id != $this->magazine->id) {
-                return show_404();
-            }
-        }
-
-
-
-
-        // $method = "{$cat}_{$param}";
-        // if (method_exists($this, $method)) {
-        //     Template::set_view('content/'.$method);
-        //     return call_user_func_array(array($this, $method), array());
-        // }
-        die('asdsad');
-
-        show_404();
-    }
-
     /**
      * Display a list of Articles data.
      *
      * @return void
      */
-    public function magazine_list($offset = 0)
+    public function index($offset = 0)
     {
         if (!has_permission('Magazines.Manage.All')) {
             // get my magazine id & redirect.
@@ -154,7 +100,7 @@ class Content extends Admin_Controller
      */
     public function create()
     {
-        $this->auth->restrict($this->permCreate);
+        $this->auth->restrict($this->permCreate); //Magazines.Content.Create
 
         $model = $this->magazines_model;
 
@@ -191,9 +137,8 @@ class Content extends Admin_Controller
     public function edit()
     {
         $this->auth->restrict($this->permView);
-        $id = $this->uri->segment(5);
 
-        if (empty($id)) {
+        if (!$id = $this->uri->segment(5)) {
             redirect(SITE_AREA . '/content/magazines');
         }
 
@@ -221,6 +166,55 @@ class Content extends Admin_Controller
         Template::render();
     }
 
+    public function staff()
+    {
+        $this->auth->restrict($this->permEdit);
+
+        if (!$id = $this->uri->segment(5)) {
+            redirect(SITE_AREA . '/content/magazines');
+        }
+
+        $staff = $this->magazine_staff_model->where('magazine_id', $id)->find_all();
+
+        if (!$staff) $staff = array();
+
+        $roles = $this->role_model->where('magazine_role', '1')->find_all();
+        $rolesAssoc = array();
+        foreach ($roles as $role) {
+            $rolesAssoc[$role->role_id] = $role->role_name;
+        }
+
+        if ($this->input->post()) {
+            if ($this->save_staff()) {
+                redirect(SITE_AREA . '/content/magazines/staff/'.$id);
+            }
+        }
+
+        Template::set('magazine_id', $id);
+        Template::set('records', $staff);
+        Template::set('roles', $rolesAssoc);
+        Template::set('toolbar_title', lang('magazines_manage'));
+
+        Template::render();
+    }
+
+    public function dismissUser()
+    {
+        $this->auth->restrict($this->permEdit);
+
+        if (!$id = $this->uri->segment(5)) {
+            redirect(SITE_AREA . '/content/magazines');
+        }
+
+        if (!$ms = $this->magazine_staff_model->find($id)) {
+            redirect(SITE_AREA . '/content/magazines');
+        }
+
+        $this->magazine_staff_model->delete($id);
+
+        redirect(SITE_AREA . '/content/magazines/staff/'.$ms->magazine_id);
+    }
+
     public function toggleVisibility()
     {
         $this->auth->restrict($this->permEdit);
@@ -242,6 +236,59 @@ class Content extends Admin_Controller
     //--------------------------------------------------------------------
     // !PRIVATE METHODS
     //--------------------------------------------------------------------
+
+    private function save_staff()
+    {
+        $mag   = $this->input->post('magazine_id');
+        $role  = $this->input->post('role_id');
+        $email = $this->input->post('email');
+
+        $this->load->library('form_validation');
+
+        if (!$this->form_validation->valid_email($email)) {
+            Template::set_message(lang('magazines_staff_bad_email'), 'error');
+            return false;
+        }
+
+        if (!$mag || !$role || !$email) {
+            Template::set_message(lang('magazines_staff_bad_data'), 'error');
+            return false;
+        }
+
+        if (!$user = $this->user_model->find_by('email', $email)) {
+            // create user
+            $this->load->helper('string');
+            $data = array(
+                'email'    => $email,
+                'username' => $email,
+                'password' => random_string()
+            );
+            $user_id = $this->user_model->insert($data);
+        } else {
+            $user_id = $user->id;
+        }
+
+        if ($staff = $this->magazine_staff_model->where('user_id', $user_id)->where('magazine_id', $mag)->find_all()) {
+            Template::set_message(lang('magazines_staff_exists'), 'error');
+            return false;
+        }
+
+
+        $data = array(
+            'magazine_id' => $mag,
+            'user_id' => $user_id,
+            'role_id' => $role
+        );
+
+        if (!$this->magazine_staff_model->insert($data)) {
+            Template::set_message(lang('magazines_staff_add_fail'), 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+
 
     /**
      * Save the data.

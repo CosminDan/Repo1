@@ -70,8 +70,6 @@ Route::any('activate', 'users/activate');
 Route::any('activate/(:any)', 'users/activate/$1');
 Route::any('resend_activation', 'users/resend_activation');
 
-Route::any(SITE_AREA.'/content/magazines/(:any)', 'magazines/content/main/$1');
-Route::any(SITE_AREA.'/content/magazines', 'magazines/content/main');
 
 // Contexts
 Route::prefix(
