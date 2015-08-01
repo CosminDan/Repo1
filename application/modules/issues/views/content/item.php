@@ -24,15 +24,15 @@ $id = isset($item->id) ? $item->id : '';
 
             <?php echo form_hidden('magazine_id', $item->magazine_id); ?>
 
-            <?php echo form_input('number', $item->number, 'Number'); ?>
+            <?php echo form_input('number', $item->number, lang('issues_field_number')); ?>
 
-            <?php echo form_input('special', $item->special, 'Special'); ?>
+            <?php echo form_input('special', $item->special, lang('issues_field_special')); ?>
 
-            <?php echo form_input('volume', $item->volume, 'Volume'); ?>
+            <?php echo form_input('volume', $item->volume, lang('issues_field_volume')); ?>
 
-            <?php echo form_input('year_published', $item->year_published, 'Year Published'); ?>
+            <?php echo form_input('year_published', $item->year_published, lang('issues_field_year_published')); ?>
 
-            <?php echo form_input('year_issue', $item->year_issue, 'Issue Year'); ?>
+            <?php echo form_input('year_issue', $item->year_issue, lang('issues_field_year_issue')); ?>
 
             <?php if (!$id) echo form_input('articles_no', '0', 'Number of articles'); ?>
 
