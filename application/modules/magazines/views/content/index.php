@@ -10,9 +10,6 @@ if ($can_delete) {
 }
 ?>
 <div class='admin-box'>
-    <h3>
-        <?php echo lang('magazines_area_title'); ?>
-    </h3>
     <?php echo form_open($this->uri->uri_string()); ?>
         <table class='table table-striped'>
             <thead>
@@ -25,7 +22,7 @@ if ($can_delete) {
                     <th><?php echo lang('magazines_field_issn'); ?></th>
                     <th><?php echo lang('magazines_field_founded_year'); ?></th>
                     <th><?php echo lang('magazines_field_publisher'); ?></th>
-                    <th>Actions</th>
+                    <th><?php echo lang('pa_actions'); ?></th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -57,8 +54,8 @@ if ($has_records) :
                     <td><?php e($record->publisher); ?></td>
                     <td>
                         <div class="btn-group">
-                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Issues</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/magazines/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Issues</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/magazines/staff/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-user icon-white"></i> Staff</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/magazines/toggleVisibility/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="<?php echo $vis_icon; ?> icon-white"></i> Visibility</a>
                         </div>

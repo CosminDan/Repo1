@@ -28,7 +28,6 @@ class Content extends Admin_Controller
         $this->auth->restrict($this->permView);
 
         $this->load->helper('misc');
-        $this->lang->load('magazines');
 
         // $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
 
@@ -231,6 +230,14 @@ class Content extends Admin_Controller
         }
 
         redirect(SITE_AREA . '/content/magazines');
+    }
+
+    public function issue()
+    {
+        $iid = $this->uri->segment(5);
+        $sub = $this->uri->segment(6);
+        $aid = $this->uri->segment(7);
+
     }
 
     //--------------------------------------------------------------------

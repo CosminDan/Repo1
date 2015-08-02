@@ -19,14 +19,12 @@ if ($can_delete) {
                     <th class='column-check'><input class='check-all' type='checkbox' /></th>
                     <?php endif;?>
 
-                    <th><?php echo lang('magazines_field_title'); ?></th>
-                    <th><?php echo lang('magazines_field_number'); ?></th>
-                    <th><?php echo lang('magazines_field_special'); ?></th>
-                    <th><?php echo lang('magazines_field_volume'); ?></th>
-                    <th><?php echo lang('magazines_field_year_issue'); ?></th>
-                    <th><?php echo lang('magazines_field_year_published'); ?></th>
-                    <th><?php echo lang('magazines_field_status'); ?></th>
-                    <th>Articles</th>
+                    <th><?php echo lang('issues_heading_title'); ?></th>
+                    <th><?php echo lang('issues_heading_year_issue'); ?></th>
+                    <th><?php echo lang('issues_heading_year_published'); ?></th>
+                    <th><?php echo lang('issues_heading_articles_count'); ?></th>
+                    <th><?php echo lang('issues_heading_pdf_loaded'); ?></th>
+                    <th><?php echo lang('issues_heading_status'); ?></th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -43,32 +41,31 @@ if ($can_delete) {
             <?php endif; ?>
             <tbody>
                 <?php
-if ($has_records) :
-    foreach ($records as $record) :
+foreach ($records as $record) :
 ?>
                 <tr>
                     <?php if ($can_delete) : ?>
                     <td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
                     <?php endif;?>
 
-                    <td><?php echo anchor(SITE_AREA . '/content/issues/edit/' . $record->id, $magazine->title); ?></td>
-                    <td><?php if ($record->number) e($record->number); ?></td>
-                    <td><?php e($record->special); ?></td>
-                    <td><?php echo integerToRoman($record->volume); ?></td>
+                    <td><?php e("{$magazine->title} {$record->full_title}"); ?></td>
                     <td><?php echo integerToRoman($record->year_issue); ?></td>
                     <td><?php e($record->year_published); ?></td>
+                    <td><?php e($record->count); ?></td>
+                    <td><?php if ($record->pdf_file) echo '<i class="icon-ok"></i>'; ?></td>
                     <td><?php e($record->status); ?></td>
-
-                    <td><?php echo anchor(SITE_AREA . '/content/articles/index/' . $record->id, "{$record->count} articles"); ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/articles/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Articles</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/pdf/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-download icon-white"></i> PDF</a>
+                        </div>
+                    </td>
                 </tr>
                 <?php
 endforeach;
-else:
+
 ?>
-                <tr>
-                    <td colspan='<?php echo $num_columns; ?>'><?php echo lang('articles_records_empty'); ?></td>
-                </tr>
-                <?php endif; ?>
             </tbody>
         </table>
     <?php

@@ -39,8 +39,6 @@ class Content extends Admin_Controller
 
         $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
 
-
-
         Assets::add_module_js('articles', 'articles.js');
         //Assets::add_module_css('articles', 'articles.css');
     }
@@ -270,11 +268,12 @@ class Content extends Admin_Controller
         if (isset($data['tags'])) $tags = $data['tags'];
         $data['tags'] = implode(',', $tags);
 
-        $config = array();
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf';
-        $this->load->library('upload');
-        $this->upload->initialize($config);
+
+        // $config = array();
+        // $config['upload_path'] = './uploads/';
+        // $config['allowed_types'] = 'pdf';
+        // $this->load->library('upload');
+        // $this->upload->initialize($config);
 
         // $dataPDF = null;
         // $raw_text = null;

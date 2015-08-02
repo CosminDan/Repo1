@@ -24,7 +24,7 @@
 }
 
 /*.categs li a:hover {
-	
+
 	border-radius: 0px;
 }*/
 
@@ -51,7 +51,7 @@
 .nav-pills.categs .science a:hover,
 .nav-pills.categs .science a:hover .fa,
 .nav-pills.categs .science.active > a,
-.nav-pills.categs .science.active > a .fa, 
+.nav-pills.categs .science.active > a .fa,
 .nav-pills.categs .science.active > a:focus {
 	color: #286090;
 /*	border-bottom: 1px solid #286090;
@@ -65,8 +65,7 @@
 .nav-pills.categs .social.active > a .fa,
 .nav-pills.categs .social.active > a:focus {
 	color: #449D44;
-/*	border-bottom: 1px solid #449D44;
-*/	background: transparent;
+    background: transparent;
 }
 
 .categs a .fa {
@@ -78,3 +77,31 @@
 	 transition: all 0.4s;
 }
 
+.issue-cover {
+}
+
+div.issue-cover .img-polaroid {
+    display: inline-block;
+    margin: 0px auto;
+}
+
+.issue-cover img {
+    widthL 315px;
+    height: 445px;
+}
+
+.issue-cover .no-image {
+    background: #CCCCCC;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    width: 315px;
+    height: 445px
+}
+
+.no-image span {
+    display: inline-block;
+    margin-top: 50%;
+    font-size: 30px;
+    transform: rotate(-30deg);
+}

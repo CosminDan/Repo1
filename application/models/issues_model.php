@@ -99,6 +99,7 @@ class Issues_model extends BF_Model
     public function __construct()
     {
         parent::__construct();
+
         $this->load->model('authorsofarticles_model');
         $this->load->model('authors_model');
     }
@@ -121,6 +122,34 @@ class Issues_model extends BF_Model
                 $item->authors[$author->id] = $author->name;
             }
         }
+
+        $item = $this->processItem($item);
+
+        return $item;
+    }
+
+    public function find_all()
+    {
+        if (!$return = parent::find_all()) {
+            return $return;
+        }
+
+        foreach ($return as $i => $v) {
+            $return[$i] = $this->processItem($v);
+        }
+
+        return $return;
+    }
+
+    public function processItem($item)
+    {
+        $title = '';
+        if ($item->number) $title .= " {$item->number}";
+        if (strlen($item->special)) {
+            $title .= " {$item->special} ".integerToRoman($item->volume);
+        }
+
+        $item->full_title = $title;
 
         return $item;
     }

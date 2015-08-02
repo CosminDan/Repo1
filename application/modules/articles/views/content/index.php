@@ -27,6 +27,7 @@ if ($can_delete) {
                     <th><?php echo lang('articles_field_references'); ?></th>
                     <th><?php echo lang('articles_field_summary'); ?></th>
                     <th><?php echo lang('articles_field_tags'); ?></th>
+                    <th><?php echo lang('pa_actions'); ?></th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -56,9 +57,16 @@ if ($has_records) :
                     <td><?php e($record->affiliation_name); ?></td>
                     <td><?php e($record->references); ?></td>
                     <td><?php echo "{$record->summary_count} words"; ?></td>
-                    <td><?php foreach ($record->tags as $tag) { ?>
-                        <span class="label label-info"><?php e($tag); ?></span>
-                       <?php } ?></td>
+                    <td>
+                        <?php foreach ($record->tags as $tag) { ?>
+                            <span class="label label-info"><?php e($tag); ?></span>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="<?php echo site_url(SITE_AREA . '/content/articles/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
+                        </div>
+                    </td>
                 </tr>
                 <?php
 endforeach;

@@ -31,11 +31,9 @@ class Content extends Admin_Controller
         $this->load->model('institutions_model');
         $this->load->helper('misc');
 
-        $this->lang->load('issues/issues');
-        $this->lang->load('articles/articles');
-        $this->lang->load('magazines/magazines');
-
         $this->magazine_id = $this->session->userdata('magazine_id');
+        $this->pdf_upload_path  = '../media/';
+        $this->cover_upload_path  = './media/';
 
         // $this->form_validation->set_error_delimiters("<span class='error'>", "</span>");
         //Assets::add_modul1e_js('articles', 'articles.js');
@@ -190,6 +188,32 @@ class Content extends Admin_Controller
         Template::render();
     }
 
+    public function pdf()
+    {
+        if (!$id = $this->uri->segment(5)) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        if (!$issue = $this->issues_model->find($id)) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        if (!$issue->pdf_file) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        $path = $this->pdf_upload_path.$issue->pdf_file;
+
+        if (!file_exists($path)) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        $this->output->enable_profiler(false);
+        $this->output->set_header('Content-Disposition: attachment; filename="'.basename($path).'"');
+        $this->output->set_content_type('application/pdf');
+        $this->output->set_output(file_get_contents($path));
+    }
+
     private function save_item($type = 'insert', $id = 0)
     {
         if ($type == 'update') {
@@ -218,6 +242,10 @@ class Content extends Admin_Controller
             $return = $model->update($id, $mData);
         }
 
+        // Upload File
+        $this->uploadPDF($id, 'pdf_upload');
+        $this->uploadCover($id, 'cover_upload');
+
         // Add empty articles
         if (isset($data['articles_no'])) {
             $articles_no = (int) $data['articles_no'];
@@ -234,6 +262,101 @@ class Content extends Admin_Controller
             $this->articles_model->insert_batch($batch);
         }
         return $return;
+    }
+
+    private function uploadPDF($id, $uploadName = 'pdf_upload')
+    {
+        $this->load->helper('string');
+
+        $model       = $this->issues_model;
+        $issue       = $model->find($id);
+        $magID       = $issue->magazine_id;
+        $upBasePath  = $this->pdf_upload_path;
+        $upSubPath   = "mag_{$magID}/";
+        $upload_path = $upBasePath.$upSubPath;
+
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path);
+        }
+
+        do {
+            $file_name = "{$id}-".random_string('alnum', 16).'.pdf';
+        } while (file_exists($upload_path.$file_name));
+
+        $config = array(
+            'upload_path'   => $upload_path,
+            'file_name'     => $file_name,
+            'allowed_types' => 'pdf'
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload($uploadName)) {
+            $model->update(
+                $id,
+                array(
+                    'id' => $id,
+                    'pdf_file' => $upSubPath.$file_name
+                )
+            );
+        }
+
+        return true;
+    }
+
+    private function uploadCover($id, $uploadName = 'cover_upload')
+    {
+        $this->load->helper('string');
+
+        $model       = $this->issues_model;
+        $issue       = $model->find($id);
+        $magID       = $issue->magazine_id;
+        $upBasePath  = $this->cover_upload_path;
+        $upSubPath   = "mag_{$magID}/";
+        $upload_path = $upBasePath.$upSubPath;
+
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path);
+        }
+
+        do {
+            $file_name = "{$id}-".random_string('alnum', 16).'.jpg';
+        } while (file_exists($upload_path.$file_name));
+
+        $config = array(
+            'upload_path'   => $upload_path,
+            'file_name'     => $file_name,
+            'allowed_types' => 'jpg'
+        );
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+
+        if ($this->upload->do_upload($uploadName)) {
+            $model->update(
+                $id,
+                array(
+                    'id' => $id,
+                    'cover_file' => $upSubPath.$file_name
+                )
+            );
+        }
+
+        $config = array(
+            'image_library'  => 'gd2',
+            'source_image'   => $upload_path.$file_name,
+            'create_thumb'   => false,
+            'maintain_ratio' => false,
+            'width'          => 630,
+            'height'         => 890,
+        );
+
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config);
+
+        $this->image_lib->resize();
+
+        return true;
     }
 
 }
