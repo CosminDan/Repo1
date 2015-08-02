@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2015 at 07:44 PM
+-- Generation Time: Aug 02, 2015 at 04:10 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -79,7 +79,8 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (35, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:28:37', 0),
 (36, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:57:16', 0),
 (37, 1, 'App settings saved from: 127.0.0.1', 'core', '2015-08-01 18:57:58', 0),
-(38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0);
+(38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0),
+(39, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 11:14:38', 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 (6, 1, 1, '23redwd', '1', '', '', '', 3555, 0, '2015-07-05', 1, '2015-07-05', 1),
 (7, 3, 1, 'Untitled', '1', '', '', '', 555, 0, '2015-07-05', 1, '2015-07-05', 1),
 (8, 3, 1, 'adfwewdsd', '1', '', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
-(9, 2, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-05', 1, NULL, NULL),
+(9, 2, 1, 'Articol interesant', '4', '', 'adas as das dasd ttestst', 'interesant,articol', 0, 0, '2015-07-05', 1, '2015-08-02', 1),
 (10, 3, 1, 'The Bla Bla Theory', '1', '', '', '', 0, 0, '2015-07-05', 1, '2015-07-05', 1),
 (11, 3, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-06', 1, NULL, NULL),
 (12, 3, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-06', 1, NULL, NULL),
@@ -362,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
   `article_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `bf_articles_categories`
@@ -391,7 +392,9 @@ INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
 (24, 14, 22),
 (31, 15, 29),
 (32, 15, 30),
-(33, 238, 2);
+(33, 238, 2),
+(34, 9, 3),
+(35, 9, 6);
 
 -- --------------------------------------------------------
 
@@ -404,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `bf_authors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `bf_authors`
@@ -422,7 +425,8 @@ INSERT INTO `bf_authors` (`id`, `name`) VALUES
 (9, 'Coshmin Dan'),
 (10, 'Zeugen'),
 (11, 'Cornel Simighean'),
-(12, 'Prof. univ. dr. doc. Constantin Marinescu');
+(12, 'Prof. univ. dr. doc. Constantin Marinescu'),
+(13, 'Cosmin Dan');
 
 -- --------------------------------------------------------
 
@@ -436,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
   `article_id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
@@ -449,7 +453,8 @@ INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
 (7, 2, 9),
 (8, 2, 10),
 (9, 13, 11),
-(10, 14, 12);
+(10, 14, 12),
+(11, 9, 13);
 
 -- --------------------------------------------------------
 
@@ -1088,7 +1093,7 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
   `login` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1121,7 +1126,7 @@ INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `language`, `publisher`, `edi
 (1, 'Erasous', '34-54413435', 'en', 'dsffsadfsaf', 'sdfsadfasdf', 'test@test.ro', 'www.test.ro', '72346295748935', 2014, '', 1),
 (2, 'Nova Apollonia', '00-000000', 'ro', 'Editura Apollonia', 'bld. Stefan cel Mare si Sfant, nr. 3', 'novaapollonia@gmail.com', 'http://www.novaapollonia.ro', '0700000000', 2013, '', 1),
 (3, 'Test', '', 'af', '', '', '', '', '', 0, '', 0),
-(4, 'test', '', 'af', '', '', '', '', '', 0, '', 0);
+(4, 'Tester', '', 'ro', '', '', '', '', '', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1152,6 +1157,8 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
   `year_issue` int(11) DEFAULT NULL,
   `year_published` int(11) DEFAULT NULL,
   `special` varchar(100) DEFAULT NULL,
+  `pdf_file` varchar(200) DEFAULT NULL,
+  `cover_file` varchar(200) DEFAULT NULL,
   `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
@@ -1160,28 +1167,28 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
 -- Dumping data for table `bf_magazine_issues`
 --
 
-INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `status`) VALUES
-(1, 1, 1, 1, 30, 2014, 'Hot Nurses', 'published'),
-(2, 1, 4, NULL, NULL, NULL, 'NOPE', 'draft'),
-(3, 1, 6546, NULL, NULL, NULL, 'YES', 'draft'),
-(4, 2, 0, 123, 22, 1233, '', 'draft'),
-(5, 2, 0, 60, 3, 2015, '', 'published'),
-(6, 2, 0, 4, 0, 0, '', 'draft'),
-(7, 2, 2, 0, 0, 0, 'Science Edition', 'draft'),
-(8, 2, 0, 123, 0, 0, '', 'draft'),
-(9, 2, 0, 123, 0, 0, '', 'draft'),
-(10, 2, 0, 123, 0, 0, '', 'draft'),
-(16, 2, 0, 33, 0, 0, '', 'draft'),
-(17, 2, 3, 0, 0, 0, 'Goblins vs Gnomes', 'draft'),
-(18, 2, 2, 0, 0, 2015, 'Test', 'draft'),
-(19, 1, 2, 1, 0, 2015, '', 'draft'),
-(20, 1, 3, 1, 0, 2015, '', 'draft'),
-(21, 1, 3, 1, 0, 2015, '', 'draft'),
-(22, 2, 1, 0, 0, 0, 'Science Edition', 'draft'),
-(23, 2, 1, 0, 0, 2015, 'Goblins vs Gnomes', 'draft'),
-(24, 2, 2, 0, 0, 2015, 'Goblins vs Gnomes', 'draft'),
-(25, 2, 1, 0, 0, 2015, 'Test', 'draft'),
-(26, 2, 0, 69, 0, 2015, '', 'draft');
+INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `pdf_file`, `cover_file`, `status`) VALUES
+(1, 1, 30, 0, 30, 2014, 'Hot Nurses', 'mag_1/1-fMXxGf5uUwfSWD8a.pdf', 'mag_1/1-Y6VmtXQTE6J4tPNX.jpg', 'published'),
+(2, 1, 4, 0, 0, 0, 'NOPE', 'mag_1/2-gNBoVuuYpqQHOw9v.pdf', NULL, 'draft'),
+(3, 1, 32, 0, 0, 0, 'YES', NULL, NULL, 'draft'),
+(4, 2, 0, 123, 22, 1233, '', NULL, NULL, 'draft'),
+(5, 2, 0, 60, 3, 2015, '', NULL, NULL, 'published'),
+(6, 2, 0, 4, 0, 0, '', NULL, NULL, 'draft'),
+(7, 2, 2, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
+(8, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
+(9, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
+(10, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
+(16, 2, 0, 33, 0, 0, '', NULL, NULL, 'draft'),
+(17, 2, 3, 0, 0, 0, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
+(18, 2, 2, 0, 0, 2015, 'Test', NULL, NULL, 'draft'),
+(19, 1, 0, 1, 0, 2015, '', NULL, NULL, 'draft'),
+(20, 1, 3, 2, 0, 2015, '', NULL, NULL, 'draft'),
+(21, 1, 3, 4, 0, 2015, '', NULL, NULL, 'draft'),
+(22, 2, 1, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
+(23, 2, 1, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
+(24, 2, 2, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
+(25, 2, 1, 0, 0, 2015, 'Test', NULL, NULL, 'draft'),
+(26, 2, 0, 69, 0, 2015, '', NULL, NULL, 'draft');
 
 -- --------------------------------------------------------
 
@@ -1493,8 +1500,7 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
 --
 
 INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('c220a48c34cc5cbad5d5624ecde0f90e', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438442860, 'a:10:{s:9:"user_data";s:0:"";s:14:"requested_page";s:40:"http://localhost/admin/content/magazines";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:40:"http://localhost/admin/content/magazines";}'),
-('e2c484190577bcce1e1c932c163fb5eb', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438446775, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:48:"http://localhost/admin/content/magazines/staff/1";s:13:"previous_page";s:48:"http://localhost/admin/content/magazines/staff/1";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:1:"5";}');
+('d4574f84ee2ff53f74afc1eba00cecfa', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438518425, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:40:"http://localhost/admin/content/magazines";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:40:"http://localhost/admin/content/magazines";s:11:"magazine_id";s:1:"3";s:8:"issue_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -1673,7 +1679,7 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-01 19:02:30', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-02 11:14:38', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
 (2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
 (3, 4, 'cosmin@hitman47.ro', 'cozmin.htn', '$2a$08$I6PYkQIsoipFlf5cUh4vBejb/4oNw.wGb8xiKmlkxdv3Q8mhtceV2', NULL, '0000-00-00 00:00:00', '', '2015-08-01 15:45:52', 0, NULL, 0, NULL, 'Cosmin', NULL, 'UP2', 'english', 0, '', 0),
 (4, 4, 'asdasd@adasdas.adsda', 'asdasd@adasdas.adsda', '$2a$08$kDlzKKZ/UUWk1Kjzqx.g9eAWcHjxh/x4j1C9Lhf2xA2YUxOCXZ2vy', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:25', 0, NULL, 0, NULL, 'asdasd@adasdas.adsda', NULL, 'UM6', 'english', 0, '', 0),
