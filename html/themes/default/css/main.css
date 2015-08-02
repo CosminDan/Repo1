@@ -91,7 +91,10 @@ div.issue-cover .img-polaroid {
 }
 
 .issue-cover .no-image {
-    background: #CCCCCC;
+    background-color: #CCCCCC;
+    background-image: url('../images/mainbg.jpg');
+    background-size: cover;
+    background-position: center center;
     text-align: center;
     color: #FFFFFF;
     font-weight: bold;

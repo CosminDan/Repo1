@@ -17,7 +17,7 @@
     <div class="tab-content">
         <?php foreach ($mainCats as $i => $mainCat) { ?>
         <div role="tabpanel" class="tab-pane fade <?php if (!$i) echo 'active in'; ?>" id="<?php echo $mainCat->tab_id; ?>">
-            <div class="row">
+            <div class="row-fluid">
 
                     <div class="col-md-4">
                         <div class="list-group">
@@ -25,7 +25,7 @@
                                 <h4>Top Articles</h4>
                             </a>
                             <?php foreach ($mainCat->articles_popular as $art) { ?>
-                                <a href="#" class="list-group-item"><?php echo $art->title; ?></a>
+                                <a href="<?php echo site_url("magazines/view/pub-{$art->issue_id}-{$art->article_id}"); ?>" class="list-group-item"><?php echo $art->title; ?></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <h4>Last Added</h4>
                             </a>
                             <?php foreach ($mainCat->articles_recent as $art) { ?>
-                                <a href="#" class="list-group-item"><?php echo $art->title; ?></a>
+                                <a href="<?php echo site_url("magazines/view/pub-{$art->issue_id}-{$art->article_id}"); ?>" class="list-group-item"><?php echo $art->title; ?></a>
                             <?php } ?>
                         </div>
                     </div>

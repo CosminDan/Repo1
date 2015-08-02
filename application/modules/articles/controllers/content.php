@@ -115,16 +115,6 @@ class Content extends Admin_Controller
             }
         }
 
-        // Set tags as arrays
-        foreach ($records as $k => $v) {
-            $tags = array();
-            if (strlen($v->tags)) {
-                $tags = explode(',', $v->tags);
-            }
-            $records[$k]->tags = $tags;
-            $records[$k]->summary_count = str_word_count($v->summary);
-        }
-
         $this->pagination->initialize($pager);
 
         Template::set('issue', $issue);

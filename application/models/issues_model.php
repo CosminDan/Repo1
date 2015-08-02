@@ -144,9 +144,9 @@ class Issues_model extends BF_Model
     public function processItem($item)
     {
         $title = '';
-        if ($item->number) $title .= " {$item->number}";
+        if ($item->number) $title .= " no. {$item->number}";
         if (strlen($item->special)) {
-            $title .= " {$item->special} ".integerToRoman($item->volume);
+            $title .= " {$item->special} vol. ".integerToRoman($item->volume);
         }
 
         $item->full_title = $title;

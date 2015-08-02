@@ -11,17 +11,9 @@ class Home extends Front_Controller
         $this->load->library('Template');
         $this->load->library('Assets');
         $this->load->library('settings/Settings_lib');
-        $this->lang->load('application');
         $this->load->library('events');
 
-        $this->load->model('magazines_model');
-        $this->load->model('issues_model');
-        $this->load->model('categories_model');
-        $this->load->model('articles_model');
-        $this->load->model('articles_categories_model');
-        $this->load->model('authors_model');
-        $this->load->model('authorsofarticles_model');
-        $this->load->model('institutions_model');
+        $this->lang->load('application');
     }
 
     //--------------------------------------------------------------------
@@ -42,7 +34,8 @@ class Home extends Front_Controller
 
         $table = array(
             'ac' => 'articles_categories',
-            'a' => 'articles'
+            'a' => 'articles',
+            'mi' => 'magazine_issues'
         );
 
         // Get subCategs
@@ -58,10 +51,12 @@ class Home extends Front_Controller
             }
 
             // Most Popular Articles
-            $query = $this->db->select('*')
+            $query = $this->db->select("*")
             ->from($table['ac'])
             ->join($table['a'], "{$table['ac']}.article_id = {$table['a']}.id", 'left')
+            ->join($table['mi'], "{$table['a']}.issue_id = {$table['mi']}.id", 'left')
             ->where_in("{$table['ac']}.category_id", $subCatIDs)
+            ->where("{$table['mi']}.status", 'published')
             ->order_by("{$table['a']}.views", 'DESC')
             ->group_by("{$table['a']}.id")
             ->limit(10)->get();
@@ -74,7 +69,9 @@ class Home extends Front_Controller
             $query = $this->db->select('*')
             ->from($table['ac'])
             ->join($table['a'], "{$table['ac']}.article_id = {$table['a']}.id", 'left')
+            ->join($table['mi'], "{$table['a']}.issue_id = {$table['mi']}.id", 'left')
             ->where_in("{$table['ac']}.category_id", $subCatIDs)
+            ->where("{$table['mi']}.status", 'published')
             ->order_by("{$table['a']}.created_on", 'DESC')
             ->group_by("{$table['a']}.id")
             ->limit(10)->get();

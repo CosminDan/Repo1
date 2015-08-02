@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 02, 2015 at 04:10 PM
+-- Generation Time: Aug 02, 2015 at 09:23 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -80,7 +80,8 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (36, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 18:57:16', 0),
 (37, 1, 'App settings saved from: 127.0.0.1', 'core', '2015-08-01 18:57:58', 0),
 (38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0),
-(39, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 11:14:38', 0);
+(39, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 11:14:38', 0),
+(40, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 18:01:35', 0);
 
 -- --------------------------------------------------------
 
@@ -112,14 +113,14 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
 --
 
 INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `references`, `summary`, `tags`, `views`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
-(4, 1, 1, 'Untitled12313223', '4', '', '', 'asd', 3432, 0, '2015-07-05', 1, '2015-07-06', 1),
+(4, 1, 1, 'Untitled12313223', '4', '', 'oi fosoidwfuv iofs voidsfv oifiofvsdhf askfuisdnf wqiofwq8 0f8wehrf083hqboksbv oie', 'asd,weed', 3432, 0, '2015-07-05', 1, '2015-08-02', 1),
 (5, 1, 1, 'Testtt', '4', 'sdfsdfsd', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
-(6, 1, 1, '23redwd', '1', '', '', '', 3555, 0, '2015-07-05', 1, '2015-07-05', 1),
+(6, 1, 3, 'First Day in Hospital', '4', 'adasdasdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam rhoncus tortor, quis malesuada tortor. Quisque turpis risus, egestas sed iaculis vel, lacinia in tellus. Proin convallis velit orci, a venenatis quam hendrerit vel. Aliquam at consequat dui, ultricies dignissim diam. Proin gravida odio dolor, vitae iaculis sapien lacinia ac. Nam in mattis nisl, nec scelerisque mauris. Sed nec posuere est, sit amet vehicula purus. Sed at lorem sed purus fermentum pellentesque id consequat ante. Curabitur ut rutrum dui. Aliquam erat volutpat. Aenean blandit augue vitae urna vulputate dictum. Duis tempus sem id erat accumsan cursus. Curabitur semper, lectus ac pharetra sodales, dui nisi luctus massa, ut fringilla ante risus quis nulla. Aenean nec eros a enim tristique lobortis ut id nisl. Ut et nibh rutrum, commodo arcu in, viverra turpis. Etiam lacinia tortor non mi aliquet cursus. ', 'sex,porn,anal,POV', 3555, 0, '2015-07-05', 1, '2015-08-02', 1),
 (7, 3, 1, 'Untitled', '1', '', '', '', 555, 0, '2015-07-05', 1, '2015-07-05', 1),
 (8, 3, 1, 'adfwewdsd', '1', '', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
-(9, 2, 1, 'Articol interesant', '4', '', 'adas as das dasd ttestst', 'interesant,articol', 0, 0, '2015-07-05', 1, '2015-08-02', 1),
+(9, 2, 1, 'Articol interesant', '4', '', 'adas as das dasd ttestst', 'interesant,articol,marizza', 0, 0, '2015-07-05', 1, '2015-08-02', 1),
 (10, 3, 1, 'The Bla Bla Theory', '1', '', '', '', 0, 0, '2015-07-05', 1, '2015-07-05', 1),
-(11, 3, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-06', 1, NULL, NULL),
+(11, 3, 3, 'Test Cosmin', '4', '', '', 'bla', 0, 0, '2015-07-06', 1, '2015-08-02', 1),
 (12, 3, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-06', 1, NULL, NULL),
 (13, 5, 1, 'Eveniment editorial universitar', '6', '', 'Luni, 16 martie 2015, în Sala BP Hașdeu a Bibliotecii Centrale Universitare „Mihai Eminescu“ din Iaşi, a fost lansat volumul „Metoda I. Natura Naturii”, o carte semnată de Edgar Morin. Traducerea acesteia în limba română a fost realizată de prof. univ. dr. Iulian Popescu, de la Universitatea „Apollonia“ din Iaşi. Totodată, Iulian Popescu, în calitate de director al Editurii „Apollonia“ s-a ocupat de tipărirea volumului.', 'lansare carte,apollonia', 0, 0, '2015-07-06', 1, '2015-07-06', 1),
 (14, 5, 1, 'Bătălia pentru Ardeal', '6', '', 'Recent, am primit cu mare satisfacție, de la bunul meu prieten, reputatul publicist și prof. univ. dr. Ioan Bojan, o lucrare de semnificație inestimabilă, științifică, istorică și națională, intitulată „Bătălia pentru Ardeal”, căreia mi s-a făcut onoarea de a-i întocmi, în prealabil, o binemeritată Prefață.', 'swag', 0, 0, '2015-07-06', 1, '2015-07-12', 1),
@@ -349,7 +350,7 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 (238, 5, 3, 'Test', '6', '', ' dd sdadfsfdgwsd vds sdf dsc weqwdsdf', 'yep,nope,ok,nevermind', 0, 0, '2015-07-23', 1, '2015-07-23', 1),
 (239, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
 (240, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
-(241, 1, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-01', 1, NULL, NULL);
+(241, 1, 2, 'Untitled', '0', '', '', '', 0, 0, '2015-08-01', 1, '2015-08-02', 1);
 
 -- --------------------------------------------------------
 
@@ -363,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
   `article_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `bf_articles_categories`
@@ -385,16 +386,24 @@ INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
 (16, 5, 2),
 (17, 5, 7),
 (18, 5, 41),
-(19, 4, 4),
-(20, 4, 29),
 (21, 13, 228),
 (23, 16, 3),
 (24, 14, 22),
 (31, 15, 29),
 (32, 15, 30),
 (33, 238, 2),
-(34, 9, 3),
-(35, 9, 6);
+(38, 9, 36),
+(39, 9, 37),
+(46, 241, 3),
+(47, 241, 6),
+(48, 241, 43),
+(49, 11, 2),
+(50, 11, 7),
+(51, 11, 28),
+(52, 4, 4),
+(53, 4, 44),
+(54, 4, 45),
+(58, 6, 57);
 
 -- --------------------------------------------------------
 
@@ -407,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `bf_authors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `bf_authors`
@@ -426,7 +435,14 @@ INSERT INTO `bf_authors` (`id`, `name`) VALUES
 (10, 'Zeugen'),
 (11, 'Cornel Simighean'),
 (12, 'Prof. univ. dr. doc. Constantin Marinescu'),
-(13, 'Cosmin Dan');
+(13, 'Cosmin Dan'),
+(14, 'It''sa me'),
+(15, 'Mario'),
+(16, 'sdsdfsdf'),
+(17, 'sdfsdfsdfsd'),
+(18, 'Coshmin'),
+(19, 'Cozmin'),
+(20, 'NC Jitca');
 
 -- --------------------------------------------------------
 
@@ -440,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
   `article_id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
@@ -454,7 +470,14 @@ INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
 (8, 2, 10),
 (9, 13, 11),
 (10, 14, 12),
-(11, 9, 13);
+(11, 9, 13),
+(12, 4, 14),
+(13, 4, 15),
+(14, 241, 16),
+(15, 241, 17),
+(16, 6, 18),
+(17, 6, 19),
+(18, 6, 20);
 
 -- --------------------------------------------------------
 
@@ -1168,10 +1191,10 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
 --
 
 INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `pdf_file`, `cover_file`, `status`) VALUES
-(1, 1, 30, 0, 30, 2014, 'Hot Nurses', 'mag_1/1-fMXxGf5uUwfSWD8a.pdf', 'mag_1/1-Y6VmtXQTE6J4tPNX.jpg', 'published'),
-(2, 1, 4, 0, 0, 0, 'NOPE', 'mag_1/2-gNBoVuuYpqQHOw9v.pdf', NULL, 'draft'),
-(3, 1, 32, 0, 0, 0, 'YES', NULL, NULL, 'draft'),
-(4, 2, 0, 123, 22, 1233, '', NULL, NULL, 'draft'),
+(1, 1, 30, 0, 30, 2014, 'Hot Nurses', 'mag_1/1-fMXxGf5uUwfSWD8a.pdf', 'mag_1/1-x5WANOQjeGp40g7n.jpg', 'published'),
+(2, 1, 4, 0, 0, 0, 'NOPE', 'mag_1/2-gNBoVuuYpqQHOw9v.pdf', NULL, 'published'),
+(3, 1, 32, 0, 0, 0, 'YES', NULL, NULL, 'published'),
+(4, 2, 0, 123, 22, 1233, '', NULL, NULL, 'published'),
 (5, 2, 0, 60, 3, 2015, '', NULL, NULL, 'published'),
 (6, 2, 0, 4, 0, 0, '', NULL, NULL, 'draft'),
 (7, 2, 2, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
@@ -1180,10 +1203,10 @@ INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year
 (10, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
 (16, 2, 0, 33, 0, 0, '', NULL, NULL, 'draft'),
 (17, 2, 3, 0, 0, 0, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
-(18, 2, 2, 0, 0, 2015, 'Test', NULL, NULL, 'draft'),
-(19, 1, 0, 1, 0, 2015, '', NULL, NULL, 'draft'),
-(20, 1, 3, 2, 0, 2015, '', NULL, NULL, 'draft'),
-(21, 1, 3, 4, 0, 2015, '', NULL, NULL, 'draft'),
+(18, 2, 2, 0, 0, 2015, 'Test', NULL, NULL, 'published'),
+(19, 1, 0, 1, 0, 2015, '', NULL, NULL, 'published'),
+(20, 1, 3, 2, 0, 2015, '', NULL, NULL, 'published'),
+(21, 1, 3, 4, 0, 2015, '', NULL, NULL, 'published'),
 (22, 2, 1, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
 (23, 2, 1, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
 (24, 2, 2, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
@@ -1500,7 +1523,7 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
 --
 
 INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('d4574f84ee2ff53f74afc1eba00cecfa', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438518425, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:40:"http://localhost/admin/content/magazines";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:40:"http://localhost/admin/content/magazines";s:11:"magazine_id";s:1:"3";s:8:"issue_id";s:1:"1";}');
+('01ca738818e9f7346ca9b53d3c842e1a', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438539457, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:17:"http://localhost/";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:17:"http://localhost/";s:11:"magazine_id";s:1:"1";s:8:"issue_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -1679,7 +1702,7 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-02 11:14:38', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-02 18:01:35', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
 (2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
 (3, 4, 'cosmin@hitman47.ro', 'cozmin.htn', '$2a$08$I6PYkQIsoipFlf5cUh4vBejb/4oNw.wGb8xiKmlkxdv3Q8mhtceV2', NULL, '0000-00-00 00:00:00', '', '2015-08-01 15:45:52', 0, NULL, 0, NULL, 'Cosmin', NULL, 'UP2', 'english', 0, '', 0),
 (4, 4, 'asdasd@adasdas.adsda', 'asdasd@adasdas.adsda', '$2a$08$kDlzKKZ/UUWk1Kjzqx.g9eAWcHjxh/x4j1C9Lhf2xA2YUxOCXZ2vy', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:25', 0, NULL, 0, NULL, 'asdasd@adasdas.adsda', NULL, 'UM6', 'english', 0, '', 0),

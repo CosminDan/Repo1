@@ -214,6 +214,26 @@ class Content extends Admin_Controller
         $this->output->set_output(file_get_contents($path));
     }
 
+    public function publish()
+    {
+        if (!$id = $this->uri->segment(5)) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        if (!$issue = $this->issues_model->find($id)) {
+            redirect(SITE_AREA . '/content/issues');
+        }
+
+        $new_status = 'published';
+        if ($issue->status == 'published') {
+            $new_status = 'draft';
+        }
+
+        $this->issues_model->update($id, array('status' => $new_status));
+
+        redirect(SITE_AREA . '/content/issues');
+    }
+
     private function save_item($type = 'insert', $id = 0)
     {
         if ($type == 'update') {
@@ -295,7 +315,6 @@ class Content extends Admin_Controller
             $model->update(
                 $id,
                 array(
-                    'id' => $id,
                     'pdf_file' => $upSubPath.$file_name
                 )
             );
@@ -336,7 +355,6 @@ class Content extends Admin_Controller
             $model->update(
                 $id,
                 array(
-                    'id' => $id,
                     'cover_file' => $upSubPath.$file_name
                 )
             );

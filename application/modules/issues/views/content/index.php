@@ -25,6 +25,7 @@ if ($can_delete) {
                     <th><?php echo lang('issues_heading_articles_count'); ?></th>
                     <th><?php echo lang('issues_heading_pdf_loaded'); ?></th>
                     <th><?php echo lang('issues_heading_status'); ?></th>
+                    <th><?php echo lang('pa_actions'); ?></th>
                 </tr>
             </thead>
             <?php if ($has_records) : ?>
@@ -59,6 +60,7 @@ foreach ($records as $record) :
                             <a href="<?php echo site_url(SITE_AREA . '/content/issues/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/articles/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Articles</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/issues/pdf/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-download icon-white"></i> PDF</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/publish/' . $record->id); ?>" class="btn btn-success btn-mini"><i class="icon-ok icon-white"></i> Publish</a>
                         </div>
                     </td>
                 </tr>

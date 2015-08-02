@@ -138,5 +138,5 @@ $autoload['language'] = array('pubapp');
 $autoload['model'] = array(
     'magazines_model', 'issues_model', 'authors_model', 'articles_model',
     'authorsofarticles_model', 'institutions_model', 'magazine_staff_model',
-    'roles/role_model'
+    'roles/role_model', 'categories_model', 'articles_categories_model',
 );

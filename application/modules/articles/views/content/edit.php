@@ -60,8 +60,8 @@ $id = isset($articles->id) ? $articles->id : '';
             <?php echo form_multiselect('tags[]', $articles->tags, $articles->tags, lang('articles_field_tags'), 'class="select2-tags input-xxlarge"'); ?>
         </fieldset>
         <fieldset class='form-actions'>
-            <input type='submit' name='save' class='btn btn-primary' value="<?php echo lang('articles_action_edit'); ?>" />
-            <?php echo anchor(SITE_AREA . '/content/articles/index/'.$articles->issue_id, lang('articles_cancel'), 'class="btn btn-warning"'); ?>
+            <input type='submit' name='save' class='btn btn-primary' value="<?php echo lang('bf_action_save'); ?>" />
+            <?php echo anchor(SITE_AREA . '/content/articles/index/'.$articles->issue_id, lang('bf_action_cancel'), 'class="btn btn-warning"'); ?>
         </fieldset>
     <?php echo form_close(); ?>
 </div>

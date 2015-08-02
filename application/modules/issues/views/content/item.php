@@ -49,7 +49,7 @@ $baseCoverPath = 'media/';
         <div class="span4 issue-cover">
             <div class="img-polaroid">
                 <?php if ($item->cover_file) { ?>
-                <img src="<?php echo site_url($baseCoverPath.$item->cover_file); ?>" />
+                <img src="<?php echo base_url($baseCoverPath.$item->cover_file); ?>" />
                 <?php } else { ?>
                 <div class="no-image">
                     <span><?php e(lang('issues_no_cover')); ?></span>

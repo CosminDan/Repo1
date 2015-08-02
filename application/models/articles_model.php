@@ -108,6 +108,38 @@ class Articles_model extends BF_Model
     {
         $item = parent::find($id);
 
+
+
+        $item = $this->processItem($item);
+
+        return $item;
+    }
+
+    public function find_all()
+    {
+        if (!$return = parent::find_all()) {
+            return $return;
+        }
+
+        foreach ($return as $i => $v) {
+            $return[$i] = $this->processItem($v);
+        }
+
+        return $return;
+    }
+
+    public function processItem($item)
+    {
+        $tags = array();
+        if (strlen($item->tags)) {
+            $tags = explode(',', $item->tags);
+        }
+
+        $item->tags = array();
+        foreach ($tags as $tag) {
+            $item->tags[$tag] = $tag;
+        }
+
         $item->authors = array();
         $aoas = $this->authorsofarticles_model->find_all_by('article_id', $item->id);
 
@@ -121,16 +153,6 @@ class Articles_model extends BF_Model
             }
         }
 
-        $tags = array();
-        if (strlen($item->tags)) {
-            $tags = explode(',', $item->tags);
-        }
-
-        $item->tags = array();
-        foreach ($tags as $tag) {
-            $item->tags[$tag] = $tag;
-        }
-
         if (!$categories = $this->articles_categories_model->where('article_id', $item->id)->find_all()) {
             $categories = array();
         }
@@ -138,6 +160,15 @@ class Articles_model extends BF_Model
         $item->categories = array();
         foreach ($categories as $category) {
             $item->categories[] = $category->id;
+        }
+
+        $item->summary_count = str_word_count($item->summary);
+
+        $item->affiliation_name = '';
+        if ($item->affiliation) {
+            if ($inst = $this->institutions_model->find($item->affiliation)) {
+                $item->affiliation_name = $inst->name;
+            }
         }
 
         return $item;
