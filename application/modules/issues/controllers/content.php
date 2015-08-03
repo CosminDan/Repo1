@@ -23,12 +23,6 @@ class Content extends Admin_Controller
 
         $this->auth->restrict($this->permView);
 
-        $this->load->model('magazines_model');
-        $this->load->model('issues_model');
-        $this->load->model('authors_model');
-        $this->load->model('articles_model');
-        $this->load->model('authorsofarticles_model');
-        $this->load->model('institutions_model');
         $this->load->helper('misc');
 
         $this->magazine_id = $this->session->userdata('magazine_id');
@@ -128,7 +122,6 @@ class Content extends Admin_Controller
 
             if ($this->save_item()) {
                 Template::set_message(lang('articles_edit_success'), 'success');
-                $article = $model->find_by('id', $id);
                 redirect(SITE_AREA . '/content/issues/index/'.$mid);
             }
 
@@ -266,21 +259,6 @@ class Content extends Admin_Controller
         $this->uploadPDF($id, 'pdf_upload');
         $this->uploadCover($id, 'cover_upload');
 
-        // Add empty articles
-        if (isset($data['articles_no'])) {
-            $articles_no = (int) $data['articles_no'];
-            if ($articles_no > 20) {
-                $articles_no = 20;
-            }
-            $batch = array();
-            for ($i = 0; $i < $articles_no; $i++) {
-                $batch[] = array(
-                    'issue_id' => $id,
-                    'title'    => 'Untitled'
-                );
-            }
-            $this->articles_model->insert_batch($batch);
-        }
         return $return;
     }
 

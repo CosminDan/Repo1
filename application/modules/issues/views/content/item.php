@@ -38,8 +38,6 @@ $baseCoverPath = 'media/';
 
                 <?php echo form_input('year_issue', $item->year_issue, lang('issues_field_year_issue')); ?>
 
-                <?php if (!$id) echo form_input('articles_no', '0', 'Number of articles'); ?>
-
                 <?php echo form_upload('pdf_upload', '', lang('issues_field_pdf_upload')); ?>
 
                 <?php echo form_upload('cover_upload', '', lang('issues_field_cover_upload')); ?>

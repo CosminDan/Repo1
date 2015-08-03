@@ -20,37 +20,37 @@
             <div class="row-fluid">
 
                     <div class="col-md-4">
+                    <div class="panel <?php e($mainCat->panel); ?>">
+                        <div class="panel-heading"><h4>Top Articles</h4></div>
                         <div class="list-group">
-                            <a href="#" class="list-group-item disabled">
-                                <h4>Top Articles</h4>
-                            </a>
                             <?php foreach ($mainCat->articles_popular as $art) { ?>
                                 <a href="<?php echo site_url("magazines/view/pub-{$art->issue_id}-{$art->article_id}"); ?>" class="list-group-item"><?php echo $art->title; ?></a>
                             <?php } ?>
                         </div>
                     </div>
+                    </div>
 
                     <div class="col-md-4">
+                    <div class="panel <?php e($mainCat->panel); ?>">
+                        <div class="panel-heading"><h4>Last Added</h4></div>
                         <div class="list-group">
-                            <a href="#" class="list-group-item disabled">
-                                <h4>Last Added</h4>
-                            </a>
                             <?php foreach ($mainCat->articles_recent as $art) { ?>
                                 <a href="<?php echo site_url("magazines/view/pub-{$art->issue_id}-{$art->article_id}"); ?>" class="list-group-item"><?php echo $art->title; ?></a>
                             <?php } ?>
                         </div>
                     </div>
+                    </div>
 
                     <div class="col-md-4">
+                    <div class="panel <?php e($mainCat->panel); ?>">
+                        <div class="panel-heading"><h4>Popular Subcategories</h4></div>
                         <div class="list-group">
-                            <a href="#" class="list-group-item disabled">
-                                <h4>Popular Subcategories</h4>
-                            </a>
                             <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
                             <a href="#" class="list-group-item">Morbi leo risus</a>
                             <a href="#" class="list-group-item">Porta ac consectetur ac</a>
                             <a href="#" class="list-group-item">Vestibulum at eros</a>
                         </div>
+                    </div>
                     </div>
             </div>
         </div>

@@ -38,11 +38,18 @@ class Home extends Front_Controller
             'mi' => 'magazine_issues'
         );
 
+        $panels = array(
+            'arts'    => 'panel-danger',
+            'science' => 'panel-info',
+            'social'  => 'panel-success',
+        );
+
         // Get subCategs
         foreach ($mainCats as $i => $mainCat) {
 
             $name = explode(' ', $mainCat->name);
             $mainCat->tab_id = strtolower(current($name));
+            $mainCat->panel = $panels[$mainCat->tab_id];
 
             $subCats = $this->categories_model->find_recursive('pid', $mainCat->id);
             $subCatIDs = array();

@@ -43,6 +43,16 @@ if ($can_delete) {
             <tbody>
                 <?php
 foreach ($records as $record) :
+    if ($record->status == 'published') {
+        $publish_icon = 'icon-remove';
+        $publish_name = 'Unpublish';
+        $pubBtn = 'btn-danger';
+    } else {
+    $publish_icon = 'icon-ok';
+    $publish_name = 'Publish';
+    $pubBtn = 'btn-success';
+}
+$publish = "<i class=\"{$publish_icon} icon-white\"></i> {$publish_name}"
 ?>
                 <tr>
                     <?php if ($can_delete) : ?>
@@ -60,7 +70,7 @@ foreach ($records as $record) :
                             <a href="<?php echo site_url(SITE_AREA . '/content/issues/edit/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Edit</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/articles/index/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-book icon-white"></i> Articles</a>
                             <a href="<?php echo site_url(SITE_AREA . '/content/issues/pdf/' . $record->id); ?>" class="btn btn-primary btn-mini"><i class="icon-download icon-white"></i> PDF</a>
-                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/publish/' . $record->id); ?>" class="btn btn-success btn-mini"><i class="icon-ok icon-white"></i> Publish</a>
+                            <a href="<?php echo site_url(SITE_AREA . '/content/issues/publish/' . $record->id); ?>" class="btn <?php e($pubBtn); ?> btn-mini"><?php echo $publish; ?></a>
                         </div>
                     </td>
                 </tr>
