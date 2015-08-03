@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Aug 02, 2015 at 09:23 PM
--- Server version: 5.5.44-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.11
+-- Host: 127.0.0.1
+-- Generation Time: Aug 03, 2015 at 08:48 PM
+-- Server version: 5.6.24
+-- PHP Version: 5.5.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,14 +28,13 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `bf_activities`;
 CREATE TABLE IF NOT EXISTS `bf_activities` (
-  `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `activity_id` bigint(20) NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `activity` varchar(255) NOT NULL,
   `module` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
-  `deleted` tinyint(12) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+  `deleted` tinyint(12) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_activities`
@@ -81,7 +80,8 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (37, 1, 'App settings saved from: 127.0.0.1', 'core', '2015-08-01 18:57:58', 0),
 (38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0),
 (39, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 11:14:38', 0),
-(40, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 18:01:35', 0);
+(40, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 18:01:35', 0),
+(41, 1, 'logged in from: ::1', 'users', '2015-08-03 19:41:01', 0);
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 
 DROP TABLE IF EXISTS `bf_articles`;
 CREATE TABLE IF NOT EXISTS `bf_articles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `issue_id` int(11) NOT NULL DEFAULT '0',
   `page` int(11) DEFAULT NULL,
   `title` varchar(100) NOT NULL,
@@ -104,253 +104,43 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
-  `modified_by` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=242 ;
+  `modified_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_articles`
 --
 
 INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `references`, `summary`, `tags`, `views`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
-(4, 1, 1, 'Untitled12313223', '4', '', 'oi fosoidwfuv iofs voidsfv oifiofvsdhf askfuisdnf wqiofwq8 0f8wehrf083hqboksbv oie', 'asd,weed', 3432, 0, '2015-07-05', 1, '2015-08-02', 1),
-(5, 1, 1, 'Testtt', '4', 'sdfsdfsd', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
-(6, 1, 3, 'First Day in Hospital', '4', 'adasdasdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam rhoncus tortor, quis malesuada tortor. Quisque turpis risus, egestas sed iaculis vel, lacinia in tellus. Proin convallis velit orci, a venenatis quam hendrerit vel. Aliquam at consequat dui, ultricies dignissim diam. Proin gravida odio dolor, vitae iaculis sapien lacinia ac. Nam in mattis nisl, nec scelerisque mauris. Sed nec posuere est, sit amet vehicula purus. Sed at lorem sed purus fermentum pellentesque id consequat ante. Curabitur ut rutrum dui. Aliquam erat volutpat. Aenean blandit augue vitae urna vulputate dictum. Duis tempus sem id erat accumsan cursus. Curabitur semper, lectus ac pharetra sodales, dui nisi luctus massa, ut fringilla ante risus quis nulla. Aenean nec eros a enim tristique lobortis ut id nisl. Ut et nibh rutrum, commodo arcu in, viverra turpis. Etiam lacinia tortor non mi aliquet cursus. ', 'sex,porn,anal,POV', 3555, 0, '2015-07-05', 1, '2015-08-02', 1),
-(7, 3, 1, 'Untitled', '1', '', '', '', 555, 0, '2015-07-05', 1, '2015-07-05', 1),
-(8, 3, 1, 'adfwewdsd', '1', '', '', '', 23, 0, '2015-07-05', 1, '2015-07-05', 1),
-(9, 2, 1, 'Articol interesant', '4', '', 'adas as das dasd ttestst', 'interesant,articol,marizza', 0, 0, '2015-07-05', 1, '2015-08-02', 1),
-(10, 3, 1, 'The Bla Bla Theory', '1', '', '', '', 0, 0, '2015-07-05', 1, '2015-07-05', 1),
-(11, 3, 3, 'Test Cosmin', '4', '', '', 'bla', 0, 0, '2015-07-06', 1, '2015-08-02', 1),
-(12, 3, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-06', 1, NULL, NULL),
-(13, 5, 1, 'Eveniment editorial universitar', '6', '', 'Luni, 16 martie 2015, în Sala BP Hașdeu a Bibliotecii Centrale Universitare „Mihai Eminescu“ din Iaşi, a fost lansat volumul „Metoda I. Natura Naturii”, o carte semnată de Edgar Morin. Traducerea acesteia în limba română a fost realizată de prof. univ. dr. Iulian Popescu, de la Universitatea „Apollonia“ din Iaşi. Totodată, Iulian Popescu, în calitate de director al Editurii „Apollonia“ s-a ocupat de tipărirea volumului.', 'lansare carte,apollonia', 0, 0, '2015-07-06', 1, '2015-07-06', 1),
-(14, 5, 1, 'Bătălia pentru Ardeal', '6', '', 'Recent, am primit cu mare satisfacție, de la bunul meu prieten, reputatul publicist și prof. univ. dr. Ioan Bojan, o lucrare de semnificație inestimabilă, științifică, istorică și națională, intitulată „Bătălia pentru Ardeal”, căreia mi s-a făcut onoarea de a-i întocmi, în prealabil, o binemeritată Prefață.', 'swag', 0, 0, '2015-07-06', 1, '2015-07-12', 1),
-(15, 5, 1233, 'Untitled13123', '4', '', 'dasdsad asdad asda sdasd asd asd143fwqcew 3d32v d 3qwcer  4cec ed 3 c', 'fdsfsd', 0, 0, '2015-07-12', 1, '2015-07-23', 1),
-(16, 4, 1, 'test', '1', '', '', '', 0, 0, '2015-07-12', 1, '2015-07-12', 1),
-(17, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(18, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(19, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(20, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(21, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(22, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(23, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(24, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(25, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(26, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(27, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(28, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(29, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(30, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(31, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(32, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(33, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(34, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(35, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(36, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(37, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(38, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(39, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(40, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(41, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(42, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(43, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(44, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(45, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(46, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(47, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(48, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(49, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(50, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(51, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(52, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(53, 6, 1, 'Untitled', '7', '', '', '', 0, 0, '2015-07-22', 1, '2015-07-23', 1),
-(54, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(55, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(56, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(57, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(58, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(59, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(60, 6, 1, 'Untitled 1231', '0', '', '', '', 0, 0, '2015-07-22', 1, '2015-07-23', 1),
-(61, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(62, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(63, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(64, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(65, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(66, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(67, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(68, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(69, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(70, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(71, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(72, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(73, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(74, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(75, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(76, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(77, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(78, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(79, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(80, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(81, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(82, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(83, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(84, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(85, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(86, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(87, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(88, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(89, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(90, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(91, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(92, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(93, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(94, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(95, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(96, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(97, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(98, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(99, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(100, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(101, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(102, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(103, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(104, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(105, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(106, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(107, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(108, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(109, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(110, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(111, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(112, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(113, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(114, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(115, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(116, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(117, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(118, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(119, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(120, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(121, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(122, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(123, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(124, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(125, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(126, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(127, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(128, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(129, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(130, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(131, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(132, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(133, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(134, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(135, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(136, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(137, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(138, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(139, 6, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(140, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(141, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(142, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(143, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(144, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(145, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(146, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(147, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(148, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(149, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(150, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(151, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(152, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(153, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(154, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(155, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(156, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(157, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(158, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(159, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(160, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(161, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(162, 17, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(163, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(164, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(165, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(166, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(167, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(168, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(169, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(170, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(171, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(172, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(173, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(174, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(175, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(176, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(177, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(178, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(179, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(180, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(181, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(182, 18, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(183, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(184, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(185, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(186, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(187, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(188, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(189, 19, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(190, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(191, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(192, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(193, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(194, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(195, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(196, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(197, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(198, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(199, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(200, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(201, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(202, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(203, 20, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(204, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(205, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(206, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(207, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(208, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(209, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(210, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(211, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(212, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(213, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(214, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(215, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(216, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(217, 21, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(218, 26, 1, 'Untitled', '0', '', 'sad asdasda sds ad', '', 0, 0, '2015-07-22', 1, '2015-07-23', 1),
-(219, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(220, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(221, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(222, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(223, 26, 1, 'Untitled', '4', 'adasdasdasd asd as dasd', 'as dasd32dsad w ', 'test', 0, 0, '2015-07-22', 1, '2015-07-23', 1),
-(224, 26, 1, 'ReActor 2000', '0', '', 'Cica a fost o data candva..', 'test,test2,reactor cu bobina', 0, 0, '2015-07-22', 1, '2015-07-23', 1),
-(225, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(226, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(227, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(228, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(229, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(230, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(231, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(232, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(233, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(234, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(235, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(236, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(237, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-22', 1, NULL, NULL),
-(238, 5, 3, 'Test', '6', '', ' dd sdadfsfdgwsd vds sdf dsc weqwdsdf', 'yep,nope,ok,nevermind', 0, 0, '2015-07-23', 1, '2015-07-23', 1),
-(239, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
-(240, 26, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-07-24', 1, NULL, NULL),
-(241, 1, 2, 'Untitled', '0', '', '', '', 0, 0, '2015-08-01', 1, '2015-08-02', 1);
+(242, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(243, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(244, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(245, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(246, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(247, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(248, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(249, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(250, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(251, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(252, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(253, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(254, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(255, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(256, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(257, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(258, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(259, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(260, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(261, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
+(262, 27, 2, '„Suntem o universitate mică, dar gălăgioasă”', '6', '', 'cuvântul preşedintelui Universităţii „Apollonia” din Iaşi, prof. univ. dr. Vasile Burlui, la deschiderea oficială a Congresului Internaţional „Pregătim viitorul, promovând excelenţa”, ediţia a XXV-a, 26 februarie – 1 martie 2015, Iaşi', 'Apollonia,Vasile Burlui,congres international,universitate', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(263, 27, 2, 'SÂNGE CALD DE APOLLONIA', '6', '', 'Despre ARACIS am mai vorbit. De această dată aș fi dorit să scriu „de bine”. Aș fi dorit să am motive să scriu de bine. Paradoxal, despre ARACIS nu se poate vorbi decât de bine. Este o instituţie necesară progresului învățământului, chiar dacă despre importanță ei sunt păreri diferite și controversate, chiar în interiorul ariei ei de responsabilitate.', 'pe coji de nuci,editorial,Apollonia,Adi Cristi,ARACIS', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(264, 27, 3, 'Congresul Internaţional „Pregătim viitorul promovând excelenţa”', '6', '', 'Aceste manifestări asociate complementar ediţiei a XXV-a a Congresului Internaţional „Pregătim viitorul promovând excelenţa”, au avut loc în perioada 24 februarie -1 martie 2015', 'congresul international,Pregatim viitorul promovand excelenta,Apollonia,tehnica dentara,medicina dentara,medicina generala,BalneoFizioKinetoTerapie', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(265, 27, 4, 'MEMORIU cu privire la propunerea de acordare a calificativului', '6', '', 'Comunitatea academică a luat act cu stupefacție de calificativele propuse pentru Universitatea „Apollonia” din Iași, după cum urmează:\r\n\r\n    Lipsă de încredere – Instituțional\r\n    Neîncredere – propunere de intrare în lichidare, Programul de studiu Medicină Dentară, Facultatea de Medicină Dentară\r\n    Încredere limitată – Acreditare – Programul de studiu Comunicare şi Relaţii Publice, Facultatea de Științe ale Comunicării\r\n    Încredere limitată – Acreditare – Programul de studiu Jurnalism, Facultatea de Științe ale Comunicării.', 'Universitatea Apollonia,memoriu,ARACIS,acreditare', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(266, 27, 8, 'Premiile UZPR', '6', '', 'Luni,  9 martie 2015, de la ora 18.00, la Institutul Cultural Român din Bucureşti, Str. Aleea Alexandru Nr. 38, va avea loc Gala Premiilor Uniunii Ziariștilor Profesioniști din România pe anul 2014.', 'Uniunea Ziaristilor Profesionisti,premii,UZP', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(267, 27, 8, 'Scrisoare deschisă adresată ARACIS', '6', '', 'Recent, pe data de 10 februarie 2015, ARACIS a remis Universităţii „Apollonia” din Iaşi conţinutul Raportului de evaluare instituţională externă, demers menit „a identifica şi certifica în ce măsură aceasta răspunde interesului public, precum şi măsurile pe care le asigură pentru creşterea calităţii în procesul de predare- învăţare şi în exercitarea dreptului legal de acordare a diplomelor şi calificărilor universitare”.', 'scrisoare descisa,Apollonia,ARACIS,comisie de evaluare', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(268, 29, 1, 'Bate vânt de primăvară, dar nu şi la ARACIS', '6', '', 'Acronimul ARACIS denumește foarte clar obiectivul principal al unei agenții care dorește să contribuie la asigurarea calității în învățământul superior (Agenţia Română de Asigurare a Calităţii în Învăţământul Superior).', 'ARACIS,Universitatea Apollonia', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(269, 29, 1, '„Lacul Lebedelor”, la Iași', '6', '', '„Lacul Lebedelor” a revenit la Iași. Spectacolul a avut loc aseară, miercuri 11 martie 2015, la Teatrul Luceafărul. Spectacolul de balet, după muzica lui Piotr Ilici Ceaikovski, a fost prezentat de data aceasta de către Teatrul Național de Operă și Balet „Oleg Danovski” din Constanța, aflat într-un turneu național.', 'Lacul lebedelor,balet,spectacol,Piotr Ilici Ceaikovski', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(270, 29, 4, 'Cât de greu e să fii OM!', '6', '', 'Festivitatea aniversară „Marcus nonagenar” care a avut loc duminică, 1 martie 2015, a fost găzduită de Aula Bibliotecii Centrale Universitare „Mihai Eminescu”, eveniment care a adunat alături suma unor personalităţi publice din diverse domenii ale Iaşului care au dorit astfel să-i fie aproape academicianului Solomon Marcus la împlinirea vârstei de 90 de ani!', 'Solomon Marcus', 0, 0, '2015-08-03', 1, '2015-08-03', 1);
 
 -- --------------------------------------------------------
 
@@ -360,50 +150,25 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 
 DROP TABLE IF EXISTS `bf_articles_categories`;
 CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `article_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_articles_categories`
 --
 
 INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
-(4, 7, 2),
-(5, 7, 3),
-(6, 7, 5),
-(7, 8, 4),
-(8, 8, 6),
-(9, 8, 2),
-(10, 10, 3),
-(11, 10, 5),
-(12, 10, 7),
-(13, 10, 11),
-(14, 10, 143),
-(15, 10, 262),
-(16, 5, 2),
-(17, 5, 7),
-(18, 5, 41),
-(21, 13, 228),
-(23, 16, 3),
-(24, 14, 22),
-(31, 15, 29),
-(32, 15, 30),
-(33, 238, 2),
-(38, 9, 36),
-(39, 9, 37),
-(46, 241, 3),
-(47, 241, 6),
-(48, 241, 43),
-(49, 11, 2),
-(50, 11, 7),
-(51, 11, 28),
-(52, 4, 4),
-(53, 4, 44),
-(54, 4, 45),
-(58, 6, 57);
+(59, 262, 228),
+(60, 263, 229),
+(61, 264, 229),
+(62, 265, 232),
+(63, 266, 17),
+(64, 267, 229),
+(65, 268, 229),
+(66, 269, 7),
+(67, 270, 229);
 
 -- --------------------------------------------------------
 
@@ -413,36 +178,30 @@ INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
 
 DROP TABLE IF EXISTS `bf_authors`;
 CREATE TABLE IF NOT EXISTS `bf_authors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_authors`
 --
 
 INSERT INTO `bf_authors` (`id`, `name`) VALUES
-(1, 'Sandelian'),
-(2, 'Sandelush'),
-(3, 'asdasdasd'),
-(4, 'aasdasdasd'),
-(5, 'aasdasdasd'),
-(6, 'Eugen G8'),
-(7, 'Test'),
-(8, 'Coshmin'),
-(9, 'Coshmin Dan'),
-(10, 'Zeugen'),
-(11, 'Cornel Simighean'),
-(12, 'Prof. univ. dr. doc. Constantin Marinescu'),
-(13, 'Cosmin Dan'),
-(14, 'It''sa me'),
-(15, 'Mario'),
-(16, 'sdsdfsdf'),
-(17, 'sdfsdfsdfsd'),
-(18, 'Coshmin'),
-(19, 'Cozmin'),
-(20, 'NC Jitca');
+(21, 'prof. univ. dr. Vasile Burlui'),
+(22, 'Adi Cristi'),
+(23, 'Mihaela Sandra Onică'),
+(24, 'Alin Mureşanu'),
+(25, 'Dan Coţcaru'),
+(26, 'Prof.univ.dr. Vasile Burlui'),
+(27, 'Prof.univ.dr. Carmen Stadoleanu'),
+(28, 'Conf.univ.dr. Gabriela Mihalache'),
+(29, 'Conf.univ.dr. Elena Folescu'),
+(30, 'Conf.univ.dr. Dan Gabriel Sîmbotin'),
+(31, 'Cornel Simighean'),
+(32, 'Cornel SImighean'),
+(33, 'Cornel Simighian'),
+(34, 'Aida Zaharia'),
+(35, 'Cornel Simighian');
 
 -- --------------------------------------------------------
 
@@ -452,32 +211,31 @@ INSERT INTO `bf_authors` (`id`, `name`) VALUES
 
 DROP TABLE IF EXISTS `bf_authorsofarticles`;
 CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+  `author_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
 --
 
 INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
-(4, 1, 6),
-(5, 1, 7),
-(6, 1, 8),
-(7, 2, 9),
-(8, 2, 10),
-(9, 13, 11),
-(10, 14, 12),
-(11, 9, 13),
-(12, 4, 14),
-(13, 4, 15),
-(14, 241, 16),
-(15, 241, 17),
-(16, 6, 18),
-(17, 6, 19),
-(18, 6, 20);
+(19, 262, 21),
+(20, 263, 22),
+(21, 264, 23),
+(22, 264, 24),
+(23, 264, 25),
+(24, 265, 26),
+(25, 265, 27),
+(26, 265, 28),
+(27, 265, 29),
+(28, 265, 30),
+(29, 266, 31),
+(30, 267, 32),
+(31, 268, 33),
+(32, 269, 34),
+(33, 270, 35);
 
 -- --------------------------------------------------------
 
@@ -487,12 +245,11 @@ INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
 
 DROP TABLE IF EXISTS `bf_categories`;
 CREATE TABLE IF NOT EXISTS `bf_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `selectable` smallint(6) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=277 ;
+  `selectable` smallint(6) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_categories`
@@ -787,8 +544,7 @@ CREATE TABLE IF NOT EXISTS `bf_ci3_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `data` blob NOT NULL,
-  PRIMARY KEY (`id`)
+  `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -803,8 +559,7 @@ CREATE TABLE IF NOT EXISTS `bf_countries` (
   `name` varchar(80) NOT NULL,
   `printable_name` varchar(80) NOT NULL,
   `iso3` char(3) DEFAULT NULL,
-  `numcode` smallint(6) DEFAULT NULL,
-  PRIMARY KEY (`iso`)
+  `numcode` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1060,7 +815,7 @@ INSERT INTO `bf_countries` (`iso`, `name`, `printable_name`, `iso3`, `numcode`) 
 
 DROP TABLE IF EXISTS `bf_email_queue`;
 CREATE TABLE IF NOT EXISTS `bf_email_queue` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `to_email` varchar(254) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
@@ -1071,9 +826,8 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
   `date_published` datetime DEFAULT NULL,
   `last_attempt` datetime DEFAULT NULL,
   `date_sent` datetime DEFAULT NULL,
-  `csv_attachment` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `csv_attachment` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1083,25 +837,18 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
 
 DROP TABLE IF EXISTS `bf_institutions`;
 CREATE TABLE IF NOT EXISTS `bf_institutions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+  `created_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_institutions`
 --
 
 INSERT INTO `bf_institutions` (`id`, `name`, `created_on`, `created_by`) VALUES
-(1, 'asdfsfsdafsdfasdf', '2015-06-24', NULL),
-(2, 'asdfsfsdafsdfasdf', '2015-06-24', 1),
-(3, 'Test', '2015-06-24', 1),
-(4, 'Facultatea Alexandru Ioan Cuza, IESI', '2015-06-24', 1),
-(5, 'dasdasdasd', '2015-07-05', 1),
-(6, 'Universitatea "Apollonia" din Iasi', '2015-07-06', 1),
-(7, 'Test 123 test', '2015-07-23', 1);
+(6, 'Universitatea "Apollonia" din Iasi', '2015-07-06', 1);
 
 -- --------------------------------------------------------
 
@@ -1111,12 +858,11 @@ INSERT INTO `bf_institutions` (`id`, `name`, `created_on`, `created_by`) VALUES
 
 DROP TABLE IF EXISTS `bf_login_attempts`;
 CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1126,7 +872,7 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
 
 DROP TABLE IF EXISTS `bf_magazines`;
 CREATE TABLE IF NOT EXISTS `bf_magazines` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `issn` varchar(50) DEFAULT NULL,
   `language` varchar(30) DEFAULT NULL,
@@ -1137,19 +883,28 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
   `phoneno` varchar(20) DEFAULT NULL,
   `founded_year` int(11) DEFAULT NULL,
   `description` text,
-  `approved` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `approved` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_magazines`
 --
 
 INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `language`, `publisher`, `editorial_address`, `email`, `website`, `phoneno`, `founded_year`, `description`, `approved`) VALUES
-(1, 'Erasous', '34-54413435', 'en', 'dsffsadfsaf', 'sdfsadfasdf', 'test@test.ro', 'www.test.ro', '72346295748935', 2014, '', 1),
-(2, 'Nova Apollonia', '00-000000', 'ro', 'Editura Apollonia', 'bld. Stefan cel Mare si Sfant, nr. 3', 'novaapollonia@gmail.com', 'http://www.novaapollonia.ro', '0700000000', 2013, '', 1),
-(3, 'Test', '', 'af', '', '', '', '', '', 0, '', 0),
-(4, 'Tester', '', 'ro', '', '', '', '', '', 0, '', 0);
+(2, 'Nova Apollonia', '2344 – 3421', 'ro', 'Editura Apollonia', 'bld. Stefan cel Mare si Sfant, nr. 3', 'novaapollonia@gmail.com', 'http://www.novaapollonia.ro', '0700000000', 2013, 'Saptamanal de cultura, educatie, informatie', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bf_magazines_categories`
+--
+
+DROP TABLE IF EXISTS `bf_magazines_categories`;
+CREATE TABLE IF NOT EXISTS `bf_magazines_categories` (
+  `id` int(11) NOT NULL,
+  `magazine_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1159,11 +914,10 @@ INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `language`, `publisher`, `edi
 
 DROP TABLE IF EXISTS `bf_magazine_categories`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `magazine_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1173,7 +927,7 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_categories` (
 
 DROP TABLE IF EXISTS `bf_magazine_issues`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `magazine_id` int(11) NOT NULL DEFAULT '0',
   `volume` int(11) DEFAULT '0',
   `number` int(11) DEFAULT '0',
@@ -1182,36 +936,17 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
   `special` varchar(100) DEFAULT NULL,
   `pdf_file` varchar(200) DEFAULT NULL,
   `cover_file` varchar(200) DEFAULT NULL,
-  `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+  `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft'
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_magazine_issues`
 --
 
 INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `pdf_file`, `cover_file`, `status`) VALUES
-(1, 1, 30, 0, 30, 2014, 'Hot Nurses', 'mag_1/1-fMXxGf5uUwfSWD8a.pdf', 'mag_1/1-x5WANOQjeGp40g7n.jpg', 'published'),
-(2, 1, 4, 0, 0, 0, 'NOPE', 'mag_1/2-gNBoVuuYpqQHOw9v.pdf', NULL, 'published'),
-(3, 1, 32, 0, 0, 0, 'YES', NULL, NULL, 'published'),
-(4, 2, 0, 123, 22, 1233, '', NULL, NULL, 'published'),
-(5, 2, 0, 60, 3, 2015, '', NULL, NULL, 'published'),
-(6, 2, 0, 4, 0, 0, '', NULL, NULL, 'draft'),
-(7, 2, 2, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
-(8, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
-(9, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
-(10, 2, 0, 123, 0, 0, '', NULL, NULL, 'draft'),
-(16, 2, 0, 33, 0, 0, '', NULL, NULL, 'draft'),
-(17, 2, 3, 0, 0, 0, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
-(18, 2, 2, 0, 0, 2015, 'Test', NULL, NULL, 'published'),
-(19, 1, 0, 1, 0, 2015, '', NULL, NULL, 'published'),
-(20, 1, 3, 2, 0, 2015, '', NULL, NULL, 'published'),
-(21, 1, 3, 4, 0, 2015, '', NULL, NULL, 'published'),
-(22, 2, 1, 0, 0, 0, 'Science Edition', NULL, NULL, 'draft'),
-(23, 2, 1, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
-(24, 2, 2, 0, 0, 2015, 'Goblins vs Gnomes', NULL, NULL, 'draft'),
-(25, 2, 1, 0, 0, 2015, 'Test', NULL, NULL, 'draft'),
-(26, 2, 0, 69, 0, 2015, '', NULL, NULL, 'draft');
+(27, 2, 0, 75, 3, 2015, '', 'mag_2/27-6QvglZEXEac0tQoE.pdf', 'mag_2/27-TxYqT6YvuRXJQp0E.jpg', 'published'),
+(28, 2, 0, 75, 3, 2015, 'Nu', 'mag_2/28-9vTbmk7Mr0FRzTRI.pdf', 'mag_2/28-ESYkOjAgi9l02MQN.jpg', 'draft'),
+(29, 2, 0, 76, 3, 2015, '', 'mag_2/29-PBDFHvE9B1pcwjU2.pdf', 'mag_2/29-6Y4DmZrIY4WWwUq6.jpg', 'draft');
 
 -- --------------------------------------------------------
 
@@ -1221,13 +956,11 @@ INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year
 
 DROP TABLE IF EXISTS `bf_magazine_staff`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_staff` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `magazine_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `magazine_id` (`magazine_id`,`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_magazine_staff`
@@ -1249,12 +982,11 @@ INSERT INTO `bf_magazine_staff` (`id`, `magazine_id`, `user_id`, `role_id`) VALU
 
 DROP TABLE IF EXISTS `bf_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_permissions` (
-  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(100) NOT NULL,
-  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
-  PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
+  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -1332,7 +1064,7 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 
 DROP TABLE IF EXISTS `bf_roles`;
 CREATE TABLE IF NOT EXISTS `bf_roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
   `role_name` varchar(60) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `default` tinyint(1) NOT NULL DEFAULT '0',
@@ -1340,9 +1072,8 @@ CREATE TABLE IF NOT EXISTS `bf_roles` (
   `login_destination` varchar(255) NOT NULL DEFAULT '/',
   `deleted` int(1) NOT NULL DEFAULT '0',
   `default_context` varchar(255) NOT NULL DEFAULT 'content',
-  `magazine_role` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `magazine_role` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_roles`
@@ -1366,8 +1097,7 @@ INSERT INTO `bf_roles` (`role_id`, `role_name`, `description`, `default`, `can_d
 DROP TABLE IF EXISTS `bf_role_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_role_permissions` (
   `role_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`role_id`,`permission_id`)
+  `permission_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1491,8 +1221,7 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 DROP TABLE IF EXISTS `bf_schema_version`;
 CREATE TABLE IF NOT EXISTS `bf_schema_version` (
   `type` varchar(40) NOT NULL,
-  `version` int(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`type`)
+  `version` int(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1514,8 +1243,7 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL,
-  PRIMARY KEY (`session_id`)
+  `user_data` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1523,7 +1251,7 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
 --
 
 INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('01ca738818e9f7346ca9b53d3c842e1a', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438539457, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:17:"http://localhost/";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:13:"previous_page";s:17:"http://localhost/";s:11:"magazine_id";s:1:"1";s:8:"issue_id";s:1:"1";}');
+('fb05397eab900886dbc4c3e074c22ba7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438623924, 'a:14:{s:9:"user_data";s:0:"";s:14:"requested_page";s:69:"http://localhost/Repo1/html/index.php/admin/content/articles/index/29";s:13:"previous_page";s:69:"http://localhost/Repo1/html/index.php/admin/content/articles/index/29";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:2:"29";s:17:"flash:old:message";s:39:"success::FIXME(''articles_edit_success'')";s:17:"flash:new:message";s:0:"";}');
 
 -- --------------------------------------------------------
 
@@ -1535,8 +1263,7 @@ DROP TABLE IF EXISTS `bf_settings`;
 CREATE TABLE IF NOT EXISTS `bf_settings` (
   `name` varchar(30) NOT NULL,
   `module` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`name`)
+  `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1590,11 +1317,10 @@ INSERT INTO `bf_settings` (`name`, `module`, `value`) VALUES
 
 DROP TABLE IF EXISTS `bf_states`;
 CREATE TABLE IF NOT EXISTS `bf_states` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` char(40) NOT NULL,
-  `abbrev` char(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+  `abbrev` char(2) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_states`
@@ -1673,7 +1399,7 @@ INSERT INTO `bf_states` (`id`, `name`, `abbrev`) VALUES
 
 DROP TABLE IF EXISTS `bf_users`;
 CREATE TABLE IF NOT EXISTS `bf_users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT '4',
   `email` varchar(254) NOT NULL,
   `username` varchar(30) NOT NULL DEFAULT '',
@@ -1692,26 +1418,16 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `activate_hash` varchar(40) NOT NULL DEFAULT '',
-  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_users`
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-02 18:01:35', '127.0.0.1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
-(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
-(3, 4, 'cosmin@hitman47.ro', 'cozmin.htn', '$2a$08$I6PYkQIsoipFlf5cUh4vBejb/4oNw.wGb8xiKmlkxdv3Q8mhtceV2', NULL, '0000-00-00 00:00:00', '', '2015-08-01 15:45:52', 0, NULL, 0, NULL, 'Cosmin', NULL, 'UP2', 'english', 0, '', 0),
-(4, 4, 'asdasd@adasdas.adsda', 'asdasd@adasdas.adsda', '$2a$08$kDlzKKZ/UUWk1Kjzqx.g9eAWcHjxh/x4j1C9Lhf2xA2YUxOCXZ2vy', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:25', 0, NULL, 0, NULL, 'asdasd@adasdas.adsda', NULL, 'UM6', 'english', 0, '', 0),
-(5, 4, 'test@slayers.ro', 'test@slayers.ro', '$2a$08$SgMZtJaEBmYEfyJQYQcNu.wj3G7/9fCe3/9dA7XYBUZEVRdOSnZQK', NULL, '0000-00-00 00:00:00', '', '2015-08-01 18:53:36', 0, NULL, 0, NULL, 'test@slayers.ro', NULL, 'UM6', 'english', 0, '', 0),
-(6, 4, 'ucozmin@gmail.com', 'ucozmin@gmail.com', '$2a$08$lp03mrA7pTXnIJOPdkIAZO5X/dI6eiYYwQVfZRAXybGLdp2PO1t0C', 'f45ced249adf8778505bfcf409989c8989c709bb', '0000-00-00 00:00:00', '', '2015-08-01 18:54:21', 0, 1438530890, 0, NULL, 'ucozmin@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
-(7, 4, 'htn.cosmin@gmail.com', 'htn.cosmin@gmail.com', '$2a$08$ee0WUVk/T02CYZLKK3PHUOgSxFKYcIXLLZJYO3.qVO40YC/Asy.ci', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:04:48', 0, NULL, 0, NULL, 'htn.cosmin@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
-(8, 4, 'htn.cosmindan@gmail.com', 'htn.cosmindan@gmail.com', '$2a$08$BVkS7it4QJ4gD1ahZnYqLuOjMwRCXoVKwmOuOuTeARcfptcGLPzWW', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:05:11', 0, NULL, 0, NULL, 'htn.cosmindan@gmail.com', NULL, 'UM6', 'english', 0, '', 0),
-(9, 4, 'saasd@dasdas.asd', 'saasd@dasdas.asd', '$2a$08$SJbbJ5tZF4e9klqMEJ37Iuug/a92nCpwCmUvHacoTNS0xFLsZVoYS', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:11:21', 0, NULL, 0, NULL, 'saasd@dasdas.asd', NULL, 'UM6', 'english', 0, '', 0),
-(10, 4, 'dsda@asdasdas.asdasd', 'dsda@asdasdas.asdasd', '$2a$08$Ia1eYPw4vVWTk/b5vREL0uOx/F0NqcaHgkK.Ehx8QZfl2rRObw8Nu', NULL, '0000-00-00 00:00:00', '', '2015-08-01 19:15:18', 0, NULL, 0, NULL, 'dsda@asdasdas.asdasd', NULL, 'UM6', 'english', 0, '', 0);
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-03 19:41:01', '::1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1723,9 +1439,15 @@ DROP TABLE IF EXISTS `bf_user_cookies`;
 CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
   `user_id` bigint(20) unsigned NOT NULL,
   `token` varchar(128) NOT NULL,
-  `created_on` datetime NOT NULL,
-  KEY `token` (`token`)
+  `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bf_user_cookies`
+--
+
+INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
+(1, 'MRlsdlfVQVnV02Bv4HlZZWqeVQURpvK96iP4mQ5VsmJdaB8nBoaNTTLa4djoSzGztUrYYt4VgpI1IGjRADLgJbzYdE6PGbGi1CJLXuXxkqCmJbfMwdqfHf4JYS1vN1qp', '2015-08-03 19:41:01');
 
 -- --------------------------------------------------------
 
@@ -1735,12 +1457,11 @@ CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
 
 DROP TABLE IF EXISTS `bf_user_meta`;
 CREATE TABLE IF NOT EXISTS `bf_user_meta` (
-  `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `meta_id` int(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) NOT NULL DEFAULT '',
-  `meta_value` text,
-  PRIMARY KEY (`meta_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+  `meta_value` text
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_user_meta`
@@ -1755,6 +1476,265 @@ INSERT INTO `bf_user_meta` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (6, 3, 'state', 'HI'),
 (7, 3, 'country', 'US');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bf_activities`
+--
+ALTER TABLE `bf_activities`
+  ADD PRIMARY KEY (`activity_id`);
+
+--
+-- Indexes for table `bf_articles`
+--
+ALTER TABLE `bf_articles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_articles_categories`
+--
+ALTER TABLE `bf_articles_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_authors`
+--
+ALTER TABLE `bf_authors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_authorsofarticles`
+--
+ALTER TABLE `bf_authorsofarticles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_categories`
+--
+ALTER TABLE `bf_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_ci3_sessions`
+--
+ALTER TABLE `bf_ci3_sessions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_countries`
+--
+ALTER TABLE `bf_countries`
+  ADD PRIMARY KEY (`iso`);
+
+--
+-- Indexes for table `bf_email_queue`
+--
+ALTER TABLE `bf_email_queue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_institutions`
+--
+ALTER TABLE `bf_institutions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_login_attempts`
+--
+ALTER TABLE `bf_login_attempts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_magazines`
+--
+ALTER TABLE `bf_magazines`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_magazines_categories`
+--
+ALTER TABLE `bf_magazines_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_magazine_categories`
+--
+ALTER TABLE `bf_magazine_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_magazine_issues`
+--
+ALTER TABLE `bf_magazine_issues`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_magazine_staff`
+--
+ALTER TABLE `bf_magazine_staff`
+  ADD PRIMARY KEY (`id`), ADD KEY `magazine_id` (`magazine_id`,`user_id`);
+
+--
+-- Indexes for table `bf_permissions`
+--
+ALTER TABLE `bf_permissions`
+  ADD PRIMARY KEY (`permission_id`);
+
+--
+-- Indexes for table `bf_roles`
+--
+ALTER TABLE `bf_roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Indexes for table `bf_role_permissions`
+--
+ALTER TABLE `bf_role_permissions`
+  ADD PRIMARY KEY (`role_id`,`permission_id`);
+
+--
+-- Indexes for table `bf_schema_version`
+--
+ALTER TABLE `bf_schema_version`
+  ADD PRIMARY KEY (`type`);
+
+--
+-- Indexes for table `bf_sessions`
+--
+ALTER TABLE `bf_sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indexes for table `bf_settings`
+--
+ALTER TABLE `bf_settings`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `bf_states`
+--
+ALTER TABLE `bf_states`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bf_users`
+--
+ALTER TABLE `bf_users`
+  ADD PRIMARY KEY (`id`), ADD KEY `email` (`email`);
+
+--
+-- Indexes for table `bf_user_cookies`
+--
+ALTER TABLE `bf_user_cookies`
+  ADD KEY `token` (`token`);
+
+--
+-- Indexes for table `bf_user_meta`
+--
+ALTER TABLE `bf_user_meta`
+  ADD PRIMARY KEY (`meta_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bf_activities`
+--
+ALTER TABLE `bf_activities`
+  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `bf_articles`
+--
+ALTER TABLE `bf_articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=271;
+--
+-- AUTO_INCREMENT for table `bf_articles_categories`
+--
+ALTER TABLE `bf_articles_categories`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+--
+-- AUTO_INCREMENT for table `bf_authors`
+--
+ALTER TABLE `bf_authors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT for table `bf_authorsofarticles`
+--
+ALTER TABLE `bf_authorsofarticles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT for table `bf_categories`
+--
+ALTER TABLE `bf_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=277;
+--
+-- AUTO_INCREMENT for table `bf_email_queue`
+--
+ALTER TABLE `bf_email_queue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bf_institutions`
+--
+ALTER TABLE `bf_institutions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `bf_login_attempts`
+--
+ALTER TABLE `bf_login_attempts`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bf_magazines`
+--
+ALTER TABLE `bf_magazines`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `bf_magazines_categories`
+--
+ALTER TABLE `bf_magazines_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bf_magazine_categories`
+--
+ALTER TABLE `bf_magazine_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bf_magazine_issues`
+--
+ALTER TABLE `bf_magazine_issues`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `bf_magazine_staff`
+--
+ALTER TABLE `bf_magazine_staff`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `bf_permissions`
+--
+ALTER TABLE `bf_permissions`
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
+--
+-- AUTO_INCREMENT for table `bf_roles`
+--
+ALTER TABLE `bf_roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `bf_states`
+--
+ALTER TABLE `bf_states`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+--
+-- AUTO_INCREMENT for table `bf_users`
+--
+ALTER TABLE `bf_users`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `bf_user_meta`
+--
+ALTER TABLE `bf_user_meta`
+  MODIFY `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
