@@ -57,8 +57,8 @@ $route['404_override'] = '';
 
 // Authentication
 Route::any(LOGIN_URL, 'users/login', array('as' => 'login'));
-Route::any(REGISTER_URL, 'users/register', array('as' => 'register'));
 Route::block('users/login');
+Route::any(REGISTER_URL, 'users/register', array('as' => 'register'));
 Route::block('users/register');
 
 Route::any('logout', 'users/logout');
@@ -69,7 +69,6 @@ Route::any('reset_password/(:any)/(:any)', 'users/reset_password/$1/$2');
 Route::any('activate', 'users/activate');
 Route::any('activate/(:any)', 'users/activate/$1');
 Route::any('resend_activation', 'users/resend_activation');
-
 
 // Contexts
 Route::prefix(

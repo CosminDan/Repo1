@@ -28,12 +28,12 @@
             <p>lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. lorem ipsum dolor sit amet.. </p>
         </div>
         <?php endif; ?>
-        <form class="heading">
+        <?php echo form_open(site_url('search/page'), 'class="heading"'); ?>
         <div class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="Search...">
+            <input name="q" type="text" class="form-control" placeholder="Search...">
             <div class="input-group-btn">
-            <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedSearch"><i class="glyphicon glyphicon-plus"></i></button>
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedSearch"><i class="glyphicon glyphicon-plus"></i></button>
+                <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
             </div>
         </div>
         <div class="collapse" id="advancedSearch">
@@ -47,7 +47,7 @@
             <hr/>
             <hr/>
         </div>
-    </form>
+    <?php echo form_close(); ?>
     </div>
   </div>
 </div>

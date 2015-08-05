@@ -159,7 +159,7 @@ class Articles_model extends BF_Model
 
         $item->categories = array();
         foreach ($categories as $category) {
-            $item->categories[] = $category->id;
+            $item->categories[$category->category_id] = $category->category_id;
         }
 
         $item->summary_count = str_word_count($item->summary);
