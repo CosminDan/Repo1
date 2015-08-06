@@ -87,6 +87,13 @@ class Home extends Front_Controller
                 $mainCat->articles_recent = array();
             }
 
+            $query = $this->categories_model
+            ->where('pid', $mainCat->id)
+            ->limit(5);
+            if (!$mainCat->categs_popular = $query->find_all()) {
+                $mainCat->categs_popular = array();
+            }
+
             $mainCats[$i] = $mainCat;
         }
 
