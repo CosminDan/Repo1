@@ -86,6 +86,7 @@ class Search extends Front_Controller
 
         //$this->_model->limit($limit, $offset);
         Template::set('records', $records);
+        Template::set('search_query', $s);
 
         Template::render();
     }

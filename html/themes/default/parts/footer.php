@@ -1,4 +1,3 @@
-    <hr />
     <footer class="footer-distributed">
 
             <div class="footer-right">
@@ -31,6 +30,14 @@
 
         </footer>
     <div id="debug"></div>
-
+    <script>
+      $(function() {
+        $(".datepicker").datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: 'dd-mm-yy'
+        });
+      });
+    </script>
 </body>
 </html>

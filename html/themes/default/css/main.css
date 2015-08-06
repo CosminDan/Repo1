@@ -1,3 +1,12 @@
+.content {
+    min-height: 600px;
+    padding-top: 20px;
+}
+
+a:focus {
+    outline: none !important;
+}
+
 .masthead.main {
 	background-image: url('../images/mainbg.jpg');
 	background-position: 50% 50%;
@@ -14,28 +23,29 @@
 	color: #000000;
 }
 
+.masthead .search_top {
+	padding: 40px 0px;
+}
+
 .masthead .heading {
-	margin: 50px 0px;
+    text-align: center;
 }
 
-.masthead .heading p {
-	text-indent: 20px;
-	text-align: left;
+#advancedSearch {
+    margin-top: 20px;
 }
-
-/*.categs li a:hover {
-
-	border-radius: 0px;
-}*/
 
 .categs a .fa {
 	color: #919295;
 }
 
 .categs a {
-	color: #000000;
+	color: #919295;
 }
 
+.categs li a {
+    font-weight: bold;
+}
 
 .nav-pills.categs .arts a:hover,
 .nav-pills.categs .arts a:hover .fa,

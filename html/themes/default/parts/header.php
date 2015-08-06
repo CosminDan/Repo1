@@ -3,7 +3,11 @@
 Assets::add_css(array('bootstrap.3.3.5.min.css', 'bootstrap-responsive.min.css'));
 Assets::add_css('main.css');
 Assets::add_css('font-awesome.min.css');
+Assets::add_css('jquery-ui.min.css');
+Assets::add_css('jquery-ui.structure.min.css');
+Assets::add_css('jquery-ui.theme.min.css');
 Assets::add_js('bootstrap.3.3.5.min.js');
+Assets::add_js('jquery-ui.min.js');
 
 $inline  = '$(".dropdown-toggle").dropdown();';
 $inline .= '$(".tooltips").tooltip();';

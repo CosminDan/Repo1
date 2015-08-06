@@ -2,7 +2,7 @@
 
 <?php echo theme_view('parts/top_menu'); ?>
 
-<div class="container">
+<div class="container content">
 
     <?php echo Template::message(); ?>
 
