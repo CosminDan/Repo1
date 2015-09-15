@@ -1,11 +1,49 @@
 <?php
-//print_r($issue);
-//print_r($articles);
 $baseCoverPath = './media/';
+if ($article_active) {
+    $found = false;
+    foreach ($articles as $i => $article) {
+        if ($article->id == $article_active) {
+            $found = true;
+            break;
+        }
+    }
+}
 ?>
+
+<?php if ($found) { ?>
+<div class="article_main">
+<hr/>
+<h1>
+    <?php e($article->title); ?>
+</h1>
+<h3>
+    <?php echo implode(', ', $article->authors); ?>,
+    <small>
+        <?php echo e($article->affiliation_name); ?>
+    </small>
+</h3>
+
+<hr/>
+
+    <p>
+        <?php e($article->summary); ?>
+    </p>
+
+<hr/>
+</div>
+
+<h2>
+    <?php e("{$magazine->title} {$issue->full_title}"); ?>
+</h2>
+
+<?php } else { ?>
+
 <h1>
     <?php e("{$magazine->title} {$issue->full_title}"); ?>
 </h1>
+
+<?php } ?>
 <div class="row-fluid">
     <div class="span4">
         <div class="issue-cover">

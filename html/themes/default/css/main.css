@@ -8,23 +8,23 @@ a:focus {
 }
 
 .masthead.main {
-	background-image: url('../images/mainbg.jpg');
-	background-position: 50% 50%;
-	background-size: cover;
-	min-height: 200px;
-	color: #FFFFFF;
+    background-image: url('../images/mainbg.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    min-height: 200px;
+    color: #FFFFFF;
 }
 
 .masthead.main a {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .masthead.main a:hover {
-	color: #000000;
+    color: #000000;
 }
 
 .masthead .search_top {
-	padding: 40px 0px;
+    padding: 40px 0px;
 }
 
 .masthead .heading {
@@ -35,60 +35,29 @@ a:focus {
     margin-top: 20px;
 }
 
-.categs a .fa {
-	color: #919295;
-}
-
-.categs a {
-	color: #919295;
-}
-
-.categs li a {
+.categs {
+    color: #919295;
     font-weight: bold;
+    text-align: center;
 }
 
-.nav-pills.categs .arts a:hover,
-.nav-pills.categs .arts a:hover .fa,
-.nav-pills.categs .arts.active > a,
-.nav-pills.categs .arts.active > a .fa,
-.nav-pills.categs .arts.active > a:focus {
-	color: #C9302C;
-/*	border-bottom: 1px solid #C9302C;
-*/	background: transparent;
+.categs .fa {
+    font-size: 3em;
 }
 
-
-.nav-pills.categs .science a:hover,
-.nav-pills.categs .science a:hover .fa,
-.nav-pills.categs .science.active > a,
-.nav-pills.categs .science.active > a .fa,
-.nav-pills.categs .science.active > a:focus {
-	color: #286090;
-/*	border-bottom: 1px solid #286090;
-*/	background: transparent;
+.categs.arts {
+    color: #C9302C;
 }
 
-
-.nav-pills.categs .social a:hover,
-.nav-pills.categs .social a:hover .fa,
-.nav-pills.categs .social.active > a,
-.nav-pills.categs .social.active > a .fa,
-.nav-pills.categs .social.active > a:focus {
-	color: #449D44;
-    background: transparent;
+.categs.science {
+    color: #286090;
 }
 
-.categs a .fa {
-	font-size: 3em;
+.categs.social {
+    color: #449D44;
 }
 
-.categs a:hover .fa {
-	transform:scale(1.2,1.2);
-	 transition: all 0.4s;
-}
-
-.issue-cover {
-}
+.issue-cover {}
 
 div.issue-cover .img-polaroid {
     display: inline-block;
@@ -96,7 +65,7 @@ div.issue-cover .img-polaroid {
 }
 
 .issue-cover img {
-    widthL 315px;
+    width: 315px;
     height: 445px;
 }
 
@@ -119,85 +88,89 @@ div.issue-cover .img-polaroid {
     transform: rotate(-30deg);
 }
 
+.article_main h3 {
+    font-style: italic;
+}
+
+.article_main p {
+    text-indent: 40px;
+}
+
+.article_main p:first-letter {
+    font-weight: bold;
+    font-size: 40px;
+}
 
 
+/* Footer */
 
-
-
-
-
-/*sldjfkglxdsnkjfnsfjnsklghdsofns*/
-.footer-distributed{
+.footer-distributed {
     background-color: #292c2f;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: left;
     font: normal 16px sans-serif;
-
     padding: 45px 50px;
     margin-top: 80px;
 }
 
-.footer-distributed .footer-left p{
-    color:  #8f9296;
+.footer-distributed .footer-left p {
+    color: #8f9296;
     font-size: 14px;
     margin: 0;
 }
 
+
 /* Footer links */
 
-.footer-distributed p.footer-links{
-    font-size:18px;
+.footer-distributed p.footer-links {
+    font-size: 18px;
     font-weight: bold;
-    color:  #ffffff;
+    color: #ffffff;
     margin: 0 0 10px;
     padding: 0;
 }
 
-.footer-distributed p.footer-links a{
-    display:inline-block;
+.footer-distributed p.footer-links a {
+    display: inline-block;
     line-height: 1.8;
     text-decoration: none;
-    color:  inherit;
+    color: inherit;
 }
 
-.footer-distributed .footer-right{
+.footer-distributed .footer-right {
     float: right;
     margin-top: 6px;
     max-width: 180px;
 }
 
-.footer-distributed .footer-right a{
+.footer-distributed .footer-right a {
     display: inline-block;
     width: 35px;
     height: 35px;
-    background-color:  #33383b;
+    background-color: #33383b;
     border-radius: 2px;
-
     font-size: 20px;
     color: #ffffff;
     text-align: center;
     line-height: 35px;
-
     margin-left: 3px;
 }
+
 
 /* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 600px) {
-
     .footer-distributed .footer-left,
-    .footer-distributed .footer-right{
+    .footer-distributed .footer-right {
         text-align: center;
     }
-
-    .footer-distributed .footer-right{
+    .footer-distributed .footer-right {
         float: none;
         margin: 0 auto 20px;
     }
-
-    .footer-distributed .footer-left p.footer-links{
+    .footer-distributed .footer-left p.footer-links {
         line-height: 1.8;
     }
 }

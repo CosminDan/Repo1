@@ -39,17 +39,20 @@ class Home extends Front_Controller
         );
 
         $panels = array(
-            'arts'    => 'panel-danger',
-            'science' => 'panel-info',
-            'social'  => 'panel-success',
+            'arts'    => array('class' => 'panel-danger', 'icon' => 'institution'),
+            'science' => array('class' => 'panel-info', 'icon' => 'flask'),
+            'social'  => array('class' => 'panel-success', 'icon' => 'group'),
         );
+
+        $articlesNo = 5;
 
         // Get subCategs
         foreach ($mainCats as $i => $mainCat) {
 
             $name = explode(' ', $mainCat->name);
             $mainCat->tab_id = strtolower(current($name));
-            $mainCat->panel = $panels[$mainCat->tab_id];
+            $mainCat->panel = $panels[$mainCat->tab_id]['class'];
+            $mainCat->icon = $panels[$mainCat->tab_id]['icon'];
 
             $subCats = $this->categories_model->find_recursive('pid', $mainCat->id);
             $subCatIDs = array();
@@ -66,7 +69,7 @@ class Home extends Front_Controller
             ->where("{$table['mi']}.status", 'published')
             ->order_by("{$table['a']}.views", 'DESC')
             ->group_by("{$table['a']}.id")
-            ->limit(10)->get();
+            ->limit($articlesNo)->get();
 
             if (!$mainCat->articles_popular = $query->result()) {
                 $mainCat->articles_popular = array();
@@ -81,17 +84,10 @@ class Home extends Front_Controller
             ->where("{$table['mi']}.status", 'published')
             ->order_by("{$table['a']}.created_on", 'DESC')
             ->group_by("{$table['a']}.id")
-            ->limit(10)->get();
+            ->limit($articlesNo)->get();
 
             if (!$mainCat->articles_recent = $query->result()) {
                 $mainCat->articles_recent = array();
-            }
-
-            $query = $this->categories_model
-            ->where('pid', $mainCat->id)
-            ->limit(5);
-            if (!$mainCat->categs_popular = $query->find_all()) {
-                $mainCat->categs_popular = array();
             }
 
             $mainCats[$i] = $mainCat;
