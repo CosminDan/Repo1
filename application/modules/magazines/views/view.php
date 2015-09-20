@@ -17,6 +17,7 @@ if ($article_active) {
 <h1>
     <?php e($article->title); ?>
 </h1>
+
 <h3>
     <?php echo implode(', ', $article->authors); ?>,
     <small>
@@ -74,6 +75,7 @@ if ($article_active) {
                 </a>
               </h4>
             </div>
+
             <div id="collapse<?php e($i); ?>" class="panel-collapse collapse<?php e($show); ?>" role="tabpanel" aria-labelledby="heading<?php e($i); ?>">
               <div class="panel-body">
                 <div>
@@ -94,6 +96,7 @@ if ($article_active) {
                 </div>
               </div>
             </div>
+            
           </div>
         <?php endforeach; ?>
         </div>
