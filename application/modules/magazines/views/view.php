@@ -12,8 +12,7 @@ if ($article_active) {
 ?>
 
 <?php if ($found) { ?>
-<div class="article_main">
-<hr/>
+<div class="article_main bs-callout bs-callout-danger">
 <h1>
     <?php e($article->title); ?>
 </h1>
@@ -31,7 +30,6 @@ if ($article_active) {
         <?php e($article->summary); ?>
     </p>
 
-<hr/>
 </div>
 
 <h2>
@@ -96,7 +94,7 @@ if ($article_active) {
                 </div>
               </div>
             </div>
-            
+
           </div>
         <?php endforeach; ?>
         </div>
