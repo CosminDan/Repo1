@@ -33,8 +33,8 @@ if (! empty($meta_fields)) :
             );
         elseif ($field['form_detail']['type'] == 'checkbox') :
 ?>
-<div class="control-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
-    <label class="control-label" for="<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
+<div class="form-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
+    <label for="<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
     <div class="controls">
         <?php
         echo form_checkbox(
@@ -55,8 +55,8 @@ if (! empty($meta_fields)) :
             $stateFieldId = $field['name'];
             $stateValue = isset($user->$field['name']) ? $user->$field['name'] : $defaultState;
 ?>
-<div class="control-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
-    <label class="control-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_state'); ?></label>
+<div class="form-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
+    <label for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_state'); ?></label>
     <div class="controls">
         <?php
         echo state_select(
@@ -64,7 +64,7 @@ if (! empty($meta_fields)) :
             $defaultState,
             $defaultCountry,
             $field['name'],
-            'span6 chzn-select'
+            'form-control'
         );
         ?>
     </div>
@@ -76,15 +76,15 @@ if (! empty($meta_fields)) :
             $countryFieldId = $field['name'];
             $countryValue = isset($user->$field['name']) ? $user->$field['name'] : $defaultCountry;
 ?>
-<div class="control-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
-    <label class="control-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_country'); ?></label>
+<div class="form-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
+    <label for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_country'); ?></label>
     <div class="controls">
         <?php
         echo country_select(
             set_value($field['name'], isset($user->$field['name']) ? $user->$field['name'] : $defaultCountry),
             $defaultCountry,
             $field['name'],
-            'span6 chzn-select'
+            'form-control'
         );
         ?>
     </div>

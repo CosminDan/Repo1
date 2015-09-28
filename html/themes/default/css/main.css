@@ -155,6 +155,10 @@ div.issue-cover .img-polaroid {
     color: #1b809e;
 }
 
+.form-control {
+    width: 50%;
+}
+
 
 /* Footer */
 
