@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2015 at 08:48 PM
+-- Generation Time: Oct 19, 2015 at 10:17 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `bf_activities` (
   `module` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `deleted` tinyint(12) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_activities`
@@ -81,7 +81,11 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (38, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-01 19:02:30', 0),
 (39, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 11:14:38', 0),
 (40, 1, 'logged in from: 127.0.0.1', 'users', '2015-08-02 18:01:35', 0),
-(41, 1, 'logged in from: ::1', 'users', '2015-08-03 19:41:01', 0);
+(41, 1, 'logged in from: ::1', 'users', '2015-08-03 19:41:01', 0),
+(42, 1, 'logged in from: ::1', 'users', '2015-08-06 19:19:25', 0),
+(43, 1, 'logged in from: ::1', 'users', '2015-09-23 21:25:48', 0),
+(44, 3, 'registered a new account.', 'users', '2015-09-27 14:26:11', 0),
+(45, 1, 'logged in from: ::1', 'users', '2015-09-29 00:16:40', 0);
 
 -- --------------------------------------------------------
 
@@ -105,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_articles`
@@ -140,7 +144,11 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 (267, 27, 8, 'Scrisoare deschisă adresată ARACIS', '6', '', 'Recent, pe data de 10 februarie 2015, ARACIS a remis Universităţii „Apollonia” din Iaşi conţinutul Raportului de evaluare instituţională externă, demers menit „a identifica şi certifica în ce măsură aceasta răspunde interesului public, precum şi măsurile pe care le asigură pentru creşterea calităţii în procesul de predare- învăţare şi în exercitarea dreptului legal de acordare a diplomelor şi calificărilor universitare”.', 'scrisoare descisa,Apollonia,ARACIS,comisie de evaluare', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
 (268, 29, 1, 'Bate vânt de primăvară, dar nu şi la ARACIS', '6', '', 'Acronimul ARACIS denumește foarte clar obiectivul principal al unei agenții care dorește să contribuie la asigurarea calității în învățământul superior (Agenţia Română de Asigurare a Calităţii în Învăţământul Superior).', 'ARACIS,Universitatea Apollonia', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
 (269, 29, 1, '„Lacul Lebedelor”, la Iași', '6', '', '„Lacul Lebedelor” a revenit la Iași. Spectacolul a avut loc aseară, miercuri 11 martie 2015, la Teatrul Luceafărul. Spectacolul de balet, după muzica lui Piotr Ilici Ceaikovski, a fost prezentat de data aceasta de către Teatrul Național de Operă și Balet „Oleg Danovski” din Constanța, aflat într-un turneu național.', 'Lacul lebedelor,balet,spectacol,Piotr Ilici Ceaikovski', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(270, 29, 4, 'Cât de greu e să fii OM!', '6', '', 'Festivitatea aniversară „Marcus nonagenar” care a avut loc duminică, 1 martie 2015, a fost găzduită de Aula Bibliotecii Centrale Universitare „Mihai Eminescu”, eveniment care a adunat alături suma unor personalităţi publice din diverse domenii ale Iaşului care au dorit astfel să-i fie aproape academicianului Solomon Marcus la împlinirea vârstei de 90 de ani!', 'Solomon Marcus', 0, 0, '2015-08-03', 1, '2015-08-03', 1);
+(270, 29, 4, 'Cât de greu e să fii OM!', '6', '', 'Festivitatea aniversară „Marcus nonagenar” care a avut loc duminică, 1 martie 2015, a fost găzduită de Aula Bibliotecii Centrale Universitare „Mihai Eminescu”, eveniment care a adunat alături suma unor personalităţi publice din diverse domenii ale Iaşului care au dorit astfel să-i fie aproape academicianului Solomon Marcus la împlinirea vârstei de 90 de ani!', 'Solomon Marcus', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
+(271, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-05', 1, NULL, NULL),
+(272, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-06', 1, NULL, NULL),
+(273, 30, 2, 'Premii europene pentru studenţii de la „Apollonia”', '6', '', 'La secțiunea materiale video a concursului „Europa Jurnaliștilor din Amfiteatre”, ajuns la a V-a ediție, locurile II și III au revenit studenților de la Facultatea de Științe ale Comunicării din cadrul Universității „Apollonia” din Iași. Câștigătorii au fost anunțați miercuri 11 martie 2015.\r\n\r\nCarmen Epure, Bogdan Lămășanu și Radu Bogdan sunt studenți în anul I la Specializarea Jurnalism. Alin Mureșanu este student la aceeași specializare, în anul III. Producţiile video prezentate în concurs de către studenții noștri au fost coordonate de lect. univ. dr. Marga Andreescu.', 'Apollonia,premii europene,concurs european,studenti,video', 0, 0, '2015-08-06', 1, '2015-08-06', 1),
+(274, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-09-29', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
   `id` int(10) unsigned NOT NULL,
   `article_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_articles_categories`
@@ -168,7 +176,8 @@ INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
 (64, 267, 229),
 (65, 268, 229),
 (66, 269, 7),
-(67, 270, 229);
+(67, 270, 229),
+(70, 273, 82);
 
 -- --------------------------------------------------------
 
@@ -180,7 +189,7 @@ DROP TABLE IF EXISTS `bf_authors`;
 CREATE TABLE IF NOT EXISTS `bf_authors` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_authors`
@@ -201,7 +210,8 @@ INSERT INTO `bf_authors` (`id`, `name`) VALUES
 (32, 'Cornel SImighean'),
 (33, 'Cornel Simighian'),
 (34, 'Aida Zaharia'),
-(35, 'Cornel Simighian');
+(35, 'Cornel Simighian'),
+(36, 'Carmen Prepeliţă');
 
 -- --------------------------------------------------------
 
@@ -214,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
   `id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
@@ -235,7 +245,8 @@ INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
 (30, 267, 32),
 (31, 268, 33),
 (32, 269, 34),
-(33, 270, 35);
+(33, 270, 35),
+(34, 273, 36);
 
 -- --------------------------------------------------------
 
@@ -841,7 +852,7 @@ CREATE TABLE IF NOT EXISTS `bf_institutions` (
   `name` varchar(255) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_institutions`
@@ -884,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
   `founded_year` int(11) DEFAULT NULL,
   `description` text,
   `approved` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_magazines`
@@ -937,7 +948,7 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
   `pdf_file` varchar(200) DEFAULT NULL,
   `cover_file` varchar(200) DEFAULT NULL,
   `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft'
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_magazine_issues`
@@ -946,7 +957,8 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
 INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `pdf_file`, `cover_file`, `status`) VALUES
 (27, 2, 0, 75, 3, 2015, '', 'mag_2/27-6QvglZEXEac0tQoE.pdf', 'mag_2/27-TxYqT6YvuRXJQp0E.jpg', 'published'),
 (28, 2, 0, 75, 3, 2015, 'Nu', 'mag_2/28-9vTbmk7Mr0FRzTRI.pdf', 'mag_2/28-ESYkOjAgi9l02MQN.jpg', 'draft'),
-(29, 2, 0, 76, 3, 2015, '', 'mag_2/29-PBDFHvE9B1pcwjU2.pdf', 'mag_2/29-6Y4DmZrIY4WWwUq6.jpg', 'draft');
+(29, 2, 0, 76, 3, 2015, '', 'mag_2/29-PBDFHvE9B1pcwjU2.pdf', 'mag_2/29-6Y4DmZrIY4WWwUq6.jpg', 'draft'),
+(30, 2, 0, 77, 3, 2015, '', 'mag_2/30-9qHMLZMtHJ0idDev.pdf', 'mag_2/30-CaXnytDX7z2B4p9w.jpg', 'published');
 
 -- --------------------------------------------------------
 
@@ -1251,7 +1263,12 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
 --
 
 INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('fb05397eab900886dbc4c3e074c22ba7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1438623924, 'a:14:{s:9:"user_data";s:0:"";s:14:"requested_page";s:69:"http://localhost/Repo1/html/index.php/admin/content/articles/index/29";s:13:"previous_page";s:69:"http://localhost/Repo1/html/index.php/admin/content/articles/index/29";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:2:"29";s:17:"flash:old:message";s:39:"success::FIXME(''articles_edit_success'')";s:17:"flash:new:message";s:0:"";}');
+('08058b4e7eefff823810ffa02c38fb1d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0', 1445190372, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
+('3e29103a97f979c8e770208dcf10d744', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0', 1445282081, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
+('5bb845ecaf4ee214e7707f6d50a44181', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443458899, ''),
+('8f8f5304564a9a832a2a2565999678a4', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443474907, 'a:13:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";s:12:"search_query";s:25:"{"q":"sange","bla":false}";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:2:"27";}'),
+('a6407ee6aa70b9a0e32ad5010409eb03', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443356417, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
+('f358f850b6a36182084e9539f6d2552d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443365495, '');
 
 -- --------------------------------------------------------
 
@@ -1419,15 +1436,16 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `activate_hash` varchar(40) NOT NULL DEFAULT '',
   `force_password_reset` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bf_users`
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-08-03 19:41:01', '::1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
-(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0);
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-09-29 00:16:40', '::1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
+(3, 4, 'htn.cosmindan@gmail.com', 'Cosmin Dan', '$2a$08$PNlpzuFyrPuTzRwJ8jhCButcHdxozmTupdok2A.pTr.SBQuvyIrny', NULL, '0000-00-00 00:00:00', '', '2015-09-27 14:26:10', 0, NULL, 0, NULL, 'Cosmin Dan', NULL, 'UP2', 'english', 0, '6ad13cd0af59a0fcc94d3dea597d479a5bae20df', 0);
 
 -- --------------------------------------------------------
 
@@ -1447,7 +1465,8 @@ CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
 --
 
 INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
-(1, 'MRlsdlfVQVnV02Bv4HlZZWqeVQURpvK96iP4mQ5VsmJdaB8nBoaNTTLa4djoSzGztUrYYt4VgpI1IGjRADLgJbzYdE6PGbGi1CJLXuXxkqCmJbfMwdqfHf4JYS1vN1qp', '2015-08-03 19:41:01');
+(1, 'P6pgDLR4oMDANfBDBv3uhq394ckFD6anrCZcQFsWXoQjApLoulWvINkB1MLw3XnlZjfOyjtuFZhEyT8itFWSmgxOkdgfhBZdoJYuPjSBKwILqRfXfpvsmghZuxTkkayd', '2015-08-08 05:35:06'),
+(1, 'GM5sQ3p0NcUUt0AP2KrvldFOzNAOTFDhi8eL51Uni5S5TSjFRADEWUFqFLOBdJlyGH6vFNrgfIpueJmZ1EMLu25lb5XjGvPoM98oBrPgUskIF5sU5IbYuEkbN76tG9ip', '2015-09-29 00:16:40');
 
 -- --------------------------------------------------------
 
@@ -1473,8 +1492,8 @@ INSERT INTO `bf_user_meta` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (3, 2, 'state', 'HI'),
 (4, 2, 'country', 'US'),
 (5, 1, 'magazine', '2'),
-(6, 3, 'state', 'HI'),
-(7, 3, 'country', 'US');
+(6, 3, 'state', ''),
+(7, 3, 'country', 'RO');
 
 --
 -- Indexes for dumped tables
@@ -1644,27 +1663,27 @@ ALTER TABLE `bf_user_meta`
 -- AUTO_INCREMENT for table `bf_activities`
 --
 ALTER TABLE `bf_activities`
-  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `bf_articles`
 --
 ALTER TABLE `bf_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=271;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=275;
 --
 -- AUTO_INCREMENT for table `bf_articles_categories`
 --
 ALTER TABLE `bf_articles_categories`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `bf_authors`
 --
 ALTER TABLE `bf_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `bf_authorsofarticles`
 --
 ALTER TABLE `bf_authorsofarticles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `bf_categories`
 --
@@ -1679,7 +1698,7 @@ ALTER TABLE `bf_email_queue`
 -- AUTO_INCREMENT for table `bf_institutions`
 --
 ALTER TABLE `bf_institutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `bf_login_attempts`
 --
@@ -1689,7 +1708,7 @@ ALTER TABLE `bf_login_attempts`
 -- AUTO_INCREMENT for table `bf_magazines`
 --
 ALTER TABLE `bf_magazines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bf_magazines_categories`
 --
@@ -1704,7 +1723,7 @@ ALTER TABLE `bf_magazine_categories`
 -- AUTO_INCREMENT for table `bf_magazine_issues`
 --
 ALTER TABLE `bf_magazine_issues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `bf_magazine_staff`
 --
@@ -1729,7 +1748,7 @@ ALTER TABLE `bf_states`
 -- AUTO_INCREMENT for table `bf_users`
 --
 ALTER TABLE `bf_users`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `bf_user_meta`
 --
