@@ -1,6 +1,6 @@
 <?php
 
-$num_columns = 8;
+$num_columns = 7;
 $can_delete = $this->auth->has_permission('Articles.Content.Delete');
 $can_edit  = $this->auth->has_permission('Articles.Content.Edit');
 $has_records = isset($records) && is_array($records) && count($records);
@@ -23,8 +23,7 @@ if ($can_delete) {
 
                     <th><?php echo lang('articles_field_title'); ?></th>
                     <th><?php echo lang('articles_field_page'); ?></th>
-                    <th><?php echo lang('articles_field_affiliation'); ?></th>
-                    <th><?php echo lang('articles_field_references'); ?></th>
+                    <th><?php echo lang('articles_field_authors'); ?></th>
                     <th><?php echo lang('articles_field_summary'); ?></th>
                     <th><?php echo lang('articles_field_tags'); ?></th>
                     <th><?php echo lang('pa_actions'); ?></th>
@@ -54,8 +53,7 @@ if ($has_records) :
 
                     <td><?php echo anchor(SITE_AREA . '/content/articles/edit/' . $record->id, $record->title); ?></td>
                     <td><?php e($record->page); ?></td>
-                    <td><?php e($record->affiliation_name); ?></td>
-                    <td><?php e($record->references); ?></td>
+                    <td><?php e(implode(', ', $record->authors)); ?></td>
                     <td><?php echo "{$record->summary_count} words"; ?></td>
                     <td>
                         <?php foreach ($record->tags as $tag) { ?>

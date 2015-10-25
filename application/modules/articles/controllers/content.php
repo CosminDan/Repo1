@@ -106,8 +106,8 @@ class Content extends Admin_Controller
         foreach (range(0, 1) as $i) {
             $this->articles_model->where('articles.issue_id', $issue->id);
             if ($i) {
-                $this->articles_model->select('articles.*, institutions.name AS affiliation_name');
-                $this->db->join('institutions', "institutions.id = articles.affiliation", 'left');
+                //$this->articles_model->select('articles.*, institutions.name AS affiliation_name');
+                //$this->db->join('institutions', "institutions.id = articles.affiliation", 'left');
                 $this->articles_model->limit($limit, $offset);
                 $records = $this->articles_model->find_all();
             } else {

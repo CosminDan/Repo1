@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 19, 2015 at 10:17 PM
--- Server version: 5.6.24
--- PHP Version: 5.5.24
+-- Host: localhost
+-- Generation Time: Oct 25, 2015 at 07:20 PM
+-- Server version: 5.5.44-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `bf_activities`;
 CREATE TABLE IF NOT EXISTS `bf_activities` (
-  `activity_id` bigint(20) NOT NULL,
+  `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `activity` varchar(255) NOT NULL,
   `module` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL,
-  `deleted` tinyint(12) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+  `deleted` tinyint(12) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`activity_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `bf_activities`
@@ -85,7 +86,8 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 (42, 1, 'logged in from: ::1', 'users', '2015-08-06 19:19:25', 0),
 (43, 1, 'logged in from: ::1', 'users', '2015-09-23 21:25:48', 0),
 (44, 3, 'registered a new account.', 'users', '2015-09-27 14:26:11', 0),
-(45, 1, 'logged in from: ::1', 'users', '2015-09-29 00:16:40', 0);
+(45, 1, 'logged in from: ::1', 'users', '2015-09-29 00:16:40', 0),
+(46, 1, 'logged in from: 79.112.24.48', 'users', '2015-10-24 05:22:51', 0);
 
 -- --------------------------------------------------------
 
@@ -95,11 +97,12 @@ INSERT INTO `bf_activities` (`activity_id`, `user_id`, `activity`, `module`, `cr
 
 DROP TABLE IF EXISTS `bf_articles`;
 CREATE TABLE IF NOT EXISTS `bf_articles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `issue_id` int(11) NOT NULL DEFAULT '0',
   `page` int(11) DEFAULT NULL,
-  `title` varchar(100) NOT NULL,
-  `affiliation` varchar(100) DEFAULT NULL,
+  `title` varchar(256) NOT NULL,
+  `affiliation` varchar(256) DEFAULT NULL,
+  `author_email` varchar(256) DEFAULT NULL,
   `references` text,
   `summary` text,
   `tags` text,
@@ -108,47 +111,24 @@ CREATE TABLE IF NOT EXISTS `bf_articles` (
   `created_on` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_on` date DEFAULT NULL,
-  `modified_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8;
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=284 ;
 
 --
 -- Dumping data for table `bf_articles`
 --
 
-INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `references`, `summary`, `tags`, `views`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
-(242, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(243, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(244, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(245, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(246, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(247, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(248, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(249, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(250, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(251, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(252, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(253, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(254, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(255, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(256, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(257, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(258, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(259, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(260, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(261, 28, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-03', 1, NULL, NULL),
-(262, 27, 2, '„Suntem o universitate mică, dar gălăgioasă”', '6', '', 'cuvântul preşedintelui Universităţii „Apollonia” din Iaşi, prof. univ. dr. Vasile Burlui, la deschiderea oficială a Congresului Internaţional „Pregătim viitorul, promovând excelenţa”, ediţia a XXV-a, 26 februarie – 1 martie 2015, Iaşi', 'Apollonia,Vasile Burlui,congres international,universitate', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(263, 27, 2, 'SÂNGE CALD DE APOLLONIA', '6', '', 'Despre ARACIS am mai vorbit. De această dată aș fi dorit să scriu „de bine”. Aș fi dorit să am motive să scriu de bine. Paradoxal, despre ARACIS nu se poate vorbi decât de bine. Este o instituţie necesară progresului învățământului, chiar dacă despre importanță ei sunt păreri diferite și controversate, chiar în interiorul ariei ei de responsabilitate.', 'pe coji de nuci,editorial,Apollonia,Adi Cristi,ARACIS', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(264, 27, 3, 'Congresul Internaţional „Pregătim viitorul promovând excelenţa”', '6', '', 'Aceste manifestări asociate complementar ediţiei a XXV-a a Congresului Internaţional „Pregătim viitorul promovând excelenţa”, au avut loc în perioada 24 februarie -1 martie 2015', 'congresul international,Pregatim viitorul promovand excelenta,Apollonia,tehnica dentara,medicina dentara,medicina generala,BalneoFizioKinetoTerapie', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(265, 27, 4, 'MEMORIU cu privire la propunerea de acordare a calificativului', '6', '', 'Comunitatea academică a luat act cu stupefacție de calificativele propuse pentru Universitatea „Apollonia” din Iași, după cum urmează:\r\n\r\n    Lipsă de încredere – Instituțional\r\n    Neîncredere – propunere de intrare în lichidare, Programul de studiu Medicină Dentară, Facultatea de Medicină Dentară\r\n    Încredere limitată – Acreditare – Programul de studiu Comunicare şi Relaţii Publice, Facultatea de Științe ale Comunicării\r\n    Încredere limitată – Acreditare – Programul de studiu Jurnalism, Facultatea de Științe ale Comunicării.', 'Universitatea Apollonia,memoriu,ARACIS,acreditare', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(266, 27, 8, 'Premiile UZPR', '6', '', 'Luni,  9 martie 2015, de la ora 18.00, la Institutul Cultural Român din Bucureşti, Str. Aleea Alexandru Nr. 38, va avea loc Gala Premiilor Uniunii Ziariștilor Profesioniști din România pe anul 2014.', 'Uniunea Ziaristilor Profesionisti,premii,UZP', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(267, 27, 8, 'Scrisoare deschisă adresată ARACIS', '6', '', 'Recent, pe data de 10 februarie 2015, ARACIS a remis Universităţii „Apollonia” din Iaşi conţinutul Raportului de evaluare instituţională externă, demers menit „a identifica şi certifica în ce măsură aceasta răspunde interesului public, precum şi măsurile pe care le asigură pentru creşterea calităţii în procesul de predare- învăţare şi în exercitarea dreptului legal de acordare a diplomelor şi calificărilor universitare”.', 'scrisoare descisa,Apollonia,ARACIS,comisie de evaluare', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(268, 29, 1, 'Bate vânt de primăvară, dar nu şi la ARACIS', '6', '', 'Acronimul ARACIS denumește foarte clar obiectivul principal al unei agenții care dorește să contribuie la asigurarea calității în învățământul superior (Agenţia Română de Asigurare a Calităţii în Învăţământul Superior).', 'ARACIS,Universitatea Apollonia', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(269, 29, 1, '„Lacul Lebedelor”, la Iași', '6', '', '„Lacul Lebedelor” a revenit la Iași. Spectacolul a avut loc aseară, miercuri 11 martie 2015, la Teatrul Luceafărul. Spectacolul de balet, după muzica lui Piotr Ilici Ceaikovski, a fost prezentat de data aceasta de către Teatrul Național de Operă și Balet „Oleg Danovski” din Constanța, aflat într-un turneu național.', 'Lacul lebedelor,balet,spectacol,Piotr Ilici Ceaikovski', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(270, 29, 4, 'Cât de greu e să fii OM!', '6', '', 'Festivitatea aniversară „Marcus nonagenar” care a avut loc duminică, 1 martie 2015, a fost găzduită de Aula Bibliotecii Centrale Universitare „Mihai Eminescu”, eveniment care a adunat alături suma unor personalităţi publice din diverse domenii ale Iaşului care au dorit astfel să-i fie aproape academicianului Solomon Marcus la împlinirea vârstei de 90 de ani!', 'Solomon Marcus', 0, 0, '2015-08-03', 1, '2015-08-03', 1),
-(271, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-05', 1, NULL, NULL),
-(272, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-08-06', 1, NULL, NULL),
-(273, 30, 2, 'Premii europene pentru studenţii de la „Apollonia”', '6', '', 'La secțiunea materiale video a concursului „Europa Jurnaliștilor din Amfiteatre”, ajuns la a V-a ediție, locurile II și III au revenit studenților de la Facultatea de Științe ale Comunicării din cadrul Universității „Apollonia” din Iași. Câștigătorii au fost anunțați miercuri 11 martie 2015.\r\n\r\nCarmen Epure, Bogdan Lămășanu și Radu Bogdan sunt studenți în anul I la Specializarea Jurnalism. Alin Mureșanu este student la aceeași specializare, în anul III. Producţiile video prezentate în concurs de către studenții noștri au fost coordonate de lect. univ. dr. Marga Andreescu.', 'Apollonia,premii europene,concurs european,studenti,video', 0, 0, '2015-08-06', 1, '2015-08-06', 1),
-(274, 27, NULL, 'Untitled', NULL, NULL, NULL, NULL, 0, 0, '2015-09-29', 1, NULL, NULL);
+INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `author_email`, `references`, `summary`, `tags`, `views`, `deleted`, `created_on`, `created_by`, `modified_on`, `modified_by`) VALUES
+(275, 31, 159, 'Social Implication of Gender Issues within Contemporary Academic Policies', '7', NULL, 'ALTBACH, GP. (ed) (2000) The Changing Academic Workplace: Comparative Perspectives, Boston College C', 'Gender subject represented a neglected theme on the\ntransitional agenda in most of the post-communist societies.\nThe presence of a conflictual memory regarding gender\ncommunist policies and the resurrection of a traditionalist\ntransitional culture nourished a set of multiple cultural and\nstructural cleavages. The general status of women within\nEast European Academia was depreciating, contrary to\nsome apparently positive evolutions. The central paradox\nof women`s condition in the field of Higher Education was\nconcerned with an apparent equilibration of gender gap in\nthe upper levels of academic pyramid while, at the bottom\nof hierarchies, women became a subject of a double\nmarginalization mechanism. The study aims at investigating\nthe main sources of gender inequalities in the sphere of\nacademic formation, with a focus point on the social\nimplications of post-welfare state paradigm.', 'gender,Higher Education,social implication,academic policies,transitional societies', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(276, 31, 170, 'Press Information, from Objectivity to Manipulation (II)', '8', NULL, 'ARISTOTEL (1988) Etica NicomahicÄ, BucureÅti: Scientific and Pedagogic Publishing House. BACHELARD, ', 'Postmodern public looks for its identity in front of the\nTV screen, and identity becomes common for the consumers\nof the same audio-visual products. In this way, media has\nthe power to create social identity. The individual of our\ndays is the victim of stress, of an agglomerated and\ntensioned life, so that what he looks for in TV shows is\nrelaxation, ease, leaving aside, for at least a few moments,\nhis daily problems. TV media takes full advantage of this\nsituation, offering to its audience the amusement it\nrequires. Unfortunately, hidden behind are the real\nintentions of the ones who control and compel by means\nof mass media: manipulation and false information.', 'mass-media,public,manipulation,public poll,persuasion', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(277, 31, 176, 'Entrepreneurship Education in Romania in Comparison to the European Union', '9', NULL, 'BOLDUREANU, G., LACHE, C., PÄDURARU T., BOLDUREANU D. & NICULESCU N. (2013) Studentsâ entrepreneuria', 'Developing the entrepreneurial spirit in the young\ngeneration is one of the priorities the European Commission\nhas set under the Lisbon Conference in 2000 concerning\nthe competitiveness and innovation in the knowledgebased\nsociety. The current concerns of the Commission in\nthis field relate mainly the contribution of instruction in\nschools and universities in the development of the\nentrepreneurial capacity of young people.\nThe paper meets the European concerns in the field of\nentrepreneurial education by investigating the role of\neducation in entrepreneurship in Romania in comparison\nto the European Union. For this analysis we used the\nâFlash Eurobarometer 354, Entrepreneurship in the EU and\nbeyond conducted in June - August 2012â.', 'entrepreneurship education,entrepreneurship,competencies,schools,universities', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(278, 31, 183, 'The Importance of Cultural Magazines in Reconsolidating the National Identity', '10', NULL, 'ConstituÅ£ia RomÃ¢niei, Art. 30, alin. 1, 2003. Colocviul NaÅ£ional al Revistelor de CulturÄ, Arad: Arc', 'In this article we intend to present the role that the cultural magazines must have in the reinforcing process of national identity. Cultural magazines are part of the\nforming process of modern Romanian state. Thus, the starting point was highlighted in 1840 by âDacia LiterarÄâ magazine. National identity is an actual term in the context of globalization and its European Union but tends to be\nalmost replaced by the so-called multi - national identity. National identity must be maintained even in conditions of globalization and decrease of cultural borders, a process that happens in the European Union today.', 'cultural magazines,reconsolidation,national identity,the European Union', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(279, 31, 191, 'An X-RAY of Upe (African Flute) in African Communication System', '11', NULL, 'AKPABIO, E. (2003) African communication systems: An introductory text, Lagos: B print Publications.', 'Scholars in communication especially in mass\ncommunication have their views reflected in Western\ncommunication and see no serious business in discussing\nAfrican communication in African context as if Africans\nhad no means of communication before their contact with\nthe western world. Assumptions of such scholars are just\nan attempt to cannibalise the effective traditional media\nwhich Africans have explored over the ages to reach and\nachieve their target within a specific culture. This paper\nthrough personal interviews explores the African flute, its\nuses, limitations and how it can be combined with other\nmedia in traditional settings to achieve the maximum\neffect. It however recommends, among other things, the\nsupport of African governments (both at a local and\nnational level) to find experts on traditional media in order\nto develop and advance the hardwares.', 'Indigenous Media,Modern Communication,Non-verbal Communication,Verbal Communication,Selective Exposure', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(280, 31, 199, 'The truth about Sancho Panza by F. Kafka in the Aspects of Humanization of Myth', '12', NULL, 'BENJAMIN, W. (1968) Illuminations. New York: Schocken books. DURÃN, M. (1989) Franz Kafka interpreta', 'The tradition established by European literature is\nrevealed within the framework of the authorâs concept of\nhumanization of myth (applying its terms and concepts\nsuch as the myth of laughter, the myth of non-totem-deathâs\nabolition, beneficent trickster, etc.). This tradition implies\nusing in a trickster manner the reminiscences of the Book\nof Job and implementing in a laughter way the intention\noffered by the mythologem of Job, i.e. abolishing non-totemdeath\nby joint efforts of God and man. The tradition is\nrepresented by such names as J. W. Goethe, F. Kafka and\nTh. Mann. According to Goethe, the story of the torment\npredetermined by God of a man known to be righteous\n(Job) is replaced by the story of the salvation predetermined\nby God of a man known as a sinner (Faust), who has sold\nhis soul to the devil. God Himself is a trickster. According\nto Goethe, God actually verbalizes the postulate of the\npowerlessness of evil. Kafka accentuates human actions.\nSancho makes a righteous choice when faced by evil-nontotem:\nthe protagonist is haunted by a demon who is\nsupposed to destroy him and initiate a lot of disasters\nthrough him. However, Sancho, using the books of\nchivalry, in a laughter manner frees himself, the Universe\nand even the demon from the terrible predestination:\nSancho gives the demon a human name (Don Quixote),\ntempts him by good and never abandons him.According\nto Th. Mann, the aspect of cooperation between God and\nman is verbalized in a trickster way.', 'European tradition,humanization of myth,mythologem of Job,myth of laughter,myth of non-totem-deathâs abolition', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(281, 31, 209, 'Understanding Magic: Magical Thinking and the Generation Gap', '13', NULL, 'AARNIO, K. (2007) Paranormal, superstitious, magical, and religious beliefs, Department of Psycholog', 'The article analyzes the possible connections one can\nestablish between understanding magic (the way\nindividuals view magic), magical thinking, generations\nand other factors, such as anomia, stress reaction, wellbeing,\nexistential anxiety, locus of control, risk avoidance.\nThe here presented ideas are based on an extended study\non magical thinking, the data supporting the theoretical\nmodel having been collected from 102 applied scales. We\nstart by describing the method, the scales used in the study\nand the variables of interest. Once our method is clear, we\nshow a number of tables and the general results obtained.\nThe aim is to show significant correlations between magical\nthinking and well-being, locus of control, anomia,\nexistential anxiety, stress reaction, sociabiliy. Moreover,\ncorrelations of interest were made in two separate groups:\nthose who believe that magic is an alternative system, a\ndifferent manner of viewing the world, and those who see\nmagic as old, useless ideas - a hoax. This distinction allows\nus to go even further: the first group is part of what\nresearchers called generation Y or the Millennials, while\nthe second group is part of generation X. We found an\ninteresting connection between understanding magic and\nthese two distinct generations.', 'generations,magical thinking,magic', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(282, 31, 218, 'Initiation Rites and Pagan Religion in the 19th Century: The Case of Cagliostro of Les IlluminÃ©s', '14', NULL, 'AMADOU, R. (dir.) (1960), Aspects de lâilluminisme au XVIIIe siÃ¨cle, Les Cahiers de La Tour de Saint', 'Our analysis is dedicated to the portraits of the eccentric\nenlightened Cagliostro. The hatching of the eccentric\nilluminisme, as fanciful opinion, of this character cannot\nabandon the historic period in which the visionaries\nreproduce their ideas concerning the religion, aimed at the\nChristianity and the Paganism. Nerval finds a good\nopportunity to center himself on spiritual e(x)ccentricities\nof the other one. This paper aims to show how Nerval, at\nthe same time fascinated and critical with regard to the\nsystems of his character, look himself through this one for\nhis own religious way with all the more fervor and concern\nas he knows that he is not able to be connected with what\nthat dogma whether it is.', 'antique superstition,dogma,illuminisme,lights,pagan religion,rites,spiritual e(x)ccentricities', 0, 0, '2015-10-24', 1, '2015-10-24', 1),
+(283, 31, 222, 'Educational Discourse Analysis', '15', NULL, 'ALBULESCU, I. (2009) The Pragmatics of Teaching, PiteÅti: Paralela 45. BOREL, MJ. (1980) Discours Ex', 'The academic teaching and learning involves the\ntransmission of information from the teacher, as a\ntransmitter,to the students, the recipients of the message,\nand in this process training them, shaping their intellect.\nWhen Jackbson described the function of language, starting\nfrom the realities of the linguistic communication, he\nintroduced the concepts of destinator (the teacher in the\nteaching activities), recipient /destinatar (the student),\nmessage (the information/knowledge), all within a context\nand using code . The understanding, the interpretation of\nthe information sent to students as recipients, its decoding,\ninvolves explaining the meanings contained in the message,\nwhich rests upon the destinator who, in his didactic\ndiscourse, âtranslatesâ, explains, creates representations\nleading to the understanding of concepts, to their\nacquisition.', 'didactic discourse,discourse procedures,knowledge,communication,locutor,interlocutor', 0, 0, '2015-10-24', 1, '2015-10-24', 1);
 
 -- --------------------------------------------------------
 
@@ -158,26 +138,26 @@ INSERT INTO `bf_articles` (`id`, `issue_id`, `page`, `title`, `affiliation`, `re
 
 DROP TABLE IF EXISTS `bf_articles_categories`;
 CREATE TABLE IF NOT EXISTS `bf_articles_categories` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `bf_articles_categories`
 --
 
 INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
-(59, 262, 228),
-(60, 263, 229),
-(61, 264, 229),
-(62, 265, 232),
-(63, 266, 17),
-(64, 267, 229),
-(65, 268, 229),
-(66, 269, 7),
-(67, 270, 229),
-(70, 273, 82);
+(71, 275, 266),
+(72, 276, 14),
+(73, 277, 228),
+(74, 278, 14),
+(75, 279, 224),
+(76, 280, 16),
+(77, 281, 16),
+(78, 282, 16),
+(79, 283, 14);
 
 -- --------------------------------------------------------
 
@@ -187,31 +167,28 @@ INSERT INTO `bf_articles_categories` (`id`, `article_id`, `category_id`) VALUES
 
 DROP TABLE IF EXISTS `bf_authors`;
 CREATE TABLE IF NOT EXISTS `bf_authors` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `bf_authors`
 --
 
 INSERT INTO `bf_authors` (`id`, `name`) VALUES
-(21, 'prof. univ. dr. Vasile Burlui'),
-(22, 'Adi Cristi'),
-(23, 'Mihaela Sandra Onică'),
-(24, 'Alin Mureşanu'),
-(25, 'Dan Coţcaru'),
-(26, 'Prof.univ.dr. Vasile Burlui'),
-(27, 'Prof.univ.dr. Carmen Stadoleanu'),
-(28, 'Conf.univ.dr. Gabriela Mihalache'),
-(29, 'Conf.univ.dr. Elena Folescu'),
-(30, 'Conf.univ.dr. Dan Gabriel Sîmbotin'),
-(31, 'Cornel Simighean'),
-(32, 'Cornel SImighean'),
-(33, 'Cornel Simighian'),
-(34, 'Aida Zaharia'),
-(35, 'Cornel Simighian'),
-(36, 'Carmen Prepeliţă');
+(37, 'Iulia ANGHEL'),
+(38, 'Maria FLOREA'),
+(39, 'Gabriela BOLDUREANU'),
+(40, 'Adrian Rosentzveig'),
+(41, 'Adi Cristi'),
+(42, 'Felix OLAJIDE TALABI'),
+(43, 'Benjamin KAYODE OGUNDEJI'),
+(44, 'Solomon OKIOYA'),
+(45, 'Jozefina CUÅNIR'),
+(46, 'Dora-Alexandra CANA'),
+(47, 'Elena Mihaela ANDREI'),
+(48, 'Marius Narcis MANOLIU');
 
 -- --------------------------------------------------------
 
@@ -221,32 +198,29 @@ INSERT INTO `bf_authors` (`id`, `name`) VALUES
 
 DROP TABLE IF EXISTS `bf_authorsofarticles`;
 CREATE TABLE IF NOT EXISTS `bf_authorsofarticles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+  `author_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `bf_authorsofarticles`
 --
 
 INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
-(19, 262, 21),
-(20, 263, 22),
-(21, 264, 23),
-(22, 264, 24),
-(23, 264, 25),
-(24, 265, 26),
-(25, 265, 27),
-(26, 265, 28),
-(27, 265, 29),
-(28, 265, 30),
-(29, 266, 31),
-(30, 267, 32),
-(31, 268, 33),
-(32, 269, 34),
-(33, 270, 35),
-(34, 273, 36);
+(35, 275, 37),
+(36, 276, 38),
+(37, 277, 39),
+(38, 278, 40),
+(39, 278, 41),
+(40, 279, 42),
+(41, 279, 43),
+(42, 279, 44),
+(43, 280, 45),
+(44, 281, 46),
+(45, 282, 47),
+(46, 283, 48);
 
 -- --------------------------------------------------------
 
@@ -256,11 +230,12 @@ INSERT INTO `bf_authorsofarticles` (`id`, `article_id`, `author_id`) VALUES
 
 DROP TABLE IF EXISTS `bf_categories`;
 CREATE TABLE IF NOT EXISTS `bf_categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `selectable` smallint(6) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8;
+  `selectable` smallint(6) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=277 ;
 
 --
 -- Dumping data for table `bf_categories`
@@ -555,8 +530,32 @@ CREATE TABLE IF NOT EXISTS `bf_ci3_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `data` blob NOT NULL
+  `data` blob NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bf_ci3_sessions`
+--
+
+INSERT INTO `bf_ci3_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('050266a7bf3a99f51ef20f354b61476475cacba6', '5.13.202.179', 1445533914, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353533333931343b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('0d76c91549e9d918e882ba002928f7767f1f914b', '107.173.154.90', 1445520330, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353532303333303b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('0d91065cdb73299a882eb2f0fa8ffe8f6b4a485a', '192.3.143.43', 1445536924, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353533363932343b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('1f7d931dc470b8f5c3fe44cc420868cf355028da', '79.112.3.136', 1445460524, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353436303334363b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('4a3ce74c4ce134bc5d3a2cf6351473b470d0d6b9', '79.112.124.29', 1445539212, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353533393231323b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('5f3893fdfa96fb0e832ac503de6bf088e6a8ec76', '79.112.107.39', 1445521973, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353532313937333b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('86dcba9ad3a2b22b73e259ed3f8ac74d64d76486', '5.13.202.179', 1445539663, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353533393636333b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('898962748351fff2f5e583f70abfe897228a4bf0', '46.102.175.250', 1445508606, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353530383630363b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('8fc5960547315b3dc97d62079f3a3a36a2fee9a2', '66.249.64.141', 1445470461, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353437303436313b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('b3df20438933a2b4c601ce6c4628b978508cb603', '79.112.107.8', 1445460641, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353436303630353b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b6d6573736167657c733a303a22223b5f5f63695f766172737c613a313a7b733a373a226d657373616765223b733a333a226e6577223b7d),
+('b641e72116e1e6c03f3e997bb8cb59cc81058143', '172.245.120.201', 1445481097, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353438313039373b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('b67192b8e4d7767a35fbe750fc663d4bfe18c2ea', '79.112.107.8', 1445460594, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353436303239373b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('b7807e86cda3c48148bfd11b5b328fa4e36218e4', '107.173.250.38', 1445495318, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353439353331383b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('ce332e819bca8f495c716482f51300eed0e7fc11', '79.112.107.39', 1445495368, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353439353336383b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('d678669995899e8c85ff026a7670c9309c4ff841', '79.112.107.39', 1445501429, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353530313432393b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('def1ffb583d493f9637e2809586665e36ab58e17', '176.126.252.11', 1445518692, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353531383639323b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b),
+('e53e2c2cb5b457c06b4ec940d5e009e94f9593ed', '172.245.110.132', 1445469745, 0x5f5f63695f6c6173745f726567656e65726174657c693a313434353436393734353b7265717565737465645f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b70726576696f75735f706167657c733a33353a22687474703a2f2f706f6c797068656d75732d6173692e636f6d2f696e6465782e706870223b);
 
 -- --------------------------------------------------------
 
@@ -570,7 +569,8 @@ CREATE TABLE IF NOT EXISTS `bf_countries` (
   `name` varchar(80) NOT NULL,
   `printable_name` varchar(80) NOT NULL,
   `iso3` char(3) DEFAULT NULL,
-  `numcode` smallint(6) DEFAULT NULL
+  `numcode` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`iso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -826,7 +826,7 @@ INSERT INTO `bf_countries` (`iso`, `name`, `printable_name`, `iso3`, `numcode`) 
 
 DROP TABLE IF EXISTS `bf_email_queue`;
 CREATE TABLE IF NOT EXISTS `bf_email_queue` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `to_email` varchar(254) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
@@ -837,8 +837,9 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
   `date_published` datetime DEFAULT NULL,
   `last_attempt` datetime DEFAULT NULL,
   `date_sent` datetime DEFAULT NULL,
-  `csv_attachment` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `csv_attachment` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -848,18 +849,27 @@ CREATE TABLE IF NOT EXISTS `bf_email_queue` (
 
 DROP TABLE IF EXISTS `bf_institutions`;
 CREATE TABLE IF NOT EXISTS `bf_institutions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `bf_institutions`
 --
 
 INSERT INTO `bf_institutions` (`id`, `name`, `created_on`, `created_by`) VALUES
-(6, 'Universitatea "Apollonia" din Iasi', '2015-07-06', 1);
+(7, 'Researcher, Romanian Academy, IaÅi Branch', '2015-10-24', 1),
+(8, 'Lecturer, PhD, âApolloniaâ University of IaÅi', '2015-10-24', 1),
+(9, '1Researcher, Department for Interdisciplinary Research in Social Sciences and Humanities âAlexandru Ioan Cuzaâ University of Iasi', '2015-10-24', 1),
+(10, 'PhD Student, Faculty of Philosophy and Social-Political Sciences, âAlexandru Ioan Cuzaâ University, Iasi', '2015-10-24', 1),
+(11, 'Department of Mass Communication, Rufus Giwa Polytechnic, Owo, Ondo State, Nigeria.', '2015-10-24', 1),
+(12, 'PhD, Institute of Cultural Patrimony of the Academy of Sciences of Moldova, Republic of Modova', '2015-10-24', 1),
+(13, 'PhD. Candidate, SOP HRD/159/1.5/S/132400 Project, Alexandru Ioan Cuza University of IaÅi, Romania.', '2015-10-24', 1),
+(14, 'Lecturer, PhD, âApolloniaâ University of Iasi', '2015-10-24', 1),
+(15, 'Prof. âModern Languages Instituteâ of Apolloniaâ University of Iasi, PhD Candidate, âStefan cel Mareâ University of Suceava', '2015-10-24', 1);
 
 -- --------------------------------------------------------
 
@@ -869,11 +879,12 @@ INSERT INTO `bf_institutions` (`id`, `name`, `created_on`, `created_by`) VALUES
 
 DROP TABLE IF EXISTS `bf_login_attempts`;
 CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -883,7 +894,7 @@ CREATE TABLE IF NOT EXISTS `bf_login_attempts` (
 
 DROP TABLE IF EXISTS `bf_magazines`;
 CREATE TABLE IF NOT EXISTS `bf_magazines` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `issn` varchar(50) DEFAULT NULL,
   `language` varchar(30) DEFAULT NULL,
@@ -894,15 +905,16 @@ CREATE TABLE IF NOT EXISTS `bf_magazines` (
   `phoneno` varchar(20) DEFAULT NULL,
   `founded_year` int(11) DEFAULT NULL,
   `description` text,
-  `approved` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `approved` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `bf_magazines`
 --
 
 INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `language`, `publisher`, `editorial_address`, `email`, `website`, `phoneno`, `founded_year`, `description`, `approved`) VALUES
-(2, 'Nova Apollonia', '2344 – 3421', 'ro', 'Editura Apollonia', 'bld. Stefan cel Mare si Sfant, nr. 3', 'novaapollonia@gmail.com', 'http://www.novaapollonia.ro', '0700000000', 2013, 'Saptamanal de cultura, educatie, informatie', 1);
+(3, 'International Journal of Communication Research', '2246-9265', 'en', 'âApolloniaâ Publishing House', 'IaÅi, Str. Muzicii nr. 2 - Romania', 'contact@ijcr.eu', 'www.ijcr.eu', '', 0, 'Issued under the patronage of the Academy of Romanian Scientists with the support of the âOamenii CetÄÅ£iiâ Foundation and âApolloniaâ University of IaÅi â Romania', 1);
 
 -- --------------------------------------------------------
 
@@ -912,10 +924,11 @@ INSERT INTO `bf_magazines` (`id`, `title`, `issn`, `language`, `publisher`, `edi
 
 DROP TABLE IF EXISTS `bf_magazines_categories`;
 CREATE TABLE IF NOT EXISTS `bf_magazines_categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `magazine_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -925,10 +938,11 @@ CREATE TABLE IF NOT EXISTS `bf_magazines_categories` (
 
 DROP TABLE IF EXISTS `bf_magazine_categories`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `magazine_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -938,7 +952,7 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_categories` (
 
 DROP TABLE IF EXISTS `bf_magazine_issues`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `magazine_id` int(11) NOT NULL DEFAULT '0',
   `volume` int(11) DEFAULT '0',
   `number` int(11) DEFAULT '0',
@@ -947,18 +961,16 @@ CREATE TABLE IF NOT EXISTS `bf_magazine_issues` (
   `special` varchar(100) DEFAULT NULL,
   `pdf_file` varchar(200) DEFAULT NULL,
   `cover_file` varchar(200) DEFAULT NULL,
-  `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft'
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  `status` enum('draft','pending','published') NOT NULL DEFAULT 'draft',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `bf_magazine_issues`
 --
 
 INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year_issue`, `year_published`, `special`, `pdf_file`, `cover_file`, `status`) VALUES
-(27, 2, 0, 75, 3, 2015, '', 'mag_2/27-6QvglZEXEac0tQoE.pdf', 'mag_2/27-TxYqT6YvuRXJQp0E.jpg', 'published'),
-(28, 2, 0, 75, 3, 2015, 'Nu', 'mag_2/28-9vTbmk7Mr0FRzTRI.pdf', 'mag_2/28-ESYkOjAgi9l02MQN.jpg', 'draft'),
-(29, 2, 0, 76, 3, 2015, '', 'mag_2/29-PBDFHvE9B1pcwjU2.pdf', 'mag_2/29-6Y4DmZrIY4WWwUq6.jpg', 'draft'),
-(30, 2, 0, 77, 3, 2015, '', 'mag_2/30-9qHMLZMtHJ0idDev.pdf', 'mag_2/30-CaXnytDX7z2B4p9w.jpg', 'published');
+(31, 3, 5, 3, 0, 2015, '', 'mag_3/31-qc23RQuGrPhCQwXz.pdf', 'mag_3/31-uMfAjVlcipjjaGp3.jpg', 'published');
 
 -- --------------------------------------------------------
 
@@ -968,11 +980,13 @@ INSERT INTO `bf_magazine_issues` (`id`, `magazine_id`, `volume`, `number`, `year
 
 DROP TABLE IF EXISTS `bf_magazine_staff`;
 CREATE TABLE IF NOT EXISTS `bf_magazine_staff` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `magazine_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `role_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `magazine_id` (`magazine_id`,`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `bf_magazine_staff`
@@ -994,11 +1008,12 @@ INSERT INTO `bf_magazine_staff` (`id`, `magazine_id`, `user_id`, `role_id`) VALU
 
 DROP TABLE IF EXISTS `bf_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_permissions` (
-  `permission_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(100) NOT NULL,
-  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+  `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
+  PRIMARY KEY (`permission_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `bf_permissions`
@@ -1076,7 +1091,7 @@ INSERT INTO `bf_permissions` (`permission_id`, `name`, `description`, `status`) 
 
 DROP TABLE IF EXISTS `bf_roles`;
 CREATE TABLE IF NOT EXISTS `bf_roles` (
-  `role_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(60) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `default` tinyint(1) NOT NULL DEFAULT '0',
@@ -1084,8 +1099,9 @@ CREATE TABLE IF NOT EXISTS `bf_roles` (
   `login_destination` varchar(255) NOT NULL DEFAULT '/',
   `deleted` int(1) NOT NULL DEFAULT '0',
   `default_context` varchar(255) NOT NULL DEFAULT 'content',
-  `magazine_role` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `magazine_role` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `bf_roles`
@@ -1109,7 +1125,8 @@ INSERT INTO `bf_roles` (`role_id`, `role_name`, `description`, `default`, `can_d
 DROP TABLE IF EXISTS `bf_role_permissions`;
 CREATE TABLE IF NOT EXISTS `bf_role_permissions` (
   `role_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`role_id`,`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1233,7 +1250,8 @@ INSERT INTO `bf_role_permissions` (`role_id`, `permission_id`) VALUES
 DROP TABLE IF EXISTS `bf_schema_version`;
 CREATE TABLE IF NOT EXISTS `bf_schema_version` (
   `type` varchar(40) NOT NULL,
-  `version` int(4) NOT NULL DEFAULT '0'
+  `version` int(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1255,7 +1273,8 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1263,12 +1282,8 @@ CREATE TABLE IF NOT EXISTS `bf_sessions` (
 --
 
 INSERT INTO `bf_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('08058b4e7eefff823810ffa02c38fb1d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0', 1445190372, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
-('3e29103a97f979c8e770208dcf10d744', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0', 1445282081, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
-('5bb845ecaf4ee214e7707f6d50a44181', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443458899, ''),
-('8f8f5304564a9a832a2a2565999678a4', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443474907, 'a:13:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";s:12:"search_query";s:25:"{"q":"sange","bla":false}";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"2";s:8:"issue_id";s:2:"27";}'),
-('a6407ee6aa70b9a0e32ad5010409eb03', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443356417, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:37:"http://localhost/Repo1/html/index.php";s:13:"previous_page";s:37:"http://localhost/Repo1/html/index.php";}'),
-('f358f850b6a36182084e9539f6d2552d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1443365495, '');
+('8007562c203771a92176191de8b0fa68', '79.112.24.48', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0', 1445668720, 'a:12:{s:9:"user_data";s:0:"";s:14:"requested_page";s:35:"http://polyphemus-asi.com/index.php";s:13:"previous_page";s:35:"http://polyphemus-asi.com/index.php";s:7:"user_id";s:1:"1";s:11:"auth_custom";s:5:"admin";s:10:"user_token";s:40:"c96526bce2ea545a3ce34495a4d1825ffea07747";s:8:"identity";s:15:"admin@pubapp.ro";s:7:"role_id";s:1:"1";s:9:"logged_in";b:1;s:8:"language";s:7:"english";s:11:"magazine_id";s:1:"3";s:8:"issue_id";s:2:"31";}'),
+('d9930a2ea7e109fe24cfb56164c1083a', '79.112.24.48', 'Mozilla/5.0 (Linux; U; Android 4.4.4; en-us; HM 1S Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chro', 1445666255, 'a:3:{s:9:"user_data";s:0:"";s:14:"requested_page";s:61:"http://polyphemus-asi.com/index.php/magazines/view/pub-27-266";s:13:"previous_page";s:61:"http://polyphemus-asi.com/index.php/magazines/view/pub-27-266";}');
 
 -- --------------------------------------------------------
 
@@ -1280,7 +1295,8 @@ DROP TABLE IF EXISTS `bf_settings`;
 CREATE TABLE IF NOT EXISTS `bf_settings` (
   `name` varchar(30) NOT NULL,
   `module` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1334,10 +1350,11 @@ INSERT INTO `bf_settings` (`name`, `module`, `value`) VALUES
 
 DROP TABLE IF EXISTS `bf_states`;
 CREATE TABLE IF NOT EXISTS `bf_states` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(40) NOT NULL,
-  `abbrev` char(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+  `abbrev` char(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `bf_states`
@@ -1416,7 +1433,7 @@ INSERT INTO `bf_states` (`id`, `name`, `abbrev`) VALUES
 
 DROP TABLE IF EXISTS `bf_users`;
 CREATE TABLE IF NOT EXISTS `bf_users` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(11) NOT NULL DEFAULT '4',
   `email` varchar(254) NOT NULL,
   `username` varchar(30) NOT NULL DEFAULT '',
@@ -1435,15 +1452,17 @@ CREATE TABLE IF NOT EXISTS `bf_users` (
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `activate_hash` varchar(40) NOT NULL DEFAULT '',
-  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `force_password_reset` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `bf_users`
 --
 
 INSERT INTO `bf_users` (`id`, `role_id`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
-(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-09-29 00:16:40', '::1', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
+(1, 1, 'admin@pubapp.ro', 'admin', '$2a$08$19kGCJNxs6DyDf.eAvRuP.jzHgMZpBna2atQMiqK27m9UF2lMQWka', NULL, '2015-10-24 05:22:51', '79.112.24.48', '2015-05-27 11:53:04', 0, NULL, 0, NULL, 'admin', NULL, 'UP2', 'english', 1, '', 0),
 (2, 2, 'editor@pubapp.ro', 'editor', '$2a$08$QaMk76T.YCSuguYKP9s/rehyAwPxOHFV3zI7oTlw4kATsu1AwdYmK', NULL, '2015-07-01 23:26:12', '127.0.0.1', '2015-07-01 23:14:57', 0, NULL, 0, NULL, 'Editor', NULL, 'UM8', 'english', 1, '', 0),
 (3, 4, 'htn.cosmindan@gmail.com', 'Cosmin Dan', '$2a$08$PNlpzuFyrPuTzRwJ8jhCButcHdxozmTupdok2A.pTr.SBQuvyIrny', NULL, '0000-00-00 00:00:00', '', '2015-09-27 14:26:10', 0, NULL, 0, NULL, 'Cosmin Dan', NULL, 'UP2', 'english', 0, '6ad13cd0af59a0fcc94d3dea597d479a5bae20df', 0);
 
@@ -1457,7 +1476,8 @@ DROP TABLE IF EXISTS `bf_user_cookies`;
 CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
   `user_id` bigint(20) unsigned NOT NULL,
   `token` varchar(128) NOT NULL,
-  `created_on` datetime NOT NULL
+  `created_on` datetime NOT NULL,
+  KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1466,7 +1486,8 @@ CREATE TABLE IF NOT EXISTS `bf_user_cookies` (
 
 INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
 (1, 'P6pgDLR4oMDANfBDBv3uhq394ckFD6anrCZcQFsWXoQjApLoulWvINkB1MLw3XnlZjfOyjtuFZhEyT8itFWSmgxOkdgfhBZdoJYuPjSBKwILqRfXfpvsmghZuxTkkayd', '2015-08-08 05:35:06'),
-(1, 'GM5sQ3p0NcUUt0AP2KrvldFOzNAOTFDhi8eL51Uni5S5TSjFRADEWUFqFLOBdJlyGH6vFNrgfIpueJmZ1EMLu25lb5XjGvPoM98oBrPgUskIF5sU5IbYuEkbN76tG9ip', '2015-09-29 00:16:40');
+(1, 'GM5sQ3p0NcUUt0AP2KrvldFOzNAOTFDhi8eL51Uni5S5TSjFRADEWUFqFLOBdJlyGH6vFNrgfIpueJmZ1EMLu25lb5XjGvPoM98oBrPgUskIF5sU5IbYuEkbN76tG9ip', '2015-09-29 00:16:40'),
+(1, 'DteCDYr4VmL72HJHP6mrpzdisbNCDoZX6Y74RzG0LeqxH3RM6mGe3PCyluyG0PTWoqrilXjcJbFcbG9aKm1iEdfXNmM8fx5N5y707YGfNnRfFQBpMnjADrKsNRkFHzGs', '2015-10-24 05:22:50');
 
 -- --------------------------------------------------------
 
@@ -1476,11 +1497,12 @@ INSERT INTO `bf_user_cookies` (`user_id`, `token`, `created_on`) VALUES
 
 DROP TABLE IF EXISTS `bf_user_meta`;
 CREATE TABLE IF NOT EXISTS `bf_user_meta` (
-  `meta_id` int(20) unsigned NOT NULL,
+  `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) NOT NULL DEFAULT '',
-  `meta_value` text
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `meta_value` text,
+  PRIMARY KEY (`meta_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `bf_user_meta`
@@ -1495,265 +1517,6 @@ INSERT INTO `bf_user_meta` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (6, 3, 'state', ''),
 (7, 3, 'country', 'RO');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `bf_activities`
---
-ALTER TABLE `bf_activities`
-  ADD PRIMARY KEY (`activity_id`);
-
---
--- Indexes for table `bf_articles`
---
-ALTER TABLE `bf_articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_articles_categories`
---
-ALTER TABLE `bf_articles_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_authors`
---
-ALTER TABLE `bf_authors`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_authorsofarticles`
---
-ALTER TABLE `bf_authorsofarticles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_categories`
---
-ALTER TABLE `bf_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_ci3_sessions`
---
-ALTER TABLE `bf_ci3_sessions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_countries`
---
-ALTER TABLE `bf_countries`
-  ADD PRIMARY KEY (`iso`);
-
---
--- Indexes for table `bf_email_queue`
---
-ALTER TABLE `bf_email_queue`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_institutions`
---
-ALTER TABLE `bf_institutions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_login_attempts`
---
-ALTER TABLE `bf_login_attempts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazines`
---
-ALTER TABLE `bf_magazines`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazines_categories`
---
-ALTER TABLE `bf_magazines_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazine_categories`
---
-ALTER TABLE `bf_magazine_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazine_issues`
---
-ALTER TABLE `bf_magazine_issues`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_magazine_staff`
---
-ALTER TABLE `bf_magazine_staff`
-  ADD PRIMARY KEY (`id`), ADD KEY `magazine_id` (`magazine_id`,`user_id`);
-
---
--- Indexes for table `bf_permissions`
---
-ALTER TABLE `bf_permissions`
-  ADD PRIMARY KEY (`permission_id`);
-
---
--- Indexes for table `bf_roles`
---
-ALTER TABLE `bf_roles`
-  ADD PRIMARY KEY (`role_id`);
-
---
--- Indexes for table `bf_role_permissions`
---
-ALTER TABLE `bf_role_permissions`
-  ADD PRIMARY KEY (`role_id`,`permission_id`);
-
---
--- Indexes for table `bf_schema_version`
---
-ALTER TABLE `bf_schema_version`
-  ADD PRIMARY KEY (`type`);
-
---
--- Indexes for table `bf_sessions`
---
-ALTER TABLE `bf_sessions`
-  ADD PRIMARY KEY (`session_id`);
-
---
--- Indexes for table `bf_settings`
---
-ALTER TABLE `bf_settings`
-  ADD PRIMARY KEY (`name`);
-
---
--- Indexes for table `bf_states`
---
-ALTER TABLE `bf_states`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bf_users`
---
-ALTER TABLE `bf_users`
-  ADD PRIMARY KEY (`id`), ADD KEY `email` (`email`);
-
---
--- Indexes for table `bf_user_cookies`
---
-ALTER TABLE `bf_user_cookies`
-  ADD KEY `token` (`token`);
-
---
--- Indexes for table `bf_user_meta`
---
-ALTER TABLE `bf_user_meta`
-  ADD PRIMARY KEY (`meta_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bf_activities`
---
-ALTER TABLE `bf_activities`
-  MODIFY `activity_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
---
--- AUTO_INCREMENT for table `bf_articles`
---
-ALTER TABLE `bf_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=275;
---
--- AUTO_INCREMENT for table `bf_articles_categories`
---
-ALTER TABLE `bf_articles_categories`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
---
--- AUTO_INCREMENT for table `bf_authors`
---
-ALTER TABLE `bf_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
---
--- AUTO_INCREMENT for table `bf_authorsofarticles`
---
-ALTER TABLE `bf_authorsofarticles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
---
--- AUTO_INCREMENT for table `bf_categories`
---
-ALTER TABLE `bf_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=277;
---
--- AUTO_INCREMENT for table `bf_email_queue`
---
-ALTER TABLE `bf_email_queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_institutions`
---
-ALTER TABLE `bf_institutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `bf_login_attempts`
---
-ALTER TABLE `bf_login_attempts`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_magazines`
---
-ALTER TABLE `bf_magazines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `bf_magazines_categories`
---
-ALTER TABLE `bf_magazines_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_magazine_categories`
---
-ALTER TABLE `bf_magazine_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bf_magazine_issues`
---
-ALTER TABLE `bf_magazine_issues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
---
--- AUTO_INCREMENT for table `bf_magazine_staff`
---
-ALTER TABLE `bf_magazine_staff`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `bf_permissions`
---
-ALTER TABLE `bf_permissions`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
---
--- AUTO_INCREMENT for table `bf_roles`
---
-ALTER TABLE `bf_roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `bf_states`
---
-ALTER TABLE `bf_states`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
---
--- AUTO_INCREMENT for table `bf_users`
---
-ALTER TABLE `bf_users`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `bf_user_meta`
---
-ALTER TABLE `bf_user_meta`
-  MODIFY `meta_id` int(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

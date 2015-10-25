@@ -10,7 +10,7 @@ Assets::add_css(
     )
 );
 
-Assets::add_js('select2.full.min.js');
+Assets::add_js('select2.full.js');
 
 
 if (isset($shortcut_data) && is_array($shortcut_data['shortcut_keys'])) {

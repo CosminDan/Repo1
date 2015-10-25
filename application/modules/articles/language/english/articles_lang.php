@@ -47,6 +47,7 @@ $lang['articles_column_deleted_by']  = 'Deleted By';
 $lang['articles_column_created_by']  = 'Created By';
 $lang['articles_column_modified_by'] = 'Modified By';
 
+
 // Module Details
 $lang['articles_module_name']        = 'Articles';
 $lang['articles_module_description'] = 'Your module description';
