@@ -16,7 +16,7 @@ $id = isset($articles->id) ? $articles->id : '';
 
 ?>
 <div class='admin-box'>
-    <h3>Articles</h3>
+    <h3><?php echo lang('articles_area_title'); ?></h3>    
     <?php echo form_open_multipart($this->uri->uri_string(), 'class="form-horizontal"'); ?>
         <fieldset>
             <?php echo form_input('title', $articles->affiliation, lang('articles_field_title'), 'class="input-xxlarge" maxlength="256"'); ?>
@@ -25,7 +25,15 @@ $id = isset($articles->id) ? $articles->id : '';
 
             <?php echo form_multiselect('authors[]', $articles->authors, array_keys($articles->authors), lang('articles_field_authors'), 'class="select2-tags input-xxlarge"'); ?>
 
-            <?php echo form_input('author_email', '', lang('articles_field_author_email'), 'class="input-xxlarge" maxlength="256"'); ?>
+             <div class="control-group<?php echo form_error('author_email') ? ' error' : ''; ?>">
+                <?php echo form_label(lang('articles_field_author_email') , 'author_email', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input class="form-control" id='author_email' type='email' name='author_email' maxlength='100' value="<?php echo set_value('author_email', isset($articles->author_email) ? $articles->author_email : ''); ?>" />
+                    <span class='help-inline'><?php echo form_error('author_email'); ?></span>
+                </div>
+            </div>
+
+            <!-- <?php echo form_input('author_email', $articles->author_email, lang('articles_field_author_email'), 'class="input-xxlarge" maxlength="256"'); ?> -->
 
             <?php echo form_input('affiliation', $articles->affiliation, lang('articles_field_affiliation'), 'class="input-xxlarge" maxlength="256"'); ?>
 

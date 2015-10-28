@@ -56,10 +56,11 @@ $lang['articles_area_title']         = 'Articles';
 // Fields
 $lang['articles_field_magazines_id'] = 'Magazines Id';
 $lang['articles_field_title']        = 'Title';
-$lang['articles_field_categories']      = 'Categories';
+$lang['articles_field_categories']   = 'Categories';
 $lang['articles_field_authors']      = 'Author(s)';
 $lang['articles_field_affiliation']  = 'Affiliation';
 $lang['articles_field_references']   = 'References';
 $lang['articles_field_summary']      = 'Summary';
 $lang['articles_field_tags']         = 'Tags';
 $lang['articles_field_page']         = 'Page';
+$lang['articles_field_author_email'] = 'Corresponding Author';
