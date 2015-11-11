@@ -88,10 +88,24 @@ class Content extends Admin_Controller
         }
 
         $pagerUriSegment = 6;
-        $offset = $this->uri->segment($pagerUriSegment);
-        $pagerBaseUrl = site_url(SITE_AREA . '/content/articles/index/'.$id) . '/';
+        $offset          = $this->uri->segment($pagerUriSegment);
+        $pagerBaseUrl    = site_url(SITE_AREA . '/content/articles/index/'.$id) . '/';
+        $limit           = $this->settings_lib->item('site.list_limit') ?: 15;
 
-        $limit  = $this->settings_lib->item('site.list_limit') ?: 15;
+        if ($delete = $this->input->post()) {
+            $checked = $this->input->post('checked');
+            if (!is_array($checked)) {
+                redirect($pagerBaseUrl);
+            }
+            foreach ($checked as $chk) {
+                $article = $this->articles_model->find($chk);
+                if ($article->issue_id != $issue->id) {
+                    continue;
+                }
+                $this->articles_model->delete($article->id);
+            }
+            redirect($pagerBaseUrl);
+        }
 
         $this->load->library('pagination');
 
@@ -106,8 +120,6 @@ class Content extends Admin_Controller
         foreach (range(0, 1) as $i) {
             $this->articles_model->where('articles.issue_id', $issue->id);
             if ($i) {
-                //$this->articles_model->select('articles.*, institutions.name AS affiliation_name');
-                //$this->db->join('institutions', "institutions.id = articles.affiliation", 'left');
                 $this->articles_model->limit($limit, $offset);
                 $records = $this->articles_model->find_all();
             } else {

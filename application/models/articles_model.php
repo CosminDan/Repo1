@@ -9,7 +9,7 @@ class Articles_model extends BF_Model
     protected $log_user  = true;
     protected $set_created = true;
     protected $set_modified = true;
-    protected $soft_deletes = true;
+    protected $soft_deletes = false;
 
     protected $created_field     = 'created_on';
     protected $created_by_field  = 'created_by';

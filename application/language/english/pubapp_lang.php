@@ -5,6 +5,9 @@ $lang['pa_role']     = 'Role';
 $lang['pa_language'] = 'Language';
 $lang['pa_actions']  = 'Actions';
 
+$lang['pa_pub_name']        = 'Publication Name';
+$lang['pa_pub_description'] = 'Publication Description';
+$lang['pa_pub_website']     = 'Publication Website';
 
 
 // ARTICLES
